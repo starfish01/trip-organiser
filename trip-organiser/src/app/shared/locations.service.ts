@@ -12,24 +12,34 @@ export class LocationsService {
 
   constructor() { }
 
-  getLocations(){
+  getLocations() {
 
     //get Location
 
     this.locations.push({
-      id:'123456',
-      title:'Tokyo'
+      id: '123456',
+      title: 'Tokyo',
+      startDate: Date.now(),
+      endDate: Date.now()
     },
-    {
-      id:'somethig',
-      title:'Kyoto'
-    })
+      {
+        id: 'somethig',
+        title: 'Kyoto',
+        startDate: Date.now(),
+        endDate: Date.now()
+      })
 
     this.locationsUpdated.next([...this.locations])
   }
 
-  getLocationUpdateListener(){
+  getLocationUpdateListener() {
     return this.locationsUpdated.asObservable();
+  }
+
+  getLocation(locationId) {
+    //this.persons =  this.personService.getPersons().filter(x => x.id == this.personId)[0];
+    const locationData = this.locations.filter( location => location.id == locationId)
+    return locationData[0]
   }
 
 }

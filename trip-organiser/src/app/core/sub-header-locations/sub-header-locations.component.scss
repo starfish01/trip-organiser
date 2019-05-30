@@ -6,8 +6,10 @@ mat-toolbar {
     //     display:none;
     // }
 }
-
-button.mat-button {
-    height: 100%;
-    
+h2 {
+    margin-bottom: 0px;
 }
+.spacer {
+    flex: 1 1 auto;
+}
+
