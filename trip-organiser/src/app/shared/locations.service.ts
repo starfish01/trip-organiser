@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Location } from '../model/location.model'
 import { Subject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,7 @@ export class LocationsService {
   private locations: Location[] = [];
   private locationsUpdated = new Subject<Location[]>();
 
-  constructor() { }
+  constructor(private http:HttpClient, private router: Router) { }
 
   getLocations() {
 
@@ -40,6 +43,16 @@ export class LocationsService {
     //this.persons =  this.personService.getPersons().filter(x => x.id == this.personId)[0];
     const locationData = this.locations.filter( location => location.id == locationId)
     return locationData[0]
+  }
+
+  addLocation(loactionData:Location){
+    this.http.post<{message:string, locationId}>('http://localhost:3000/api/locations',loactionData)
+    .subscribe((responseData)=>{
+      loactionData.id = responseData.locationId;
+      this.locations.push(loactionData)
+      this.locationsUpdated.next([...this.locations])
+      this.router.navigate(['/'])
+    })
   }
 
 }

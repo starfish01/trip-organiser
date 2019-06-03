@@ -22,6 +22,8 @@ import {MatCardModule} from '@angular/material/card';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -35,6 +37,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     ReactiveFormsModule,
     AppRoutingModule,
     MatToolbarModule,
@@ -45,7 +48,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCardModule
+    MatCardModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

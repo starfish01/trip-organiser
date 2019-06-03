@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 // const Post = require('./models/post')
 const mongoose = require("mongoose")
 
+const locationRoutes = require('./routes/locations')
 
 const app = express();
 
@@ -30,28 +31,7 @@ app.use((req, res, next) => {
     next();
 })
 
-/*
-app.post("/api/posts", (req, res, next) => {
-    const post = new Post({
-        title:req.body.title,
-        content:req.body.content
-    });
-    post.save();
-    console.log(post);
-    res.status(201).json({
-        message: 'Post added successfully'
-    });
-});
+app.use("/api/locations",locationRoutes);
 
-app.get('/api/posts', (req, res, next) => {
-    const posts = [
-        { id: '123456789', title: 'first server side post', content: 'This is the content from the serveer' },
-        { id: '12345dsdsds9', title: 'second server side post', content: 'This is the content from the serveer' },
-    ]
-
-    res.json(posts);
-
-});
-*/
 
 module.exports = app;
