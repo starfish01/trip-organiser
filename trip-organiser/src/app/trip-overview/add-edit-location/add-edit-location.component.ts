@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
 import { Router } from '@angular/router';
 import {Location} from '@angular/common';
 import { LocationsService } from 'src/app/shared/locations.service';
 
-import {LocationModel} from 'src/app/model/location.model'
+import {Location as LocationModel} from 'src/app/model/location.model'
 
 
 

@@ -3,6 +3,9 @@ import { Location } from '../model/location.model'
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators'
+
+
 
 
 @Injectable({
@@ -32,7 +35,23 @@ export class LocationsService {
         endDate: Date.now()
       })
 
-    this.locationsUpdated.next([...this.locations])
+      this.http.get<{message:string, locations: Location,maxPosts:number}>('http://localhost:3000/api/locations')
+      .pipe(map((locationData) => {
+        return {
+          locations: locationData.locations.map(location => {
+            return {
+              title: location.title,
+              startDate: location.startDate,
+              id: location._id,
+            }
+          }), maxPosts: locationData.maxPosts
+        }
+      }))
+      .subscribe((transformedPostData) => {
+        this.locations = transformedPostData.locations;
+        this.locationsUpdated.next([...this.locations])
+      });
+
   }
 
   getLocationUpdateListener() {
@@ -46,7 +65,7 @@ export class LocationsService {
   }
 
   addLocation(loactionData:Location){
-    this.http.post<{message:string, locationId}>('http://localhost:3000/api/locations',loactionData)
+    this.http.post<{message:string, locationId}>('http://localhost:3000/api/locations/create',loactionData)
     .subscribe((responseData)=>{
       loactionData.id = responseData.locationId;
       this.locations.push(loactionData)

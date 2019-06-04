@@ -8,14 +8,14 @@ const locationRoutes = require('./routes/locations')
 
 const app = express();
 
-/*
-mongoose.connect("mongodb+srv://patrick:MUr8c4kQuK2frTp5@cluster0-jrerw.mongodb.net/node-angular?retryWrites=true")
+
+mongoose.connect("mongodb+srv://patrickLabes:nqMbBeXJJEFIr7r0@cluster0-trg7g.mongodb.net/trip-data?retryWrites=true&w=majority")
 .then(()=>{
     console.log('Connection Made')
-}).catch(()=>{
-    console.log('Connection Failed')
+}).catch((err)=>{
+    console.log('Connection Failed '+err)
 });
-*/
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
