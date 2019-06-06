@@ -52,8 +52,8 @@ export class LocationsService {
 
   getLocation(locationId) {
     //internal search
-    this.locations.forEach((obj)=>{
-      if(obj.id == locationId){
+    this.locations.forEach((obj) => {
+      if (obj.id == locationId) {
         return obj
       }
     })
@@ -62,13 +62,24 @@ export class LocationsService {
   }
 
   addLocation(loactionData: Location) {
-    this.http.post<{ message: string, locationId }>('http://localhost:3000/api/locations/create', loactionData)
+    this.http.post<{ message: string, id:string }>('http://localhost:3000/api/locations/create', loactionData)
       .subscribe((responseData) => {
-        loactionData.id = responseData.locationId;
+        console.log(responseData)
+        loactionData.id = responseData.id;
         this.locations.push(loactionData)
         this.locationsUpdated.next([...this.locations])
         this.router.navigate(['/'])
       })
+  }
+
+  updateLocation(locationData: Location, locationId: string) {
+    console.log(locationData)
+    this.http.put<{ message: string }>('http://localhost:3000/api/locations/' + locationId, locationData).subscribe(response => {
+      this.router.navigate(['/'])
+      this.locationsUpdated.next([...this.locations])
+
+      console.log(response)
+    })
   }
 
 }

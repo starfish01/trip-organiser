@@ -17,7 +17,27 @@ router.post("/create",(req,res,next)=>{
             id: createdLocation._id
         })
     })
+})
 
+router.put("/:id", (req,res,next) => {
+    console.log('put')
+    const location = ({
+        title: req.body.title,
+        startDate: req.body.startDate,
+        endDate: req.body.endDate
+      });
+      console.log(location)
+      console.log(req.params.id)
+     
+      Location.updateOne({
+          _id: req.params.id},
+          location
+      ).then(result => {
+        res.status(200).json({ message: "Update successful!" });
+      }).catch(error=>{
+          console.log(error)
+            res.status(404).json({message:"An error occured "+ error})
+      });
 })
 
 router.get("",(req,res,next)=>{

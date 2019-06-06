@@ -21,6 +21,7 @@ export class AddEditLocationComponent implements OnInit {
   editLocation = null;
   isEditMode = false;
   isLoading = false;
+  locationId;
 
 
 
@@ -29,9 +30,9 @@ export class AddEditLocationComponent implements OnInit {
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
-        const locationId = paramMap.get('id')
+        this.locationId = paramMap.get('id')
 
-        this.getLocationData(locationId)
+        this.getLocationData()
 
       } else {
         this.isEditMode = false;
@@ -43,8 +44,8 @@ export class AddEditLocationComponent implements OnInit {
     
   }
 
-  getLocationData(locationId) {
-    this.locationService.getLocation(locationId).subscribe(locationData => {
+  getLocationData() {
+    this.locationService.getLocation(this.locationId).subscribe(locationData => {
       if (!locationData.location) {
         this.router.navigate([''])
         console.log('invalid route')
@@ -84,16 +85,25 @@ export class AddEditLocationComponent implements OnInit {
 
   onSubmit() {
 
+    if(this.locationEdit.invalid){
+      return;
+    }
+
     const location: LocationModel = {
-      'id': null,
+      'id':null,
       'title': this.locationEdit.value.title,
       'startDate': this.locationEdit.value.startDate.getTime() / 1000,
       'endDate': this.locationEdit.value.endDate.getTime() / 1000
     }
 
-    this.locationService.addLocation(location)
+    if(this.isEditMode){
+      location.id = this.locationId
+      this.locationService.updateLocation(location, this.locationId)
+    }else {
+      this.locationService.addLocation(location)
+    }
 
-    this.locationEdit.reset();
+    // this.locationEdit.reset();
 
   }
 

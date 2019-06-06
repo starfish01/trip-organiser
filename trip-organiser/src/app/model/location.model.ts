@@ -1,5 +1,5 @@
 export interface Location {
-    id:string,
+    id:string
     title: string,
     startDate: number,
     endDate: number
