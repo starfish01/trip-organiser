@@ -1,4 +1,11 @@
-<div>
-    <h1>{{ locationSelected.title }}</h1>
+<div *ngIf="locationSelected">
+    <div class="location-title">
+        <h1>{{ locationSelected.title }}</h1>
+
+        <a [routerLink]="['/',locationSelected._id,'edit']" class="edit-btn"><i class="material-icons">
+                edit
+            </i></a>
+    </div>
     <small>{{ locationSelected.startDate | date:shortDate }} - {{ locationSelected.endDate | date:shortDate }}</small>
+
 </div>

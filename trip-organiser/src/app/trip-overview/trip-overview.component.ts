@@ -16,23 +16,26 @@ export class TripOverviewComponent implements OnInit {
   paramsSubscription: Subscription;
 
 
-  constructor(private route: ActivatedRoute,private router: Router, private locationService:LocationsService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private locationService: LocationsService) { }
 
   ngOnInit() {
     // this.locationParamId = this.route.snapshot.params['location'];
 
-    this.paramsSubscription = this.route.params.subscribe((params:Params)=>{
-      this.locationParamId = params['location'] 
-      this.getLocationData()  
+    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
+      this.locationParamId = params['location']
+      this.getLocationData()
     })
   }
 
-  getLocationData(){
-    this.locationSelected = this.locationService.getLocation(this.locationParamId);
-    if(this.locationSelected == undefined){
-      this.router.navigate([''])
-      console.log('invalid route')
-    }
+  getLocationData() {
+    this.locationService.getLocation(this.locationParamId).subscribe(locationData => {
+      if (!locationData.location) {
+        this.router.navigate([''])
+        console.log('invalid route')
+      }
+      this.locationSelected = locationData.location
+    });
+
   }
 
 }

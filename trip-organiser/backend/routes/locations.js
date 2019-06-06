@@ -10,7 +10,7 @@ router.post("/create",(req,res,next)=>{
         startDate:req.body.startDate,
         endDate:req.body.endDate
     })
-
+    console.log(location)
     location.save().then(createdLocation => {
         res.status(201).json({
             message:"Post Created",
@@ -21,8 +21,7 @@ router.post("/create",(req,res,next)=>{
 })
 
 router.get("",(req,res,next)=>{
-    console.log('Get Location')
-
+console.log("get all locations")
     const locationQuery = Location.find()
     //not implementing query yet not sure if it will be needed 
     // it will be needed if you are organiseing a seperate trip
@@ -42,6 +41,7 @@ router.get("",(req,res,next)=>{
 })
 
 router.get("/:id",(req,res,next)=>{
+
     Location.findById(req.params.id).then(location=>{
         if(location){
             res.status(200).json({
@@ -49,7 +49,9 @@ router.get("/:id",(req,res,next)=>{
                 location:location
             })
         }else{
-            
+         res.status(404).json({
+             message:'Location not found'
+         })   
         }
     })
 })
