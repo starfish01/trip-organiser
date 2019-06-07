@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import { LocationsService } from 'src/app/shared/locations.service';
 
-import { Location as LocationModel } from 'src/app/model/location.model'
+import { Location as LocationModel } from 'src/app/model/location.model';
 
 
 
@@ -30,9 +30,9 @@ export class AddEditLocationComponent implements OnInit {
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has('id')) {
-        this.locationId = paramMap.get('id')
+        this.locationId = paramMap.get('id');
 
-        this.getLocationData()
+        this.getLocationData();
 
       } else {
         this.isEditMode = false;
@@ -40,42 +40,42 @@ export class AddEditLocationComponent implements OnInit {
         this.initForm();
 
       }
-    })
-    
+    });
+
   }
 
   getLocationData() {
     this.locationService.getLocation(this.locationId).subscribe(locationData => {
       if (!locationData.location) {
-        this.router.navigate([''])
-        console.log('invalid route')
+        this.router.navigate(['']);
+        console.log('invalid route');
       }
-      this.editLocation = locationData.location
+      this.editLocation = locationData.location;
       this.isEditMode = true;
       this.initForm();
-    })
+    });
   }
 
   initForm() {
-    console.log('here')
-    let title = ''
+    console.log('here');
+    let title = '';
     let startDate;
     let endDate;
 
     if (this.isEditMode) {
-      console.log(this.editLocation)
-      title = this.editLocation.title
-      startDate = new Date(this.editLocation.startDate*1000)
-      endDate = new Date(this.editLocation.endDate*1000)
+      console.log(this.editLocation);
+      title = this.editLocation.title;
+      startDate = new Date(this.editLocation.startDate * 1000);
+      endDate = new Date(this.editLocation.endDate * 1000);
     }
 
 
 
     this.locationEdit = new FormGroup({
-      'title': new FormControl(title, [Validators.required]),
-      'startDate': new FormControl(startDate, [Validators.required]),
-      'endDate': new FormControl(endDate, [Validators.required])
-    })
+      title: new FormControl(title, [Validators.required]),
+      startDate: new FormControl(startDate, [Validators.required]),
+      endDate: new FormControl(endDate, [Validators.required])
+    });
     this.isLoading = false;
   }
 
@@ -85,26 +85,31 @@ export class AddEditLocationComponent implements OnInit {
 
   onSubmit() {
 
-    if(this.locationEdit.invalid){
+    if (this.locationEdit.invalid) {
       return;
     }
 
     const location: LocationModel = {
-      'id':null,
-      'title': this.locationEdit.value.title,
-      'startDate': this.locationEdit.value.startDate.getTime() / 1000,
-      'endDate': this.locationEdit.value.endDate.getTime() / 1000
-    }
+      id: null,
+      title: this.locationEdit.value.title,
+      startDate: this.locationEdit.value.startDate.getTime() / 1000,
+      endDate: this.locationEdit.value.endDate.getTime() / 1000
+    };
 
-    if(this.isEditMode){
-      location.id = this.locationId
-      this.locationService.updateLocation(location, this.locationId)
-    }else {
-      this.locationService.addLocation(location)
+    if (this.isEditMode) {
+      location.id = this.locationId;
+      this.locationService.updateLocation(location, this.locationId);
+    } else {
+      this.locationService.addLocation(location);
     }
 
     // this.locationEdit.reset();
 
+  }
+
+  deleteItem() {
+    this.isLoading = true;
+    this.locationService.deleteLocation(this.locationId);
   }
 
 }

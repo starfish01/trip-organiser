@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Location } from '../model/location.model'
+import { Location } from '../model/location.model';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators'
+import { map } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -33,16 +33,16 @@ export class LocationsService {
               startDate: new Date(location.startDate * 1000),
               endDate: new Date(location.endDate * 1000),
               id: location._id,
-            }
+            };
           }
           ),
           maxPosts: locationData.maxPosts
-        }
+        };
       }))
       .subscribe((transformedPostData) => {
-        console.log('2')
+        console.log('2');
         this.locations = transformedPostData.locations;
-        this.locationsUpdated.next([...this.locations])
+        this.locationsUpdated.next([...this.locations]);
       });
   }
 
@@ -51,35 +51,52 @@ export class LocationsService {
   }
 
   getLocation(locationId) {
-    //internal search
+    // internal search
     this.locations.forEach((obj) => {
-      if (obj.id == locationId) {
-        return obj
+      if (obj.id === locationId) {
+        return obj;
       }
-    })
+    });
 
-    return this.http.get<{ location: any }>("http://localhost:3000/api/locations/" + locationId)
+    return this.http.get<{ location: any }>('http://localhost:3000/api/locations/' + locationId);
   }
 
   addLocation(loactionData: Location) {
-    this.http.post<{ message: string, id:string }>('http://localhost:3000/api/locations/create', loactionData)
+    this.http.post<{ message: string, id: string }>('http://localhost:3000/api/locations/create', loactionData)
       .subscribe((responseData) => {
-        console.log(responseData)
+        console.log(responseData);
         loactionData.id = responseData.id;
-        this.locations.push(loactionData)
-        this.locationsUpdated.next([...this.locations])
-        this.router.navigate(['/'])
-      })
+        this.locations.push(loactionData);
+        this.locationsUpdated.next([...this.locations]);
+        this.router.navigate(['/']);
+      });
   }
 
   updateLocation(locationData: Location, locationId: string) {
-    console.log(locationData)
+    console.log(locationData);
     this.http.put<{ message: string }>('http://localhost:3000/api/locations/' + locationId, locationData).subscribe(response => {
-      this.router.navigate(['/'])
-      this.locationsUpdated.next([...this.locations])
+      this.router.navigate(['/']);
+      this.locationsUpdated.next([...this.locations]);
 
-      console.log(response)
-    })
+      console.log(response);
+    });
+  }
+
+  deleteLocation(locationId) {
+
+    this.http.delete<{message: string}>('http://localhost:3000/api/locations/' + locationId).subscribe(response => {
+      this.router.navigate(['/']);
+
+      const index = this.locations.findIndex((loc, i) => {
+        return loc.id === locationId;
+      });
+
+      this.locations.splice(index, 1);
+
+      this.locationsUpdated.next([...this.locations]);
+
+    });
+
   }
 
 }

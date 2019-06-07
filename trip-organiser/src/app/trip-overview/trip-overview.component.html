@@ -6,6 +6,6 @@
                 edit
             </i></a>
     </div>
-    <small>{{ locationSelected.startDate | date:shortDate }} - {{ locationSelected.endDate | date:shortDate }}</small>
+    <small>{{ locationSelected.startDate * 1000 | date:shortDate }} - {{ locationSelected.endDate * 1000 | date:shortDate }}</small>
 
 </div>

@@ -43,12 +43,12 @@
                 <button mat-stroked-button color="primary" [disabled]="!locationEdit.valid" (click)="onSubmit()"
                     type="button">Save</button>
                 <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>
-                <!-- <button mat-stroked-button color="danger" (click)="deleteItem()" type="button">Delete</button> -->
+
+              <span class="spacer"></span>
+
+                 <button *ngIf="isEditMode" mat-stroked-button color="danger" (click)="deleteItem()" type="button">Delete</button>
             </div>
 
-            <!-- <div *ngIf="loading">
-      <img src="../../../assets/images/loading.svg" style="width:10%">
-    </div> -->
 
         </form>
     </mat-card>
