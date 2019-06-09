@@ -5,10 +5,10 @@ import { map } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 
+import {environment} from '../../environments/environment';
+const BACKEND_URL = environment.apiURL + '/locations/';
 
 
 
@@ -23,8 +23,7 @@ export class LocationsService {
   constructor(private http: HttpClient, private router: Router) { }
 
   getLocations() {
-
-    this.http.get<{ message: string, locations: any, maxPosts: number }>('http://localhost:3000/api/locations')
+    this.http.get<{ message: string, locations: any, maxPosts: number }>(BACKEND_URL)
       .pipe(map((locationData) => {
         return {
           locations: locationData.locations.map(location => {
@@ -58,33 +57,34 @@ export class LocationsService {
       }
     });
 
-    return this.http.get<{ location: any }>('http://localhost:3000/api/locations/' + locationId);
+    return this.http.get<{ location: any }>(BACKEND_URL + locationId);
   }
 
-  addLocation(loactionData: Location) {
-    this.http.post<{ message: string, id: string }>('http://localhost:3000/api/locations/create', loactionData)
+  addLocation(locationData: Location) {
+    this.http.post<{ message: string, id: string }>(BACKEND_URL + 'create', locationData)
       .subscribe((responseData) => {
         console.log(responseData);
-        loactionData.id = responseData.id;
-        this.locations.push(loactionData);
+        locationData.id = responseData.id;
+        this.locations.push(locationData);
         this.locationsUpdated.next([...this.locations]);
         this.router.navigate(['/']);
       });
   }
 
   updateLocation(locationData: Location, locationId: string) {
-    console.log(locationData);
-    this.http.put<{ message: string }>('http://localhost:3000/api/locations/' + locationId, locationData).subscribe(response => {
+    this.http.put<{ message: string }>(BACKEND_URL + locationId, locationData).subscribe(response => {
       this.router.navigate(['/']);
-      this.locationsUpdated.next([...this.locations]);
 
-      console.log(response);
+      const index = this.locations.findIndex(x => x.id === locationId);
+      this.locations[index] = locationData;
+
+      this.locationsUpdated.next([...this.locations]);
     });
   }
 
   deleteLocation(locationId) {
 
-    this.http.delete<{message: string}>('http://localhost:3000/api/locations/' + locationId).subscribe(response => {
+    this.http.delete<{message: string}>(BACKEND_URL + locationId).subscribe(response => {
       this.router.navigate(['/']);
 
       const index = this.locations.findIndex((loc, i) => {
