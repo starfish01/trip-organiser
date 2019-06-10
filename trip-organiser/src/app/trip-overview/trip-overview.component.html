@@ -2,20 +2,39 @@
   <mat-card class="example-card">
 
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(https://source.unsplash.com/random/?' + locationSelected.title + ')'}" ></div>
-      <mat-card-title>{{ locationSelected.title }} <a [routerLink]="['/',locationSelected._id,'edit']" class="edit-btn"><i class="material-icons">
+      <div mat-card-avatar class="example-header-image"
+           [ngStyle]="{'background-image': 'url(https://source.unsplash.com/random/?' + locationSelected.title + ')'}"></div>
+      <mat-card-title>{{ locationSelected.title }} <a [routerLink]="['/',locationSelected._id,'edit']" class="edit-btn"><i
+        class="material-icons">
         edit
       </i></a></mat-card-title>
-      <mat-card-subtitle><i class="material-icons">date_range</i> {{ locationSelected.startDate * 1000 | date:shortDate }} - {{ locationSelected.endDate * 1000 | date:shortDate }}</mat-card-subtitle>
-      <mat-card-subtitle *ngIf="locationSelected.stay"><i class="material-icons">place</i> {{locationSelected.stay}}</mat-card-subtitle>
+      <mat-card-subtitle><i
+        class="material-icons">date_range</i> {{ locationSelected.startDate * 1000 | date:shortDate }}
+        - {{ locationSelected.endDate * 1000 | date:shortDate }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="locationSelected.stay"><i class="material-icons">place</i> {{locationSelected.stay}}
+      </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-      <p>
-        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-        bred for hunting.
-      </p>
+
+<!--      Desktop mode -->
+<!--      <div flex fxLayout="row" *ngIf="!isMobile">-->
+<!--        <div fxFlex="45">-->
+<!--          <app-restaurants></app-restaurants>-->
+<!--        </div>-->
+<!--        <div fxFlex="10"></div>-->
+<!--        <div fxFlex="45">-->
+<!--          -->
+<!--        </div>-->
+<!--      </div>-->
+
+      <mat-tab-group>
+        <mat-tab label="Food"><app-restaurants></app-restaurants></mat-tab>
+        <mat-tab label="Places">Places to be</mat-tab>
+        <mat-tab label="Third"> Content 3 </mat-tab>
+      </mat-tab-group>
+
+
     </mat-card-content>
   </mat-card>
 </div>

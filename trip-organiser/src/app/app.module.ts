@@ -23,7 +23,9 @@ import {MatCardModule} from '@angular/material/card';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {HttpClientModule} from '@angular/common/http';
-import {MatExpansionModule} from '@angular/material';
+import {MatDialogModule, MatExpansionModule, MatIconModule, MatTabsModule} from '@angular/material';
+import { RestaurantsComponent } from './trip-overview/restaurants/restaurants.component';
+import { AddEditRestaurantsComponent } from './trip-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import {MatExpansionModule} from '@angular/material';
     TripOverviewComponent,
     HomePageComponent,
     AddEditLocationComponent,
+    RestaurantsComponent,
+    AddEditRestaurantsComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,8 +54,14 @@ import {MatExpansionModule} from '@angular/material';
     MatNativeDateModule,
     MatCardModule,
     MatExpansionModule,
-    FormsModule
+    FormsModule,
+    MatTabsModule,
+    MatIconModule,
+    MatDialogModule
 
+  ],
+  entryComponents:[
+    AddEditRestaurantsComponent
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],
   bootstrap: [AppComponent]
