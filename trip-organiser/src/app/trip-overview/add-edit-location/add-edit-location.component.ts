@@ -61,12 +61,14 @@ export class AddEditLocationComponent implements OnInit {
     let title = '';
     let startDate;
     let endDate;
+    let stay;
 
     if (this.isEditMode) {
       console.log(this.editLocation);
       title = this.editLocation.title;
       startDate = new Date(this.editLocation.startDate * 1000);
       endDate = new Date(this.editLocation.endDate * 1000);
+      stay = this.editLocation.stay;
     }
 
 
@@ -74,7 +76,8 @@ export class AddEditLocationComponent implements OnInit {
     this.locationEdit = new FormGroup({
       title: new FormControl(title, [Validators.required]),
       startDate: new FormControl(startDate, [Validators.required]),
-      endDate: new FormControl(endDate, [Validators.required])
+      endDate: new FormControl(endDate, [Validators.required]),
+      stay: new FormControl(stay),
     });
     this.isLoading = false;
   }
@@ -93,7 +96,8 @@ export class AddEditLocationComponent implements OnInit {
       id: null,
       title: this.locationEdit.value.title,
       startDate: this.locationEdit.value.startDate.getTime() / 1000,
-      endDate: this.locationEdit.value.endDate.getTime() / 1000
+      endDate: this.locationEdit.value.endDate.getTime() / 1000,
+      stay: this.locationEdit.value.stay,
     };
 
     if (this.isEditMode) {

@@ -3,4 +3,5 @@ export interface Location {
     title: string;
     startDate: number;
     endDate: number;
+    stay: string;
 }

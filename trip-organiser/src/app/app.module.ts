@@ -14,7 +14,7 @@ import {HomePageComponent} from './core/home-page/home-page.component';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AddEditLocationComponent} from './trip-overview/add-edit-location/add-edit-location.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -23,7 +23,7 @@ import {MatCardModule} from '@angular/material/card';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {HttpClientModule} from '@angular/common/http';
-import {MatExpansionModule} from "@angular/material";
+import {MatExpansionModule} from '@angular/material';
 
 
 @NgModule({
@@ -50,6 +50,7 @@ import {MatExpansionModule} from "@angular/material";
     MatNativeDateModule,
     MatCardModule,
     MatExpansionModule,
+    FormsModule
 
   ],
   providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}],

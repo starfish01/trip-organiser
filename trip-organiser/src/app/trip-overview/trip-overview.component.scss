@@ -17,7 +17,15 @@ h1 {
         cursor: pointer;
     }
 }
+mat-card-header{
+  margin-bottom: 2rem;
+}
+
+.mat-card-avatar{
+  height: 100px;
+  width: 100px;
+}
 .example-header-image {
-  background-image: url('https://d36tnp772eyphs.cloudfront.net/blogs/1/2011/05/Tokyo-Japan-Akihabara-neon-cityscape-destinations-1200x900.jpg');
+  //background-image: url('https://d36tnp772eyphs.cloudfront.net/blogs/1/2011/05/Tokyo-Japan-Akihabara-neon-cityscape-destinations-1200x900.jpg');
   background-size: cover;
 }

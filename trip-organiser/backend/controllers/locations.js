@@ -5,7 +5,8 @@ exports.createLocation = (req,res,next)=>{
   const location = new Location({
     title:req.body.title,
     startDate:req.body.startDate,
-    endDate:req.body.endDate
+    endDate:req.body.endDate,
+    stay:req.body.stay,
   });
   console.log(location);
   location.save().then(createdLocation => {
@@ -21,10 +22,11 @@ exports.updateLocation = (req,res,next) => {
   const location = ({
     title: req.body.title,
     startDate: req.body.startDate,
-    endDate: req.body.endDate
+    endDate: req.body.endDate,
+    stay: req.body.stay,
   });
-  console.log(location)
-  console.log(req.params.id)
+  console.log(location);
+  console.log(req.params.id);
 
   Location.updateOne({
       _id: req.params.id},
@@ -32,7 +34,7 @@ exports.updateLocation = (req,res,next) => {
   ).then(result => {
     res.status(200).json({ message: "Update successful!" });
   }).catch(error=>{
-    console.log(error)
+    console.log(error);
     res.status(404).json({message:"An error occured "+ error})
   });
 };

@@ -32,6 +32,7 @@ export class LocationsService {
               startDate: new Date(location.startDate * 1000),
               endDate: new Date(location.endDate * 1000),
               id: location._id,
+              stay: location.stay,
             };
           }
           ),
