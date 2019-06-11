@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ParamMap} from "@angular/router";
+import {LocationsService} from '../../../shared/locations.service';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-add-edit-restaurants',
@@ -10,41 +11,57 @@ import {ParamMap} from "@angular/router";
 })
 export class AddEditRestaurantsComponent implements OnInit {
 
-  isEditMode:boolean = false;
+
   restaurantEdit: FormGroup;
   isLoading = false;
-  editRestaurant = null;
-  restaurantId;
+  paramsSubscription: Subscription;
+  locationParamId: string = null;
+  editMode:boolean;
+  restaurantId: string;
 
-  constructor(private dialogRef: MatDialogRef<AddEditRestaurantsComponent>) { }
+  constructor(public locationService: LocationsService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+
     this.isLoading = true;
-    this.initForm();
+
+    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
+      this.locationParamId = params.id;
+      const check = this.locationService.locationCheck(this.locationParamId);
+      if (!check) {
+        this.router.navigate(['/' + this.locationParamId, 'overview']);
+      } else if (this.route.url.value[2].path === 'add') {
+        this.editMode = false;
+        this.initForm();
+      } else {
+        this.editMode = true;
+
+        // this.initForm();
+      }
+
+    });
   }
 
   initForm() {
-    let restauranttitle = '';
+    let restaurantTitle = '';
     let cuisine = '';
     let restaurantLocation = '';
-    let restaurantMenu = '';
     let restaurantDescription = '';
+    let restaurantCost = '';
+
+
 
     this.restaurantEdit = new FormGroup({
-      restauranttitle: new FormControl(restauranttitle, [Validators.required]),
+      restaurantTitle: new FormControl(restaurantTitle, [Validators.required]),
       cuisine: new FormControl(cuisine, [Validators.required]),
       restaurantLocation: new FormControl(restaurantLocation, [Validators.required]),
-      restaurantMenu: new FormControl(restaurantMenu),
+      restaurantCost: new FormControl(restaurantCost, [Validators.required]),
       restaurantDescription: new FormControl(restaurantDescription, [Validators.required])
 
 
     });
     this.isLoading = false;
 
-  }
-
-  close() {
-    this.dialogRef.close();
   }
 
   onSubmit() {

@@ -57,8 +57,11 @@ export class LocationsService {
         return obj;
       }
     });
-
     return this.http.get<{ location: any }>(BACKEND_URL + locationId);
+  }
+
+  locationCheck(locationId) {
+    return this.locations.some(el => el.id === locationId);
   }
 
   addLocation(locationData: Location) {

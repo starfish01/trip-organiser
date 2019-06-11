@@ -18,19 +18,20 @@
     <mat-card-content>
 
 <!--      Desktop mode -->
-<!--      <div flex fxLayout="row" *ngIf="!isMobile">-->
+<!--      <div flex fxLayout="row">-->
 <!--        <div fxFlex="45">-->
 <!--          <app-restaurants></app-restaurants>-->
 <!--        </div>-->
 <!--        <div fxFlex="10"></div>-->
 <!--        <div fxFlex="45">-->
-<!--          -->
+
 <!--        </div>-->
 <!--      </div>-->
 
       <mat-tab-group>
-        <mat-tab label="Places to be">Places to be</mat-tab>
-        <mat-tab label="Food to eat"><app-restaurants></app-restaurants></mat-tab>
+        <mat-tab label="Places to be">
+        </mat-tab>
+        <mat-tab label="Food to eat"><app-restaurants [locationID]="locationSelected._id"></app-restaurants></mat-tab>
         <mat-tab label="Third"> Content 3 </mat-tab>
       </mat-tab-group>
 

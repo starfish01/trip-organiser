@@ -1,6 +1,6 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material';
-import {AddEditRestaurantsComponent} from './add-edit-restaurants/add-edit-restaurants.component';
+import {Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, ParamMap, Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-restaurants',
@@ -9,29 +9,28 @@ import {AddEditRestaurantsComponent} from './add-edit-restaurants/add-edit-resta
 })
 export class RestaurantsComponent implements OnInit, OnDestroy {
 
-  isFavourite:boolean = false;
-  fileNameDialogRef: MatDialogRef<AddEditRestaurantsComponent>;
+  isFavourite: boolean = false;
+  // locationId: string;
 
-  constructor(private dialog: MatDialog) { }
+  @Input('locationID') locationId: string;
+
+  constructor(private router: Router, public route: ActivatedRoute) {}
 
   ngOnInit() {
 
   }
 
+  onClickAddRestaurant(): void {
+    // ':id/restaurant/add',
+    this.router.navigate([this.locationId, 'restaurant', 'add']);
+  }
 
-
-
-  openDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    this.fileNameDialogRef = this.dialog.open(AddEditRestaurantsComponent, dialogConfig);
+  onEditClick(){
+    this.router.navigate([this.locationId, 'restaurant', 'edit', this.locationId]);
   }
 
   ngOnDestroy(): void {
-
+    console.log('destroy');
   }
 
   onFavoriteClick(){

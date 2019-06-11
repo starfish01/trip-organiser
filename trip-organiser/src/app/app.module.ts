@@ -23,7 +23,7 @@ import {MatCardModule} from '@angular/material/card';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {HttpClientModule} from '@angular/common/http';
-import {MatDialogModule, MatExpansionModule, MatIconModule, MatTabsModule} from '@angular/material';
+import {MatDialogModule, MatExpansionModule, MatIconModule, MatSelectModule, MatTabsModule} from '@angular/material';
 import { RestaurantsComponent } from './trip-overview/restaurants/restaurants.component';
 import { AddEditRestaurantsComponent } from './trip-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
 
@@ -57,7 +57,8 @@ import { AddEditRestaurantsComponent } from './trip-overview/restaurants/add-edi
     FormsModule,
     MatTabsModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
 
   ],
   entryComponents:[

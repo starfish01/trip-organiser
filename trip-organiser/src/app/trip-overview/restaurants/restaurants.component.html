@@ -1,6 +1,6 @@
 <div class="container">
 
-  <button mat-button color="primary" (click)="openDialog()">Add</button>
+  <button mat-button color="primary" (click)="onClickAddRestaurant()">Add</button>
   <div class="food-accordion">
     <mat-accordion>
       <mat-expansion-panel>
@@ -37,7 +37,7 @@
         </mat-panel-description>
 
         <mat-action-row>
-          <button mat-button color="warn">Edit</button>
+          <button mat-button color="warn" (click)="onEditClick()">Edit</button>
           <button mat-button color="primary" (click)="onFavoriteClick()">
             <mat-icon *ngIf="isFavourite">favorite</mat-icon>
             <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
