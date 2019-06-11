@@ -10,6 +10,8 @@
                 <div fxFlex="45">
                     <mat-form-field class="full-width" appearance="standard">
                         <input matInput id="title" placeholder="Title" formControlName="title">
+<!--                      <mat-error *ngIf="title.invalid">Title is a required field</mat-error>-->
+
                     </mat-form-field>
                 </div>
 
@@ -22,6 +24,7 @@
                             placeholder="Start Date">
                         <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #startDatePicker></mat-datepicker>
+<!--                      <mat-error *ngIf="startDate.invalid">Start date is a required</mat-error>-->
                     </mat-form-field>
 
                 </div>
@@ -34,6 +37,7 @@
                             placeholder="End Date">
                         <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #endDatePicker></mat-datepicker>
+<!--                      <mat-error *ngIf="endDate.invalid">Start date is a required</mat-error>-->
                     </mat-form-field>
                 </div>
               <div fxFlex="10"></div>
@@ -44,7 +48,6 @@
                 </div>
 
             </div>
-
 
             <div>
                 <button mat-stroked-button color="primary" [disabled]="!locationEdit.valid" (click)="onSubmit()"

@@ -1,16 +1,67 @@
-<h1 mat-dialog-title>Favorite Animal</h1>
-<div mat-dialog-content>
-  My favorite animal is:
-  <ul>
-    <li>
-      something
-    </li>
-    <li>
-      something
-    </li>
-    <li>
-      something
-    </li>
-  </ul>
+<h1 mat-dialog-title></h1>
+  <div mat-dialog-content>
+
+      <form *ngIf="!isLoading" [formGroup]="restaurantEdit" (ngSubmit)="onSubmit()">
+
+        <div flex fxLayout="row">
+          <div fxFlex="45">
+            <mat-form-field class="full-width" appearance="standard">
+              <input matInput id="restaurantTitle" placeholder="Title" formControlName="restauranttitle">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="10"></div>
+
+          <div fxFlex="45">
+
+            <mat-form-field class="full-width" appearance="standard">
+              <input matInput id="cuisine" placeholder="Cuisine" formControlName="cuisine">
+<!--              <mat-error *ngIf="cuisine.invalid">Title is a required field</mat-error>-->
+            </mat-form-field>
+
+          </div>
+        </div>
+
+        <div flex fxLayout="row">
+          <div fxFlex="40">
+              $$$$$
+          </div>
+
+          <div fxFlex="10"></div>
+
+          <div fxFlex="40">
+
+            <mat-form-field class="full-width" appearance="standard">
+              <input matInput id="restaurantLocation" placeholder="Location" formControlName="restaurantLocation">
+            </mat-form-field>
+
+          </div>
+
+        </div>
+
+<!--        <div flex fxFlex="row">-->
+<!--          <div fxFlex="40">-->
+
+<!--              <mat-form-field class="full-width" appearance="standard">-->
+<!--                <input matInput id="restaurantMenu" placeholder="Menu" formControlName="restaurantLocation">-->
+<!--              </mat-form-field>-->
+<!--          </div>-->
+<!--          <div fxFlex="10"></div>-->
+<!--          <div fxFlex="40"></div>-->
+<!--        </div>-->
+
+
+        <div>
+          <button mat-stroked-button color="primary" [disabled]="!restaurantEdit.valid" (click)="onSubmit()"
+                  type="button">Save</button>
+<!--          <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>-->
+
+          <span class="spacer"></span>
+
+<!--          <button *ngIf="isEditMode" mat-stroked-button color="danger" (click)="deleteItem()" type="button">Delete</button>-->
+        </div>
+
+      </form>
+
   <button mat-button color="warn" (click)="close()">close</button>
 </div>
