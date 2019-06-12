@@ -51,6 +51,8 @@ export class RestaurantsService {
   getRestaurant() {}
 
   addRestaurant(RestaurantData: Restaurant) {
+
+    console.log('title');
     this.http.post<{ message: string, id: string}>(BACKEND_URL + 'create', RestaurantData).subscribe((responseData) => {
       console.log(responseData);
       // Need to set up object

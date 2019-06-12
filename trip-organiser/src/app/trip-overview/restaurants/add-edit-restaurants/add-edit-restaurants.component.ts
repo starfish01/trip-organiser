@@ -3,6 +3,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LocationsService} from '../../../shared/locations.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {Location as LocationModel} from "../../../model/location.model";
+import {Restaurant} from "../../../model/restaurant.model";
+import {RestaurantsService} from "../../../shared/restaurants.service";
 
 @Component({
   selector: 'app-add-edit-restaurants',
@@ -16,10 +19,10 @@ export class AddEditRestaurantsComponent implements OnInit {
   isLoading = false;
   paramsSubscription: Subscription;
   locationParamId: string = null;
-  editMode:boolean;
+  editMode: boolean;
   restaurantId: string;
 
-  constructor(public locationService: LocationsService, private route: ActivatedRoute, private router: Router) { }
+  constructor(public locationService: LocationsService, private route: ActivatedRoute, private router: Router, private restaurantSevice: RestaurantsService) { }
 
   ngOnInit() {
 
@@ -30,16 +33,22 @@ export class AddEditRestaurantsComponent implements OnInit {
       const check = this.locationService.locationCheck(this.locationParamId);
       if (!check) {
         this.router.navigate(['/' + this.locationParamId, 'overview']);
-      } else if (this.route.url.value[2].path === 'add') {
-        this.editMode = false;
-        this.initForm();
       } else {
-        this.editMode = true;
-
-        // this.initForm();
+        this.initForm();
+        this.editMode = false;
       }
-
     });
+        // } else if (this.route.url.value[2].path === 'add') {
+      //   this.editMode = false;
+      //   this.initForm();
+      // } else {
+      //   this.editMode = true;
+      //
+      //   // this.initForm();
+      // }
+
+
+
   }
 
   initForm() {
@@ -65,6 +74,29 @@ export class AddEditRestaurantsComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.restaurantEdit.invalid) {
+      return;
+    }
+
+    const restaurant: Restaurant = {
+      id: null,
+      restaurantTitle: this.restaurantEdit.value.restaurantTitle,
+      cuisine: this.restaurantEdit.value.cuisine,
+      restaurantLocation: this.restaurantEdit.value.restaurantLocation,
+      restaurantCost: this.restaurantEdit.value.restaurantCost,
+      restaurantDescription: this.restaurantEdit.value.restaurantDescription
+    };
+
+    this.restaurantSevice.addRestaurant(restaurant);
+
+      // if (this.isEditMode) {
+      //   location.id = this.locationId;
+      //   this.locationService.updateLocation(location, this.locationId);
+      // } else {
+      //   this.locationService.addLocation(location);
+      // }
+
+      // this.locationEdit.reset();
 
   }
 

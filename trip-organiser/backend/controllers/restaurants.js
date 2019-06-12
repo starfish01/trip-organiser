@@ -13,7 +13,7 @@ exports.createRestaurant = (req,res,next)=>{
 
   });
   console.log(restaurant);
-  location.save().then(createdRestaurant => {
+  restaurant.save().then(createdRestaurant => {
     res.status(201).json({
       message:"Post Restaurant",
       id: createdRestaurant._id
