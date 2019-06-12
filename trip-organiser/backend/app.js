@@ -2,9 +2,11 @@ const express = require('express');
 const bodyParser = require("body-parser");
 
 // const Post = require('./models/post')
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const locationRoutes = require('./routes/locations')
+const locationRoutes = require('./routes/locations');
+
+const restaurantRoutes = require('./routes/restaurants');
 
 const app = express();
 
@@ -32,6 +34,9 @@ app.use((req, res, next) => {
 })
 
 app.use("/api/locations",locationRoutes);
+
+app.use("/api/restaurants",restaurantRoutes);
+
 
 
 module.exports = app;

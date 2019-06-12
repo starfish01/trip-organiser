@@ -40,8 +40,8 @@ exports.updateLocation = (req,res,next) => {
 };
 
 exports.getLocations = (req,res,next)=>{
-  console.log("get all locations")
-  const locationQuery = Location.find()
+  console.log("get all locations");
+  const locationQuery = Location.find();
   //not implementing query yet not sure if it will be needed
   // it will be needed if you are organiseing a seperate trip
 

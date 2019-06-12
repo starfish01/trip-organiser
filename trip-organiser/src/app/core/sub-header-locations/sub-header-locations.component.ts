@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SubHeaderLocationsComponent implements OnInit, OnDestroy {
 
-  constructor(private locationsService:LocationsService, private router: Router) { }
+  constructor(private locationsService: LocationsService, private router: Router) { }
 
   locations: Location[] = [];
   private locationSubs:Subscription;
@@ -21,10 +21,10 @@ export class SubHeaderLocationsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true;
     this.locationSubs = this.locationsService.getLocationUpdateListener().subscribe((locations:Location[])=>{
-      this.locations = locations
+      this.locations = locations;
       this.isLoading = false;
-    })
-    this.locationsService.getLocations()
+    });
+    this.locationsService.getLocations();
   }
 
   ngOnDestroy(): void {
@@ -32,7 +32,7 @@ export class SubHeaderLocationsComponent implements OnInit, OnDestroy {
   }
 
 
-  onLocationClick(locationId){
+  onLocationClick(locationId) {
     this.router.navigateByUrl(locationId)
   }
 
