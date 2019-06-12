@@ -5,5 +5,9 @@ export interface Restaurant {
   restaurantLocation: string;
   restaurantDescription: string;
   restaurantCost: string;
+  restaurantLocationRef: string;
+  restaurantUrl: string;
+  created_at: string;
+  updatedAt: string;
 }
 

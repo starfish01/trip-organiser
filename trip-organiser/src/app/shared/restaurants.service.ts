@@ -32,6 +32,10 @@ export class RestaurantsService {
               restaurantLocation: restaurant.restaurantLocation,
               restaurantDescription: restaurant.restaurantDescription,
               restaurantCost: restaurant.restaurantCost,
+              restaurantLocationRef: restaurant.restaurantLocationRef,
+              restaurantUrl: restaurant.restaurantUrl,
+              created_at: restaurant.created_at,
+              updatedAt: restaurant.updatedAt,
             };
           }
           ),
@@ -51,7 +55,6 @@ export class RestaurantsService {
   getRestaurant() {}
 
   addRestaurant(RestaurantData: Restaurant) {
-
     console.log('title');
     this.http.post<{ message: string, id: string}>(BACKEND_URL + 'create', RestaurantData).subscribe((responseData) => {
       console.log(responseData);

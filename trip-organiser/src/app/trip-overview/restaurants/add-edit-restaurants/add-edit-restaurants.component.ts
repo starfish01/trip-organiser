@@ -22,7 +22,7 @@ export class AddEditRestaurantsComponent implements OnInit {
   editMode: boolean;
   restaurantId: string;
 
-  constructor(public locationService: LocationsService, private route: ActivatedRoute, private router: Router, private restaurantSevice: RestaurantsService) { }
+  constructor(public locationService: LocationsService, private route: ActivatedRoute, private router: Router, private restaurantsService: RestaurantsService) { }
 
   ngOnInit() {
 
@@ -57,6 +57,7 @@ export class AddEditRestaurantsComponent implements OnInit {
     let restaurantLocation = '';
     let restaurantDescription = '';
     let restaurantCost = '';
+    let restaurantUrl = '';
 
 
 
@@ -65,15 +66,15 @@ export class AddEditRestaurantsComponent implements OnInit {
       cuisine: new FormControl(cuisine, [Validators.required]),
       restaurantLocation: new FormControl(restaurantLocation, [Validators.required]),
       restaurantCost: new FormControl(restaurantCost, [Validators.required]),
-      restaurantDescription: new FormControl(restaurantDescription, [Validators.required])
-
-
+      restaurantDescription: new FormControl(restaurantDescription, [Validators.required]),
+      restaurantUrl: new FormControl(restaurantUrl)
     });
     this.isLoading = false;
 
   }
 
   onSubmit() {
+
     if (this.restaurantEdit.invalid) {
       return;
     }
@@ -84,10 +85,14 @@ export class AddEditRestaurantsComponent implements OnInit {
       cuisine: this.restaurantEdit.value.cuisine,
       restaurantLocation: this.restaurantEdit.value.restaurantLocation,
       restaurantCost: this.restaurantEdit.value.restaurantCost,
-      restaurantDescription: this.restaurantEdit.value.restaurantDescription
+      restaurantDescription: this.restaurantEdit.value.restaurantDescription,
+      restaurantLocationRef: this.locationParamId,
+      restaurantUrl: this.restaurantEdit.value.restaurantUrl,
+      created_at: null,
+      updatedAt: null,
     };
 
-    this.restaurantSevice.addRestaurant(restaurant);
+    this.restaurantsService.addRestaurant(restaurant);
 
       // if (this.isEditMode) {
       //   location.id = this.locationId;
