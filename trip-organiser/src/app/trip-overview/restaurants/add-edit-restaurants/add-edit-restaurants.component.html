@@ -1,5 +1,6 @@
 <div>
-  <h1 *ngIf="!isLoading">Add place to dine</h1>
+  <h1 *ngIf="!isLoading && !restaurantDetails">Add place to dine</h1>
+  <h1 *ngIf="!isLoading && restaurantDetails">Edit {{restaurantDetails.restaurantTitle}}</h1>
 
   <span *ngIf="isLoading">
     <img src="../../../../assets/foodLoading.svg">
@@ -7,104 +8,105 @@
   </span>
 
 
-<mat-card>
+  <mat-card>
 
-  <form *ngIf="!isLoading" [formGroup]="restaurantEdit" (ngSubmit)="onSubmit()">
+    <form *ngIf="!isLoading" [formGroup]="restaurantEdit" (ngSubmit)="onSubmit()">
 
-    <div flex fxLayout="row">
-      <div fxFlex="45">
-        <mat-form-field class="full-width">
-          <input matInput id="restaurantTitle" placeholder="Restaurant name" formControlName="restaurantTitle">
-          <mat-error>Restaurant name is required</mat-error>
-        </mat-form-field>
-      </div>
-
-      <div fxFlex="10"></div>
-
-      <div fxFlex="45">
-
-        <mat-form-field class="full-width">
-          <input matInput id="cuisine" placeholder="Cuisine" formControlName="cuisine">
-          <mat-error>Cuisine is a required</mat-error>
-        </mat-form-field>
-
-      </div>
-    </div>
-
-    <div flex fxLayout="row">
-      <div fxFlex="45">
-        <mat-form-field class="full-width">
-          <input matInput id="restaurantLocation" placeholder="Location" formControlName="restaurantLocation">
-          <mat-error>Location is a required</mat-error>
-        </mat-form-field>
-
-      </div>
-
-      <div fxFlex="10"></div>
-
-      <div fxFlex="45">
-
-        <div class="full-width">
+      <div flex fxLayout="row">
+        <div fxFlex="45">
           <mat-form-field class="full-width">
-            <mat-label>Cost</mat-label>
-            <mat-select id="restaurantCost" formControlName="restaurantCost">
-              <mat-option value="0">¯\_(ツ)_/¯</mat-option>
-              <mat-option value="$">$</mat-option>
-              <mat-option value="$$">$$</mat-option>
-              <mat-option value="$$$">$$$</mat-option>
-              <mat-option value="$$$$">$$$$</mat-option>
-              <mat-option value="$$$$$">$$$$$</mat-option>
-            </mat-select>
-            <mat-error>Cost is a required</mat-error>
+            <input matInput id="restaurantTitle" placeholder="Restaurant name" formControlName="restaurantTitle">
+            <mat-error>Restaurant name is required</mat-error>
           </mat-form-field>
+        </div>
+
+        <div fxFlex="10"></div>
+
+        <div fxFlex="45">
+
+          <mat-form-field class="full-width">
+            <input matInput id="cuisine" placeholder="Cuisine" formControlName="cuisine">
+            <mat-error>Cuisine is a required</mat-error>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+          <mat-form-field class="full-width">
+            <input matInput id="restaurantLocation" placeholder="Location" formControlName="restaurantLocation">
+            <mat-error>Location is a required</mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <div fxFlex="10"></div>
+
+        <div fxFlex="45">
+
+          <div class="full-width">
+            <mat-form-field class="full-width">
+              <mat-label>Cost</mat-label>
+              <mat-select id="restaurantCost" formControlName="restaurantCost">
+                <mat-option value="0">¯\_(ツ)_/¯</mat-option>
+                <mat-option value="$">$</mat-option>
+                <mat-option value="$$">$$</mat-option>
+                <mat-option value="$$$">$$$</mat-option>
+                <mat-option value="$$$$">$$$$</mat-option>
+                <mat-option value="$$$$$">$$$$$</mat-option>
+              </mat-select>
+              <mat-error>Cost is a required</mat-error>
+            </mat-form-field>
+          </div>
+
         </div>
 
       </div>
 
-    </div>
+
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+          <mat-form-field class="full-width">
+            <input matInput id="restaurantUrl" placeholder="Restaurant website" formControlName="restaurantUrl">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="10"></div>
+
+        <div fxFlex="45">
 
 
-    <div flex fxLayout="row">
-      <div fxFlex="45">
-        <mat-form-field class="full-width">
-          <input matInput id="restaurantUrl" placeholder="Restaurant website" formControlName="restaurantUrl">
-        </mat-form-field>
+        </div>
       </div>
 
-      <div fxFlex="10"></div>
 
-      <div fxFlex="45">
+      <div flex fxLayout="row">
+        <div fxFlex="100">
 
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" id="restaurantDescription"
+                      formControlName="restaurantDescription"></textarea>
+            <mat-error>Description is a required</mat-error>
+          </mat-form-field>
 
-
+        </div>
       </div>
-    </div>
 
+      <div>
+        <button mat-stroked-button color="primary" [disabled]="!restaurantEdit.valid" (click)="onSubmit()"
+                type="button">Save
+        </button>
+        <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>
 
+        <span class="spacer"></span>
 
-    <div flex fxLayout="row">
-      <div fxFlex="100">
-
-        <mat-form-field class="full-width">
-          <textarea matInput placeholder="Description" id="restaurantDescription" formControlName="restaurantDescription"></textarea>
-          <mat-error>Description is a required</mat-error>
-        </mat-form-field>
-
+        <button *ngIf="restaurantDetails" mat-stroked-button color="warn" class="delete-Button" (click)="onClickDeleteItem()" type="button">
+          Delete
+        </button>
       </div>
-    </div>
 
-    <div>
-      <button mat-stroked-button color="primary" [disabled]="!restaurantEdit.valid" (click)="onSubmit()"
-              type="button">Save
-      </button>
-      <!--          <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>-->
+    </form>
 
-      <span class="spacer"></span>
-
-      <!--          <button *ngIf="isEditMode" mat-stroked-button color="danger" (click)="deleteItem()" type="button">Delete</button>-->
-    </div>
-
-  </form>
-
-</mat-card>
+  </mat-card>
 </div>

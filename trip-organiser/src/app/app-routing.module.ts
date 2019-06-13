@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'create', component: AddEditLocationComponent },
   { path: ':id/edit', component: AddEditLocationComponent },
   { path: ':id/restaurant/add', component: AddEditRestaurantsComponent },
-  { path: ':id/restaurant/edit/:id', component: AddEditRestaurantsComponent },
+  { path: ':id/restaurant/edit/:restaurantId', component: AddEditRestaurantsComponent },
   { path: '**', redirectTo: '/home' }
 ];
 

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LocationsService} from '../../../shared/locations.service';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {Location as LocationModel} from "../../../model/location.model";
-import {Restaurant} from "../../../model/restaurant.model";
-import {RestaurantsService} from "../../../shared/restaurants.service";
+import {Location as LocationModel} from '../../../model/location.model';
+import {Restaurant} from '../../../model/restaurant.model';
+import {RestaurantsService} from '../../../shared/restaurants.service';
 
 @Component({
   selector: 'app-add-edit-restaurants',
@@ -21,8 +21,13 @@ export class AddEditRestaurantsComponent implements OnInit {
   locationParamId: string = null;
   editMode: boolean;
   restaurantId: string;
+  restaurantDetails: Restaurant;
 
-  constructor(public locationService: LocationsService, private route: ActivatedRoute, private router: Router, private restaurantsService: RestaurantsService) { }
+  constructor(public locationService: LocationsService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private restaurantsService: RestaurantsService) {
+  }
 
   ngOnInit() {
 
@@ -30,25 +35,24 @@ export class AddEditRestaurantsComponent implements OnInit {
 
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       this.locationParamId = params.id;
+      this.restaurantId = params.restaurantId;
       const check = this.locationService.locationCheck(this.locationParamId);
       if (!check) {
         this.router.navigate(['/' + this.locationParamId, 'overview']);
+      } else if (params.restaurantId) {
+        this.editMode = true;
+        this.restaurantDetails = this.restaurantsService.getRestaurant(params.restaurantId);
+        if (!this.restaurantsService) {
+          console.log('ERROR');
+          this.router.navigate(['/']);
+        } else {
+          this.initForm();
+        }
       } else {
         this.initForm();
         this.editMode = false;
       }
     });
-        // } else if (this.route.url.value[2].path === 'add') {
-      //   this.editMode = false;
-      //   this.initForm();
-      // } else {
-      //   this.editMode = true;
-      //
-      //   // this.initForm();
-      // }
-
-
-
   }
 
   initForm() {
@@ -59,7 +63,14 @@ export class AddEditRestaurantsComponent implements OnInit {
     let restaurantCost = '';
     let restaurantUrl = '';
 
-
+    if (this.editMode) {
+      restaurantTitle = this.restaurantDetails.restaurantTitle;
+      cuisine = this.restaurantDetails.cuisine;
+      restaurantLocation = this.restaurantDetails.restaurantLocation;
+      restaurantDescription = this.restaurantDetails.restaurantDescription;
+      restaurantCost = this.restaurantDetails.restaurantCost;
+      restaurantUrl = this.restaurantDetails.restaurantUrl;
+    }
 
     this.restaurantEdit = new FormGroup({
       restaurantTitle: new FormControl(restaurantTitle, [Validators.required]),
@@ -70,7 +81,6 @@ export class AddEditRestaurantsComponent implements OnInit {
       restaurantUrl: new FormControl(restaurantUrl)
     });
     this.isLoading = false;
-
   }
 
   onSubmit() {
@@ -92,18 +102,21 @@ export class AddEditRestaurantsComponent implements OnInit {
       updatedAt: null,
     };
 
-    this.restaurantsService.addRestaurant(restaurant);
+    if (this.editMode) {
+      restaurant.id = this.restaurantId;
+      this.restaurantsService.updateRestaurant(restaurant, this.restaurantId);
+    } else {
+      this.restaurantsService.addRestaurant(restaurant);
+    }
+
     this.isLoading = true;
-
-      // if (this.isEditMode) {
-      //   location.id = this.locationId;
-      //   this.locationService.updateLocation(location, this.locationId);
-      // } else {
-      //   this.locationService.addLocation(location);
-      // }
-
-      // this.locationEdit.reset();
-
   }
 
+  onClickDeleteItem() {
+    this.restaurantsService.deleteRestaurant(this.restaurantDetails.id, this.locationParamId);
+  }
+
+  onCancel() {
+    this.router.navigate([this.locationParamId, 'overview'], {queryParams:{ position: 'food'}});
+  }
 }

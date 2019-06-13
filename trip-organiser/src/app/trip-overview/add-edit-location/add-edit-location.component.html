@@ -1,64 +1,66 @@
 <img *ngIf="isLoading" class="loading-image" src="../../../assets/loading.svg">
 <div *ngIf="!isLoading">
 
-    <h1 *ngIf="!isEditMode">Where to next?</h1>
-    <h1 *ngIf="isEditMode">Updating your trip to {{ editLocation.title }}</h1>
-    <mat-card>
-        <form *ngIf="editLocation" [formGroup]="locationEdit" (ngSubmit)="onSubmit()">
+  <h1 *ngIf="!isEditMode">Where to next?</h1>
+  <h1 *ngIf="isEditMode">Updating your trip to {{ editLocation.title }}</h1>
+  <mat-card>
+    <form *ngIf="editLocation" [formGroup]="locationEdit" (ngSubmit)="onSubmit()">
 
-            <div flex fxLayout="row">
-                <div fxFlex="45">
-                    <mat-form-field class="full-width" appearance="standard">
-                        <input matInput id="title" placeholder="Title" formControlName="title">
-<!--                      <mat-error *ngIf="title.invalid">Title is a required field</mat-error>-->
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+          <mat-form-field class="full-width" appearance="standard">
+            <input matInput id="title" placeholder="Title" formControlName="title">
+            <!--                      <mat-error *ngIf="title.invalid">Title is a required field</mat-error>-->
 
-                    </mat-form-field>
-                </div>
+          </mat-form-field>
+        </div>
 
-                <div fxFlex="10"></div>
+        <div fxFlex="10"></div>
 
-                <div fxFlex="45">
+        <div fxFlex="45">
 
-                    <mat-form-field class="full-width" appearance="standard">
-                        <input matInput id="startDate" formControlName="startDate" [matDatepicker]="startDatePicker"
-                            placeholder="Start Date">
-                        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #startDatePicker></mat-datepicker>
-<!--                      <mat-error *ngIf="startDate.invalid">Start date is a required</mat-error>-->
-                    </mat-form-field>
+          <mat-form-field class="full-width" appearance="standard">
+            <input matInput id="startDate" formControlName="startDate" [matDatepicker]="startDatePicker"
+                   placeholder="Start Date">
+            <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #startDatePicker></mat-datepicker>
+            <!--                      <mat-error *ngIf="startDate.invalid">Start date is a required</mat-error>-->
+          </mat-form-field>
 
-                </div>
-            </div>
+        </div>
+      </div>
 
-            <div flex fxLayout="row">
-                <div fxFlex="45">
-                    <mat-form-field class="full-width" appearance="standard">
-                        <input matInput id="endDate" formControlName="endDate" [matDatepicker]="endDatePicker"
-                            placeholder="End Date">
-                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #endDatePicker></mat-datepicker>
-<!--                      <mat-error *ngIf="endDate.invalid">Start date is a required</mat-error>-->
-                    </mat-form-field>
-                </div>
-              <div fxFlex="10"></div>
-                <div fxFlex="45">
-                  <mat-form-field class="full-width" appearance="standard">
-                    <input matInput id="stay" placeholder="Basecamp" formControlName="stay">
-                  </mat-form-field>
-                </div>
-            </div>
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+          <mat-form-field class="full-width" appearance="standard">
+            <input matInput id="endDate" formControlName="endDate" [matDatepicker]="endDatePicker"
+                   placeholder="End Date">
+            <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #endDatePicker></mat-datepicker>
+            <!--                      <mat-error *ngIf="endDate.invalid">Start date is a required</mat-error>-->
+          </mat-form-field>
+        </div>
+        <div fxFlex="10"></div>
+        <div fxFlex="45">
+          <mat-form-field class="full-width" appearance="standard">
+            <input matInput id="stay" placeholder="Basecamp" formControlName="stay">
+          </mat-form-field>
+        </div>
+      </div>
 
-            <div>
-                <button mat-stroked-button color="primary" [disabled]="!locationEdit.valid" (click)="onSubmit()"
-                    type="button">Save</button>
-                <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>
+      <div>
+        <button mat-stroked-button color="primary" [disabled]="!locationEdit.valid" (click)="onSubmit()"
+                type="button">Save
+        </button>
+        <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>
 
-              <span class="spacer"></span>
+        <span class="spacer"></span>
 
-                 <button *ngIf="isEditMode" mat-stroked-button color="danger" (click)="deleteItem()" type="button">Delete</button>
-            </div>
+        <button *ngIf="isEditMode" mat-stroked-button color="danger" (click)="deleteItem()" type="button">Delete
+        </button>
+      </div>
 
 
-        </form>
-    </mat-card>
+    </form>
+  </mat-card>
 </div>

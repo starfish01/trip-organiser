@@ -12,10 +12,11 @@ import {LocationsService} from '../shared/locations.service';
 export class TripOverviewComponent implements OnInit, OnDestroy {
 
 
-
+  tabIndex = 0;
   locationParamId: string = null;
   locationSelected: Location = null;
   paramsSubscription: Subscription;
+
 
 
   constructor(private route: ActivatedRoute, private router: Router, private locationService: LocationsService) {
@@ -44,6 +45,14 @@ export class TripOverviewComponent implements OnInit, OnDestroy {
       this.locationParamId = params.location;
       this.getLocationData();
     });
+    this.route.queryParams.subscribe((queryParams:Params) => {
+     if (queryParams.position === 'place') {
+       this.tabIndex = 0;
+     }else if(queryParams.position === 'food') {
+        this.tabIndex = 1;
+      }
+    });
+
   }
 
   getLocationData() {
@@ -58,7 +67,6 @@ export class TripOverviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('destroy1');
   }
 
 

@@ -45,8 +45,8 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     this.router.navigate([this.locationId, 'restaurant', 'add']);
   }
 
-  onEditClick(){
-    this.router.navigate([this.locationId, 'restaurant', 'edit', this.locationId]);
+  onEditClick(restaurantId) {
+    this.router.navigate([this.locationId, 'restaurant', 'edit', restaurantId]);
   }
 
   onFavoriteClick(){
