@@ -1,5 +1,11 @@
 <div>
-  <h1>Add place to dine</h1>
+  <h1 *ngIf="!isLoading">Add place to dine</h1>
+
+  <span *ngIf="isLoading">
+    <img src="../../../../assets/foodLoading.svg">
+    <p>Loading...</p>
+  </span>
+
 
 <mat-card>
 

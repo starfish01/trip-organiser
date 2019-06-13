@@ -18,6 +18,7 @@ exports.createRestaurant = (req, res, next) => {
     res.status(201).json({
       id: createdRestaurant._id,
       message: "Post Restaurant",
+      locationId: createdRestaurant.restaurantLocationRef,
     });
   });
 };

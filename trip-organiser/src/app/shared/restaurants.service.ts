@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import {Subject} from 'rxjs';
 import {Location} from '../model/location.model';
 import {map} from "rxjs/operators";
+import {Router} from "@angular/router";
 
 
 
@@ -18,7 +19,7 @@ export class RestaurantsService {
   private restaurants: Restaurant[] = [];
   private restaurantsUpdate = new Subject<Restaurant[]>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private  router: Router) { }
 
   getRestaurants() {
     this.http.get<{ message: string, restaurants: any, maxPosts: number }>(BACKEND_URL)
@@ -54,15 +55,17 @@ export class RestaurantsService {
 
   getRestaurant() {}
 
-  addRestaurant(RestaurantData: Restaurant) {
+  addRestaurant(restaurantData: Restaurant) {
     console.log('title');
-    this.http.post<{ message: string, id: string}>(BACKEND_URL + 'create', RestaurantData).subscribe((responseData) => {
+    this.http.post<{ message: string, id: string, locationId: string}>(BACKEND_URL + 'create', restaurantData).subscribe((responseData) => {
       console.log(responseData);
       // Need to set up object
-      // locationData.id = responseData.id;
-      // this.locations.push(locationData);
-      // this.locationsUpdated.next([...this.locations]);
-      // this.router.navigate(['/']);
+      restaurantData.id = responseData.id;
+      this.restaurants.push(restaurantData);
+      this.restaurantsUpdate.next([...this.restaurants]);
+
+      this.router.navigate([responseData.locationId, 'overview']);
+
     });
   }
 }

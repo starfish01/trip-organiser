@@ -93,6 +93,7 @@ export class AddEditRestaurantsComponent implements OnInit {
     };
 
     this.restaurantsService.addRestaurant(restaurant);
+    this.isLoading = true;
 
       // if (this.isEditMode) {
       //   location.id = this.locationId;
