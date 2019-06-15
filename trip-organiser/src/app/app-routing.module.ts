@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './core/home-page/home-page.component';
-import { TripOverviewComponent } from './trip-overview/trip-overview.component';
-import { AddEditLocationComponent } from './trip-overview/add-edit-location/add-edit-location.component';
-import {AddEditRestaurantsComponent} from './trip-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
+import { LocationOverviewComponent } from './location-overview/location-overview.component';
+import { AddEditLocationComponent } from './location-overview/add-edit-location/add-edit-location.component';
+import {AddEditRestaurantsComponent} from './location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
+import {TripsOverviewComponent} from "./trips-overview/trips-overview.component";
 
 const routes: Routes = [
-  { path: 'home', component: HomePageComponent },
+  { path: 'home', component: TripsOverviewComponent },
   // { path: ':location', redirectTo: ':location/overview', pathMatch: 'full'},
-  { path: ':location/overview', component: TripOverviewComponent },
+  { path: ':location/overview', component: LocationOverviewComponent },
   { path: 'create', component: AddEditLocationComponent },
   { path: ':id/edit', component: AddEditLocationComponent },
   { path: ':id/restaurant/add', component: AddEditRestaurantsComponent },

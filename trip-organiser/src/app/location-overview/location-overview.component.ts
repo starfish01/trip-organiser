@@ -5,11 +5,11 @@ import {Subscription} from 'rxjs';
 import {LocationsService} from '../shared/locations.service';
 
 @Component({
-  selector: 'app-trip-overview',
-  templateUrl: './trip-overview.component.html',
-  styleUrls: ['./trip-overview.component.scss']
+  selector: 'app-location-trip-overview',
+  templateUrl: './location-overview.component.html',
+  styleUrls: ['./location-overview.component.scss']
 })
-export class TripOverviewComponent implements OnInit, OnDestroy {
+export class LocationOverviewComponent implements OnInit, OnDestroy {
 
 
   tabIndex = 0;
@@ -34,9 +34,9 @@ export class TripOverviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
 
-    this.isMobile = TripOverviewComponent.getIsMobile();
+    this.isMobile = LocationOverviewComponent.getIsMobile();
     window.onresize = () => {
-      this.isMobile = TripOverviewComponent.getIsMobile();
+      this.isMobile = LocationOverviewComponent.getIsMobile();
       console.log(this.isMobile);
     };
 
