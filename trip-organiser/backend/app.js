@@ -8,15 +8,17 @@ const locationRoutes = require('./routes/locations');
 
 const restaurantRoutes = require('./routes/restaurants');
 
+const tripsRoutes = require('./routes/trips');
+
 const app = express();
 
 
 mongoose.connect("mongodb+srv://patrickLabes:nqMbBeXJJEFIr7r0@cluster0-trg7g.mongodb.net/trip-data?retryWrites=true&w=majority")
-.then(()=>{
-    console.log('Connection Made')
-}).catch((err)=>{
-    console.log('Connection Failed '+err)
-});
+    .then(() => {
+        console.log('Connection Made')
+    }).catch((err) => {
+        console.log('Connection Failed ' + err)
+    });
 
 
 app.use(bodyParser.json());
@@ -33,9 +35,11 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use("/api/locations",locationRoutes);
+app.use("/api/locations", locationRoutes);
 
-app.use("/api/restaurants",restaurantRoutes);
+app.use("/api/restaurants", restaurantRoutes);
+
+app.use("/api/trips", tripsRoutes);
 
 
 

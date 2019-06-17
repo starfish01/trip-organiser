@@ -1,0 +1,37 @@
+<div *ngIf="!addTrip && !isLoading" class="card add-trip" (click)="onAddTrip()">
+  <div class="card-body">
+    <h3>Add Trip</h3>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="card" (click)="onAddTrip()">
+  <div class="card-body">
+    <img src="../../../assets/loading.svg" width="15%">
+  </div>
+</div>
+
+<div *ngIf="addTrip && !isLoading" class="card" (click)="onAddTrip()">
+  <div class="card-body">
+
+    <form [formGroup]="addEditTrip" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-12">
+          <mat-form-field class="full-width" appearance="standard">
+            <input matInput id="tripTitle" placeholder="tripTitle" formControlName="tripTitle" autocomplete="off">
+            <mat-error>Title is a required field</mat-error>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button mat-raised-button [disabled]="addEditTrip.invalid" (click)="onSubmit()" color="primary">Add</button>
+          <span class="spacer"></span>
+          <button mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>

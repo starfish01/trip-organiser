@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 const BACKEND_URL = environment.apiURL + '/locations/';
 
 
@@ -88,7 +88,7 @@ export class LocationsService {
 
   deleteLocation(locationId) {
 
-    this.http.delete<{message: string}>(BACKEND_URL + locationId).subscribe(response => {
+    this.http.delete<{ message: string }>(BACKEND_URL + locationId).subscribe(response => {
       this.router.navigate(['/']);
 
       const index = this.locations.findIndex((loc, i) => {

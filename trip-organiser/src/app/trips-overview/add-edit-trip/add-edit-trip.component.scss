@@ -1,0 +1,17 @@
+
+.card {
+  border:2px solid;
+  text-align: center;
+  &.add-trip{
+    border:2px dashed;
+    cursor: pointer;
+    &:hover {
+      background-color: aliceblue;
+    }
+  }
+  
+}
+
+.spacer{
+  margin: 10px;
+}
