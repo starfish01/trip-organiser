@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-body">
-    <h3>Trip Title</h3>
-    <button mat-raised-button color="primary">Lets Go!</button>
+    <h3>{{ trip.tripTitle }}</h3>
+    <button mat-raised-button color="primary" (click)="onTripSelect(trip.id)">Lets Go!</button>
   </div>
 </div>

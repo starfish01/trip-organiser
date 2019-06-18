@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TripService } from 'src/app/shared/trip.service';
 import { Trip } from 'src/app/model/trip.model';
@@ -13,6 +13,7 @@ export class AddEditTripComponent implements OnInit {
   addTrip = false;
   addEditTrip: FormGroup;
   isLoading: boolean = false;
+  @Input('tripAdded') tripBeingAdded: boolean;
 
   @Output() userCreatedTrip = new EventEmitter<Trip>();
 
@@ -45,12 +46,7 @@ export class AddEditTripComponent implements OnInit {
       this.addEditTrip.value
     );
 
-    this.isLoading = true;
-
-    // this.tripService.addTrip(this.addEditTrip.value)
-
-    //temp
-    // this.onCancel()
+    this.onCancel();
 
   }
 
@@ -58,6 +54,5 @@ export class AddEditTripComponent implements OnInit {
     this.addEditTrip.reset();
     this.addTrip = false;
   }
-
 
 }

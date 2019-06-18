@@ -1,16 +1,16 @@
-<div *ngIf="!addTrip && !isLoading" class="card add-trip" (click)="onAddTrip()">
+<div *ngIf="!addTrip && !tripBeingAdded" class="card add-trip" (click)="onAddTrip()">
   <div class="card-body">
     <h3>Add Trip</h3>
   </div>
 </div>
 
-<div *ngIf="isLoading" class="card" (click)="onAddTrip()">
+<div *ngIf="tripBeingAdded" class="card" (click)="onAddTrip()">
   <div class="card-body">
     <img src="../../../assets/loading.svg" width="15%">
   </div>
 </div>
 
-<div *ngIf="addTrip && !isLoading" class="card" (click)="onAddTrip()">
+<div *ngIf="addTrip && !tripBeingAdded" class="card" (click)="onAddTrip()">
   <div class="card-body">
 
     <form [formGroup]="addEditTrip" (ngSubmit)="onSubmit()">

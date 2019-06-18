@@ -29,6 +29,7 @@ import { AddEditRestaurantsComponent } from './location-overview/restaurants/add
 import { TripsOverviewComponent } from './trips-overview/trips-overview.component';
 import { TripOverviewComponent } from './trips-overview/trip-overview/trip-overview.component';
 import { AddEditTripComponent } from './trips-overview/add-edit-trip/add-edit-trip.component';
+import { TripDashboardComponent } from './trips-overview/trip-dashboard/trip-dashboard.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { AddEditTripComponent } from './trips-overview/add-edit-trip/add-edit-tr
     TripsOverviewComponent,
     TripOverviewComponent,
     AddEditTripComponent,
+    TripDashboardComponent,
   ],
   imports: [
     BrowserModule,

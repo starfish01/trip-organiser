@@ -7,4 +7,6 @@ const TripsController = require("../controllers/trips");
 
 router.post("/create", TripsController.createTrip);
 
+router.get("",TripsController.getTrips)
+
 module.exports = router;

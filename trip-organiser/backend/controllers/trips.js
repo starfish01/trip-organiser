@@ -14,3 +14,15 @@ exports.createTrip = (req, res, next) => {
         })
     })
 };
+
+exports.getTrips = (req,res,next) => {
+    console.log('Get Trips')
+    //probably will need to implement the query with the users id
+    Trip.find().then(documents => {
+        res.status(200).json({
+            message: "Trips fetched",
+            trips:documents
+        })
+    })  
+}
+
