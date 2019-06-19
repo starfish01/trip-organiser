@@ -9,6 +9,6 @@ router.post("/create", TripsController.createTrip);
 
 router.get("", TripsController.getTrips);
 
-router.get(":id", TripsController.getTrip);
+router.get("/:id", TripsController.getTrip);
 
 module.exports = router;

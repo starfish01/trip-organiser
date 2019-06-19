@@ -28,7 +28,16 @@ exports.getTrips = (req,res,next) => {
 
 exports.getTrip = (req,res,next) => {
     console.log('Get Trip')
-    // Trip.findById(req.params.id)
-    console.log(req.params.id)
+    Trip.findById(req.params.id).then(document => {
+        res.status(200).json({
+            message:'Trip Fetched',
+            trip:document
+        })
+    }).catch((err)=>{
+        res.status(200).json({
+            message:err.message,
+            trip: null
+        })
+    })
 }
 

@@ -4,7 +4,7 @@
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"
            [ngStyle]="{'background-image': 'url(https://source.unsplash.com/random/?' + locationSelected.title + ')'}"></div>
-      <mat-card-title>{{ locationSelected.title }} <a [routerLink]="['/',locationSelected._id,'edit']" class="edit-btn"><i
+      <mat-card-title>{{ locationSelected.title }} <a routerLink="../edit" class="edit-btn"><i
         class="material-icons">
         edit
       </i></a></mat-card-title>

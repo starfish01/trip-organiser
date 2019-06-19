@@ -9,6 +9,8 @@ import {Subject} from 'rxjs';
 import {Location} from '../model/location.model';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {Location as LOCO} from '@angular/common';
+
 
 
 @Injectable({
@@ -19,7 +21,7 @@ export class RestaurantsService {
   private restaurants: Restaurant[] = [];
   private restaurantsUpdate = new Subject<Restaurant[]>();
 
-  constructor(private http: HttpClient, private  router: Router) {
+  constructor(private http: HttpClient, private  router: Router,private _location: LOCO) {
   }
 
   getRestaurants() {
@@ -60,7 +62,7 @@ export class RestaurantsService {
       const index = this.restaurants.findIndex(x => x.id === restaurantData.id);
       this.restaurants[index] = restaurantData;
       this.restaurantsUpdate.next([...this.restaurants]);
-      this.router.navigate([restaurantData.restaurantLocationRef, 'overview'], {queryParams: { position: 'food'}});
+      this._location.back();
     });
   }
 
@@ -77,7 +79,7 @@ export class RestaurantsService {
       restaurantData.id = responseData.id;
       this.restaurants.push(restaurantData);
       this.restaurantsUpdate.next([...this.restaurants]);
-      this.router.navigate([responseData.locationId, 'overview'], {queryParams: { position: 'food'}});
+      this._location.back();
     });
   }
 
@@ -86,7 +88,7 @@ export class RestaurantsService {
       const index = this.restaurants.findIndex(x => x.id === restaurantId);
       this.restaurants.splice(index, 1);
       this.restaurantsUpdate.next([...this.restaurants]);
-      this.router.navigate([locationId, 'overview'], {queryParams: { position: 'food'}});
+      this._location.back();
     });
   }
 }

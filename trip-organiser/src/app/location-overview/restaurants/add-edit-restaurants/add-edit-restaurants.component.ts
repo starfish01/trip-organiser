@@ -6,6 +6,8 @@ import {Subscription} from 'rxjs';
 import {Location as LocationModel} from '../../../model/location.model';
 import {Restaurant} from '../../../model/restaurant.model';
 import {RestaurantsService} from '../../../shared/restaurants.service';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-add-edit-restaurants',
@@ -26,7 +28,8 @@ export class AddEditRestaurantsComponent implements OnInit {
   constructor(public locationService: LocationsService,
               private route: ActivatedRoute,
               private router: Router,
-              private restaurantsService: RestaurantsService) {
+              private restaurantsService: RestaurantsService,
+              private _location: Location) {
   }
 
   ngOnInit() {
@@ -34,11 +37,12 @@ export class AddEditRestaurantsComponent implements OnInit {
     this.isLoading = true;
 
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      this.locationParamId = params.id;
+      console.log(params.location)
+      this.locationParamId = params.location;
       this.restaurantId = params.restaurantId;
       const check = this.locationService.locationCheck(this.locationParamId);
       if (!check) {
-        this.router.navigate(['/' + this.locationParamId, 'overview']);
+        this._location.back();
       } else if (params.restaurantId) {
         this.editMode = true;
         this.restaurantDetails = this.restaurantsService.getRestaurant(params.restaurantId);
@@ -117,6 +121,6 @@ export class AddEditRestaurantsComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate([this.locationParamId, 'overview'], {queryParams:{ position: 'food'}});
-  }
+    this._location.back();
+    }
 }

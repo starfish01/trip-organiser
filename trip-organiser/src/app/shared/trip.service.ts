@@ -20,28 +20,47 @@ export class TripService {
 
   private selectedTrip: Trip = null;
 
-  constructor(private http: HttpClient, private router:Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   selectTrip(tripId) {
-    this.selectedTrip =  this.trips.find(x => x.id === tripId)
-    if(this.selectedTrip){
-      this.router.navigate([this.selectedTrip.id,'dashboard'])
-    }else{
+    this.selectedTrip = this.trips.find(x => x.id === tripId)
+    if (this.selectedTrip) {
+      this.router.navigate([this.selectedTrip.id])
+    } else {
       this.selectedTrip = null;
     }
   }
 
-  getTrip(id){
-    console.log('h')
-    if(this.selectTrip === undefined){
-      return {...this.selectedTrip}
+  getTrip(id) {
+    return new Promise((res, rej) => {
+      if (this.selectedTrip != undefined) {
+        res({ ...this.selectedTrip })
+      } else {
+        this.http.get<{ message: string, trip: any }>(BACKEND_URL + id).subscribe((data) => {
+          if (data.trip != null) {
+            const tripData: Trip = {
+              id: data.trip._id,
+              tripTitle: data.trip.tripTitle
+            }
+            this.selectedTrip = tripData
+            res({ ...tripData })
+          } else {
+            res(null)
+          }
+
+        })
+      }
+
+    })
+    if (this.selectTrip != undefined) {
+      return { ...this.selectedTrip }
     } else {
-      this.http.get<{message:string, trip:any}>(BACKEND_URL+id)
+      this.http.get<{ message: string, trip: any }>(BACKEND_URL + id)
     }
   }
 
-  unselectTrip(){
-    this.selectTrip = null;  
+  unselectTrip() {
+    this.selectTrip = null;
   }
 
   getTripUpdateListener() {
@@ -51,10 +70,9 @@ export class TripService {
   getTrips() {
     this.http.get<{ message: string, trips: any }>(BACKEND_URL)
       .pipe(map((tripData) => {
-        console.log(tripData)
         return {
           trips: tripData.trips.map(trip => {
-            return{
+            return {
               tripTitle: trip.tripTitle,
               id: trip._id
             }
@@ -63,7 +81,6 @@ export class TripService {
         }
       }))
       .subscribe((transformedData) => {
-        console.log(transformedData)
         this.trips = transformedData.trips
         this.tripUpdate.next([...this.trips])
       }
@@ -72,7 +89,6 @@ export class TripService {
 
   addTrip(trip: Trip) {
     this.http.post<{ message: string, id: string }>(BACKEND_URL + 'create', trip).subscribe((response) => {
-      console.log(response)
       this.trips.push(trip)
       this.tripUpdate.next([...this.trips])
     })

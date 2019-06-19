@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LocationsService } from 'src/app/shared/locations.service';
 import { Location } from '../../model/location.model'
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, Params, ActivatedRoute } from '@angular/router';
+import { Trip } from 'src/app/model/trip.model';
 
 
 @Component({
@@ -12,14 +13,21 @@ import { Router } from '@angular/router';
 })
 export class SubHeaderLocationsComponent implements OnInit, OnDestroy {
 
-  constructor(private locationsService: LocationsService, private router: Router) { }
+  constructor(private locationsService: LocationsService, private router: Router, private route: ActivatedRoute) { }
 
   locations: Location[] = [];
   private locationSubs:Subscription;
+  tripSelected: Trip = null;
   isLoading: Boolean = false;
+  tripId:string=null;
 
   ngOnInit() {
     this.isLoading = true;
+    
+    this.route.params.subscribe((params: Params) => {
+      this.tripId = params.trip
+    })
+
     this.locationSubs = this.locationsService.getLocationUpdateListener().subscribe((locations:Location[])=>{
       this.locations = locations;
       this.isLoading = false;

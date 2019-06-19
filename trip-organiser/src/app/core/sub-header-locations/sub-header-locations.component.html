@@ -2,14 +2,14 @@
     <img *ngIf="isLoading" class="loading-image" src="../../../assets/loading.svg">
 
     <ng-container *ngFor="let location of locations">
-        <a routerLinkActive="mat-accent" mat-button routerLink="/{{location.id}}/overview">
+        <a routerLinkActive="mat-accent" mat-button routerLink="{{location.id}}/overview">
             <h2 class="mat-h2 mat-title">{{ location.title }}</h2><small>{{ location.startDate | date:'dd/MM'}} -
                 {{ location.endDate | date:'dd/MM' }}</small>
         </a>
     </ng-container>
     <span class="spacer"></span>
 
-    <a *ngIf="!isLoading" mat-mini-fab routerLink="/create" routerLinkActive="mat-accent">
+    <a *ngIf="!isLoading" mat-mini-fab routerLink="create" routerLinkActive="mat-accent">
         <i class="material-icons">
             add
         </i>

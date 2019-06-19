@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {Location} from '../model/location.model';
-import {Subscription} from 'rxjs';
-import {LocationsService} from '../shared/locations.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Location } from '../model/location.model';
+import { Subscription } from 'rxjs';
+import { LocationsService } from '../shared/locations.service';
 
 @Component({
   selector: 'app-location-trip-overview',
@@ -33,7 +33,6 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
     this.isMobile = LocationOverviewComponent.getIsMobile();
     window.onresize = () => {
       this.isMobile = LocationOverviewComponent.getIsMobile();
@@ -45,10 +44,10 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
       this.locationParamId = params.location;
       this.getLocationData();
     });
-    this.route.queryParams.subscribe((queryParams:Params) => {
-     if (queryParams.position === 'place') {
-       this.tabIndex = 0;
-     }else if(queryParams.position === 'food') {
+    this.route.queryParams.subscribe((queryParams: Params) => {
+      if (queryParams.position === 'place') {
+        this.tabIndex = 0;
+      } else if (queryParams.position === 'food') {
         this.tabIndex = 1;
       }
     });

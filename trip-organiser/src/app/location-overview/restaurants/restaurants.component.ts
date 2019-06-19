@@ -41,7 +41,6 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
   }
 
   onClickAddRestaurant(): void {
-    // ':id/restaurant/add',
     this.router.navigate([this.locationId, 'restaurant', 'add']);
   }
 

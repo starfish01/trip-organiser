@@ -1,5 +1,10 @@
-<div *ngIf="trip">
+<!-- <div *ngIf="trip">
   <mat-card class="example-card">
     <h1>{{ trip.tripTitle }}</h1>
   </mat-card>
-</div>
+</div> -->
+
+<app-sub-header-locations></app-sub-header-locations>
+<main>
+  <router-outlet></router-outlet>
+</main>
