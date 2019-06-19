@@ -1,3 +1,5 @@
-<p>
-  trip-dashboard works!
-</p>
+<div *ngIf="trip">
+  <mat-card class="example-card">
+    <h1>{{ trip.tripTitle }}</h1>
+  </mat-card>
+</div>

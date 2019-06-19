@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TripService } from 'src/app/shared/trip.service';
+import { Trip } from 'src/app/model/trip.model';
 
 @Component({
   selector: 'app-trip-dashboard',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TripDashboardComponent implements OnInit {
 
-  constructor() { }
+  trip:Trip = null;
+
+  constructor(private tripService:TripService) { }
 
   ngOnInit() {
+    this.trip = this.tripService.getTrip()
+    console.log(this.trip)
+    // console.log(this.tripService.getTrip())
   }
 
 }

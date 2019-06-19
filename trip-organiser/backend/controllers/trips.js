@@ -26,3 +26,9 @@ exports.getTrips = (req,res,next) => {
     })  
 }
 
+exports.getTrip = (req,res,next) => {
+    console.log('Get Trip')
+    // Trip.findById(req.params.id)
+    console.log(req.params.id)
+}
+

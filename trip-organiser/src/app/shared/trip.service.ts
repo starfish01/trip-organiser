@@ -25,9 +25,18 @@ export class TripService {
   selectTrip(tripId) {
     this.selectedTrip =  this.trips.find(x => x.id === tripId)
     if(this.selectedTrip){
-      this.router.navigate([this.selectedTrip.tripTitle,'dashboard'])
+      this.router.navigate([this.selectedTrip.id,'dashboard'])
     }else{
       this.selectedTrip = null;
+    }
+  }
+
+  getTrip(id){
+    console.log('h')
+    if(this.selectTrip === undefined){
+      return {...this.selectedTrip}
+    } else {
+      this.http.get<{message:string, trip:any}>(BACKEND_URL+id)
     }
   }
 
