@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import {Location as LOCO} from '@angular/common';
+
 
 import { environment } from '../../environments/environment';
 const BACKEND_URL = environment.apiURL + '/locations/';
@@ -20,10 +22,11 @@ export class LocationsService {
   private locations: Location[] = [];
   private locationsUpdated = new Subject<Location[]>();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private _location: LOCO) { }
 
-  getLocations() {
-    this.http.get<{ message: string, locations: any, maxPosts: number }>(BACKEND_URL)
+  getLocations(tripId) {
+    const queryParams = `?tripId=${tripId}`;
+    this.http.get<{ message: string, locations: any, maxPosts: number }>(BACKEND_URL + queryParams)
       .pipe(map((locationData) => {
         return {
           locations: locationData.locations.map(location => {
@@ -72,25 +75,26 @@ export class LocationsService {
         locationData.id = responseData.id;
         this.locations.push(locationData);
         this.locationsUpdated.next([...this.locations]);
-        this.router.navigate(['/']);
+        // this.router.navigate(['/']);
+        this._location.back();
       });
   }
 
   updateLocation(locationData: Location, locationId: string) {
     this.http.put<{ message: string }>(BACKEND_URL + locationId, locationData).subscribe(response => {
-      this.router.navigate(['/']);
+      // this.router.navigate(['/']);
 
       const index = this.locations.findIndex(x => x.id === locationId);
       this.locations[index] = locationData;
 
       this.locationsUpdated.next([...this.locations]);
+      this._location.back();
     });
   }
 
-  deleteLocation(locationId) {
+  deleteLocation(locationId, tripId) {
 
     this.http.delete<{ message: string }>(BACKEND_URL + locationId).subscribe(response => {
-      this.router.navigate(['/']);
 
       const index = this.locations.findIndex((loc, i) => {
         return loc.id === locationId;
@@ -99,7 +103,7 @@ export class LocationsService {
       this.locations.splice(index, 1);
 
       this.locationsUpdated.next([...this.locations]);
-
+      this.router.navigate([tripId]);
     });
 
   }

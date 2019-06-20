@@ -1,4 +1,4 @@
-const Trip = require("../models/trips");
+const Trip = require("../models/trip");
 
 
 exports.createTrip = (req, res, next) => {

@@ -7,6 +7,7 @@ exports.createLocation = (req,res,next)=>{
     startDate:req.body.startDate,
     endDate:req.body.endDate,
     stay:req.body.stay,
+    tripId: req.body.tripId,
   });
   console.log(location);
   location.save().then(createdLocation => {
@@ -41,7 +42,16 @@ exports.updateLocation = (req,res,next) => {
 
 exports.getLocations = (req,res,next)=>{
   console.log("get all locations");
+
+  // console.log(req.query.tripId)
+  const tripId = req.query.tripId;
   const locationQuery = Location.find();
+
+  console.log('trip' + tripId)
+  if(tripId) {
+    locationQuery.where('tripId').equals(tripId)
+  }
+
   //not implementing query yet not sure if it will be needed
   // it will be needed if you are organiseing a seperate trip
 
@@ -51,6 +61,7 @@ exports.getLocations = (req,res,next)=>{
     fetchedLocations = documents
     return Location.count();
   }).then(count=>{
+    console.log(fetchedLocations);
     res.status(200).json({
       message: 'Post fetched successfully',
       locations: fetchedLocations,

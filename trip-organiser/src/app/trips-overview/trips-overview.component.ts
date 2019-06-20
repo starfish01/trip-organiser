@@ -21,7 +21,7 @@ export class TripsOverviewComponent implements OnInit, OnDestroy {
     this.tripsSub = this.tripService.getTripUpdateListener().subscribe((data) => {
       this.trips = data;
       this.tripBeingAdded = false;
-    })
+    });
     this.tripService.getTrips();
   }
 

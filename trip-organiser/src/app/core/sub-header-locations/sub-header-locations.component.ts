@@ -23,16 +23,15 @@ export class SubHeaderLocationsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    
     this.route.params.subscribe((params: Params) => {
       this.tripId = params.trip
-    })
+    });
 
     this.locationSubs = this.locationsService.getLocationUpdateListener().subscribe((locations:Location[])=>{
       this.locations = locations;
       this.isLoading = false;
     });
-    this.locationsService.getLocations();
+    this.locationsService.getLocations(this.tripId);
   }
 
   ngOnDestroy(): void {

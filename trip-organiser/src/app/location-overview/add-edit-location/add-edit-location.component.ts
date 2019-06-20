@@ -23,15 +23,14 @@ export class AddEditLocationComponent implements OnInit {
   isEditMode = false;
   isLoading = false;
   locationId;
+  tripId: string;
 
 
 
   ngOnInit() {
     this.isLoading = true;
-
+    this.tripId = this.route.snapshot.parent.url[0].path
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      console.log(paramMap);
-      console.log(this.tripService.getSelectedTripId());
 
       if (paramMap.has('id')) {
         this.locationId = paramMap.get('id');
@@ -102,6 +101,7 @@ export class AddEditLocationComponent implements OnInit {
       startDate: this.locationEdit.value.startDate.getTime() / 1000,
       endDate: this.locationEdit.value.endDate.getTime() / 1000,
       stay: this.locationEdit.value.stay,
+      tripId: this.tripId
     };
 
     if (this.isEditMode) {
@@ -117,7 +117,7 @@ export class AddEditLocationComponent implements OnInit {
 
   deleteItem() {
     this.isLoading = true;
-    this.locationService.deleteLocation(this.locationId);
+    this.locationService.deleteLocation(this.locationId, this.tripId);
   }
 
 }

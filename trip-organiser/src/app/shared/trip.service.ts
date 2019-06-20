@@ -95,9 +95,10 @@ export class TripService {
 
   addTrip(trip: Trip) {
     this.http.post<{ message: string, id: string }>(BACKEND_URL + 'create', trip).subscribe((response) => {
-      this.trips.push(trip)
-      this.tripUpdate.next([...this.trips])
-    })
+      trip.id = response.id;
+      this.trips.push(trip);
+      this.tripUpdate.next([...this.trips]);
+    });
   }
 
 }
