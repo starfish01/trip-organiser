@@ -27,9 +27,10 @@ import { MatDialogModule, MatExpansionModule, MatIconModule, MatSelectModule, Ma
 import { RestaurantsComponent } from './location-overview/restaurants/restaurants.component';
 import { AddEditRestaurantsComponent } from './location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
 import { TripsOverviewComponent } from './trips-overview/trips-overview.component';
-import { TripOverviewComponent } from './trips-overview/trip-overview/trip-overview.component';
+import { TripSelectorComponent } from './trips-overview/trip-selector/trip-selector.component';
 import { AddEditTripComponent } from './trips-overview/add-edit-trip/add-edit-trip.component';
-import { TripDashboardComponent } from './trips-overview/trip-dashboard/trip-dashboard.component';
+import { TripParentComponent } from './trips-overview/trip-parent/trip-parent.component';
+import { TripOverviewComponent } from './trips-overview/trip-overview/trip-overview.component';
 
 
 @NgModule({
@@ -43,9 +44,10 @@ import { TripDashboardComponent } from './trips-overview/trip-dashboard/trip-das
     RestaurantsComponent,
     AddEditRestaurantsComponent,
     TripsOverviewComponent,
-    TripOverviewComponent,
+    TripSelectorComponent,
     AddEditTripComponent,
-    TripDashboardComponent,
+    TripParentComponent,
+    TripOverviewComponent,
   ],
   imports: [
     BrowserModule,

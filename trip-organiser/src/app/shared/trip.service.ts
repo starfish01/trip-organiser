@@ -31,6 +31,14 @@ export class TripService {
     }
   }
 
+  getSelectedTripId() {
+    console.log('123')
+    console.log(this.selectedTrip.id);
+    // return this.selectedTrip.id;
+
+    //need to do the collecting
+  }
+
   getTrip(id) {
     return new Promise((res, rej) => {
       if (this.selectedTrip != undefined) {
@@ -43,15 +51,13 @@ export class TripService {
               tripTitle: data.trip.tripTitle
             }
             this.selectedTrip = tripData
-            res({ ...tripData })
+            res({ ...tripData });
           } else {
-            res(null)
+            res(null);
           }
-
-        })
+        });
       }
-
-    })
+    });
     if (this.selectTrip != undefined) {
       return { ...this.selectedTrip }
     } else {

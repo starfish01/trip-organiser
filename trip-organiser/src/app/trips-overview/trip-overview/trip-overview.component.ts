@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Trip } from 'src/app/model/trip.model';
-import { TripService } from 'src/app/shared/trip.service';
+import { Component, OnInit } from '@angular/core';
+import {TripService} from '../../shared/trip.service';
+import {ActivatedRoute, Params, Router} from "@angular/router";
 
 @Component({
   selector: 'app-trip-overview',
@@ -9,17 +9,25 @@ import { TripService } from 'src/app/shared/trip.service';
 })
 export class TripOverviewComponent implements OnInit {
 
-  @Input('tripData') trip: Trip;
+  trip = null;
 
-
-  constructor(private tripService:TripService) { }
+  constructor(private tripService: TripService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-  }
 
-  onTripSelect(id){
-    console.log(id)
-    this.tripService.selectTrip(id);
+    this.route.params.subscribe((params: Params) => {
+      new Promise((res, rej) => {
+        res(this.tripService.getTrip(params.trip));
+      }).then((data) => {
+        if (data === null) {
+          alert('The trip could not be found');
+          this.router.navigate(['/home']);
+        } else {
+          this.trip = data
+        }
+      }).catch((err) => {
+      });
+    });
   }
 
 }

@@ -1,6 +1,5 @@
-<div class="card">
-  <div class="card-body">
-    <h3>{{ trip.tripTitle }}</h3>
-    <button mat-raised-button color="primary" (click)="onTripSelect(trip.id)">Lets Go!</button>
-  </div>
+<div *ngIf="trip">
+  <mat-card class="example-card">
+    <h1>{{ trip.tripTitle }}</h1>
+  </mat-card>
 </div>

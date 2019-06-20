@@ -33,6 +33,7 @@ export class LocationsService {
               endDate: new Date(location.endDate * 1000),
               id: location._id,
               stay: location.stay,
+              tripId: location.tripId,
             };
           }
           ),

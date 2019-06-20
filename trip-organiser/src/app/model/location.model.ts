@@ -4,4 +4,5 @@ export interface Location {
     startDate: number;
     endDate: number;
     stay: string;
+    tripId: string;
 }

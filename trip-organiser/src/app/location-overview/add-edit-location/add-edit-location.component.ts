@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
 import { Location } from '@angular/common';
 import { LocationsService } from 'src/app/shared/locations.service';
 
 import { Location as LocationModel } from 'src/app/model/location.model';
+import {TripService} from "../../shared/trip.service";
 
 
 
@@ -15,7 +16,7 @@ import { Location as LocationModel } from 'src/app/model/location.model';
 })
 export class AddEditLocationComponent implements OnInit {
 
-  constructor(private router: Router, private _location: Location, private locationService: LocationsService, public route: ActivatedRoute) { }
+  constructor(private tripService: TripService, private router: Router, private _location: Location, private locationService: LocationsService, public route: ActivatedRoute) { }
 
   locationEdit: FormGroup;
   editLocation = null;
@@ -29,6 +30,9 @@ export class AddEditLocationComponent implements OnInit {
     this.isLoading = true;
 
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      console.log(paramMap);
+      console.log(this.tripService.getSelectedTripId());
+
       if (paramMap.has('id')) {
         this.locationId = paramMap.get('id');
 

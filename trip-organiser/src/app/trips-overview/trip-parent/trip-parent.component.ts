@@ -4,11 +4,11 @@ import { Trip } from 'src/app/model/trip.model';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-trip-dashboard',
-  templateUrl: './trip-dashboard.component.html',
-  styleUrls: ['./trip-dashboard.component.scss']
+  selector: 'app-trip-parent',
+  templateUrl: './trip-parent.component.html',
+  styleUrls: ['./trip-parent.component.scss']
 })
-export class TripDashboardComponent implements OnInit {
+export class TripParentComponent implements OnInit {
 
   trip = null;
 
@@ -27,8 +27,7 @@ export class TripDashboardComponent implements OnInit {
           this.trip = data
         }
       }).catch((err) => {
-        console.log(err)
-      })
+      });
     });
   }
 
