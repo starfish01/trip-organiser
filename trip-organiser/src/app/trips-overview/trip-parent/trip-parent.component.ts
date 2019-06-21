@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TripService } from 'src/app/shared/trip.service';
 import { Trip } from 'src/app/model/trip.model';
 import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { trigger, transition, animate, style } from '@angular/animations';
+
 
 @Component({
   selector: 'app-trip-parent',
@@ -30,5 +32,18 @@ export class TripParentComponent implements OnInit {
       });
     });
   }
+
+
+//   animations: [
+//     trigger ('slideInOut', [
+//     transition (':enter', [
+//       style({transform: 'translateY(-100%)'}),
+//       animate ('200ms ease-in', style({transform: 'translateY(0%)'}))
+//     ]),
+//   transition (':leave', [
+//     animate ('200ms ease-in', style({transform: 'translateY(-100%)'}))
+//     ])
+// ])
+// ]
 
 }

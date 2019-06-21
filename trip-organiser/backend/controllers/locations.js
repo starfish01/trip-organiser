@@ -2,12 +2,12 @@ const Location = require("../models/location");
 
 exports.createLocation = (req,res,next)=>{
   console.log('Create Location');
+
+  //Mass Assign values
+  //After the spread we can add the user ID
   const location = new Location({
-    title:req.body.title,
-    startDate:req.body.startDate,
-    endDate:req.body.endDate,
-    stay:req.body.stay,
-    tripId: req.body.tripId,
+    ...req.body,
+
   });
   console.log(location);
   location.save().then(createdLocation => {
@@ -49,7 +49,7 @@ exports.getLocations = (req,res,next)=>{
 
   console.log('trip' + tripId)
   if(tripId) {
-    locationQuery.where('tripId').equals(tripId)
+    locationQuery.where('tripId').equals(tripId).sort('startDate')
   }
 
   //not implementing query yet not sure if it will be needed
