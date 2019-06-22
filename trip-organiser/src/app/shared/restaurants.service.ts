@@ -6,7 +6,6 @@ import {Restaurant} from '../model/restaurant.model';
 const BACKEND_URL = environment.apiURL + '/restaurants/';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
-import {Location} from '../model/location.model';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Location as LOCO} from '@angular/common';

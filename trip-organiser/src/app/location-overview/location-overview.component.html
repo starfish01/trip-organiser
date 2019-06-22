@@ -29,7 +29,7 @@
 <!--      </div>-->
 
       <mat-tab-group [selectedIndex]="tabIndex">
-        <mat-tab label="Places to be">
+        <mat-tab label="Places to be"><app-sites [locationID]="locationSelected._id"></app-sites>
         </mat-tab>
         <mat-tab label="Food to eat"><app-restaurants [locationID]="locationSelected._id"></app-restaurants></mat-tab>
         <mat-tab label="Third"> Content 3 </mat-tab>

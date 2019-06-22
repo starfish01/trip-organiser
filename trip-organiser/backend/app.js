@@ -1,14 +1,16 @@
-const express = require('express');
+const express = require("express");
 const bodyParser = require("body-parser");
 
 // const Post = require('./models/post')
 const mongoose = require("mongoose");
 
-const locationRoutes = require('./routes/locations');
+const locationRoutes = require("./routes/locations");
 
-const restaurantRoutes = require('./routes/restaurants');
+const restaurantRoutes = require("./routes/restaurants");
 
-const tripsRoutes = require('./routes/trips');
+const tripsRoutes = require("./routes/trips");
+
+const sitesRoutes = require("./routes/sites");
 
 const app = express();
 
@@ -41,6 +43,6 @@ app.use("/api/restaurants", restaurantRoutes);
 
 app.use("/api/trips", tripsRoutes);
 
-
+app.use("/api/sites", sitesRoutes);
 
 module.exports = app;

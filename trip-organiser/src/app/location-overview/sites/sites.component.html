@@ -1,0 +1,57 @@
+<div class="container">
+
+  <a mat-button color="primary" routerLink="../site/add/">Add</a>
+  <span *ngIf="isLoading">loading...</span>
+  <div class="food-accordion" *ngIf="!isLoading">
+
+    <ng-container *ngFor="let site of sites">
+
+      <mat-accordion *ngIf="site.siteLocationRef === locationId">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{site.siteTitle}}
+            </mat-panel-title>
+
+            <mat-panel-description>
+              <mat-icon>face</mat-icon><span> x 5</span>
+            </mat-panel-description>
+
+            <mat-panel-description>
+
+              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
+              <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+
+          <mat-panel-description>
+            {{site.siteCost}}
+          </mat-panel-description>
+
+          <h3>Description</h3>
+          <p>{{site.siteDescription}}</p>
+          <h3>Location</h3>
+          <p>{{site.siteLocation}}</p>
+
+
+
+          <mat-action-row>
+            <a class="site-button" *ngIf="site.siteUrl" target="_blank" color="primary" mat-raised-button href="{{site.siteUrl}}">Visit Website</a>
+            <button mat-button color="warn" routerLink="../site/edit/{{site.id}}">Edit</button>
+            <button mat-button color="primary" (click)="onFavoriteClick()">
+              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
+              <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
+            </button>
+
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
+
+
+
+    </ng-container>
+
+
+  </div>
+</div>

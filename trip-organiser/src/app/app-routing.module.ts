@@ -9,6 +9,7 @@ import { TripParentComponent } from './trips-overview/trip-parent/trip-parent.co
 import {TripSelectorComponent} from './trips-overview/trip-selector/trip-selector.component';
 import {TripsOverviewComponent} from './trips-overview/trips-overview.component';
 import {TripOverviewComponent} from "./trips-overview/trip-overview/trip-overview.component";
+import {AddEditSitesComponent} from "./location-overview/sites/add-edit-sites/add-edit-sites.component";
 
 const routes: Routes = [
   { path: 'home', component: TripsOverviewComponent },
@@ -20,6 +21,8 @@ const routes: Routes = [
       { path: ':location/overview', component: LocationOverviewComponent },
       { path: ':location/restaurant/add', component: AddEditRestaurantsComponent },
       { path: ':location/restaurant/edit/:restaurantId', component: AddEditRestaurantsComponent },
+      { path: ':location/site/add', component: AddEditSitesComponent },
+      { path: ':location/site/edit/:siteId', component: AddEditSitesComponent },
     ]
   },
   { path: '**', redirectTo: '/home' }

@@ -14,13 +14,13 @@ import {Restaurant} from "../../model/restaurant.model";
 export class RestaurantsComponent implements OnInit, OnDestroy {
 
   @Input('locationID') locationId: string;
-  isFavourite: boolean = false;
+  isFavourite = false;
 
   constructor(private router: Router, public route: ActivatedRoute, private restaurantService: RestaurantsService) {}
 
   restaurants: Restaurant[] = [];
   private restaurantSubs: Subscription;
-  isLoading: Boolean = false;
+  isLoading = false;
 
   ngOnInit() {
     this.isLoading = true;

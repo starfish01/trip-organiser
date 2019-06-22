@@ -1,0 +1,113 @@
+<div>
+  <h1 *ngIf="!isLoading && !siteDetails">Add place to visit</h1>
+  <h1 *ngIf="!isLoading && siteDetails">Edit {{siteDetails.siteTitle}}</h1>
+
+  <span *ngIf="isLoading">
+    <img src="../../../../assets/foodLoading.svg">
+    <p>Loading...</p>
+  </span>
+
+
+  <mat-card>
+
+    <form *ngIf="!isLoading" [formGroup]="siteEdit" (ngSubmit)="onSubmit()">
+
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+          <mat-form-field class="full-width">
+            <input matInput id="siteTitle" placeholder="Site name" formControlName="siteTitle">
+            <mat-error>Site name is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex="10"></div>
+
+
+        <div fxFlex="45">
+
+          <mat-form-field class="full-width">
+            <input matInput id="siteLocation" placeholder="Location" formControlName="siteLocation">
+            <mat-error>Location is a required</mat-error>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+
+          <mat-form-field class="full-width">
+            <input matInput id="siteUrl" placeholder="Site website" formControlName="siteUrl">
+          </mat-form-field>
+
+
+        </div>
+
+        <div fxFlex="10"></div>
+
+        <div fxFlex="45">
+
+          <div class="full-width">
+            <mat-form-field class="full-width">
+              <mat-label>Cost</mat-label>
+              <mat-select id="siteCost" formControlName="siteCost">
+                <mat-option value="0">¯\_(ツ)_/¯</mat-option>
+                <mat-option value="$">$</mat-option>
+                <mat-option value="$$">$$</mat-option>
+                <mat-option value="$$$">$$$</mat-option>
+                <mat-option value="$$$$">$$$$</mat-option>
+                <mat-option value="$$$$$">$$$$$</mat-option>
+              </mat-select>
+              <mat-error>Cost is a required</mat-error>
+            </mat-form-field>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div flex fxLayout="row">
+        <div fxFlex="45">
+
+        </div>
+
+        <div fxFlex="10"></div>
+
+        <div fxFlex="45">
+
+
+        </div>
+      </div>
+
+
+      <div flex fxLayout="row">
+        <div fxFlex="100">
+
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" id="siteDescription"
+                      formControlName="siteDescription"></textarea>
+            <mat-error>Description is a required</mat-error>
+          </mat-form-field>
+
+        </div>
+      </div>
+
+      <div>
+        <button mat-stroked-button color="primary" [disabled]="!siteEdit.valid" (click)="onSubmit()"
+                type="button">Save
+        </button>
+        <button mat-stroked-button type="button" color="warning" (click)="onCancel()">Cancel</button>
+
+        <span class="spacer"></span>
+
+        <button *ngIf="siteDetails" mat-stroked-button color="warn" class="delete-Button"
+                (click)="onClickDeleteItem()" type="button">
+          Delete
+        </button>
+      </div>
+
+    </form>
+
+  </mat-card>
+</div>
