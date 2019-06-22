@@ -33,6 +33,8 @@ import { TripParentComponent } from './trips-overview/trip-parent/trip-parent.co
 import { TripOverviewComponent } from './trips-overview/trip-overview/trip-overview.component';
 import { SitesComponent } from './location-overview/sites/sites.component';
 import { AddEditSitesComponent } from './location-overview/sites/add-edit-sites/add-edit-sites.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 @NgModule({
@@ -52,6 +54,8 @@ import { AddEditSitesComponent } from './location-overview/sites/add-edit-sites/
     TripOverviewComponent,
     SitesComponent,
     AddEditSitesComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

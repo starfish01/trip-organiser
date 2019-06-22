@@ -1,21 +1,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
-// const Post = require('./models/post')
 const mongoose = require("mongoose");
-
 const locationRoutes = require("./routes/locations");
-
 const restaurantRoutes = require("./routes/restaurants");
-
 const tripsRoutes = require("./routes/trips");
-
 const sitesRoutes = require("./routes/sites");
+const userRoutes = require("./routes/user");
 
 const app = express();
 
 
-mongoose.connect("mongodb+srv://patrickLabes:nqMbBeXJJEFIr7r0@cluster0-trg7g.mongodb.net/trip-data?retryWrites=true&w=majority")
+mongoose.connect("mongodb+srv://patrickLabes:"+ process.env.MONGO_ATLAS_PW +"@cluster0-trg7g.mongodb.net/trip-data?retryWrites=true&w=majority")
     .then(() => {
         console.log('Connection Made')
     }).catch((err) => {
@@ -44,5 +40,7 @@ app.use("/api/restaurants", restaurantRoutes);
 app.use("/api/trips", tripsRoutes);
 
 app.use("/api/sites", sitesRoutes);
+
+app.use("api/user/", userRoutes);
 
 module.exports = app;
