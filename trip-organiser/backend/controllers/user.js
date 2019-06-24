@@ -2,26 +2,20 @@ const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-
 exports.createUser = (req, res, next) => {
   console.log('signup');
-  console.log(req.body);
   bcrypt.hash(req.body.password, 10).then(hash => {
     const user = new User({
       ...req.body,
-      password: hash
-      // email: req.body.email,
-      // password: hash,
+      password: hash,
     });
     user.save()
       .then(result => {
-        console.log(result)
         res.status(201).json({
           message: "User Created",
           result: result,
         });
       }).catch(err => {
-      console.log(err)
       res.status(500).json({
         message: "Invalid authentication credentials!",
       });
@@ -37,6 +31,12 @@ exports.userLogin = (req, res, next) => {
         message: "Auth Failed",
       });
     }
+
+    User.findOneAndUpdate({email: req.body.email}, {
+      $inc: {loginCounter: 1},
+      lastLogin: new Date().getTime(),
+    }, {new: true}).then();
+
     fetchedUser = user;
     return bcrypt.compare(req.body.password, user.password);
   }).then(result => {
@@ -60,6 +60,8 @@ exports.userLogin = (req, res, next) => {
       message: "Logged in",
       token: token,
       userId: fetchedUser._id,
+      firstName: fetchedUser.firstName,
+      lastName: fetchedUser.lastName,
     });
     // We get the userId in the token however it would impact performance
     // if we would have to decode the token on the client side

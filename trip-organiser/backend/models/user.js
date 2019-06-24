@@ -11,7 +11,7 @@ const userSchema = mongoose.Schema({
   lastName: {type: String, required: true},
   lastLogin: {type: String, required: true},
   emailValidated: {type: Boolean},
-  loginCouter: {type: Number}
+  loginCounter: {type: Number}
 });
 
 //ensures the email is unique

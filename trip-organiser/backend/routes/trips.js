@@ -2,13 +2,14 @@ const express = require("express");
 const router = express.Router();
 
 const TripsController = require("../controllers/trips");
+const checkAuth = require("../middleware/check-auth");
 
 // router.get("", RestaurantController.getRestaurants);
 
-router.post("/create", TripsController.createTrip);
+router.post("/create", checkAuth, TripsController.createTrip);
 
-router.get("", TripsController.getTrips);
+router.get("", checkAuth, TripsController.getTrips);
 
-router.get("/:id", TripsController.getTrip);
+router.get("/:id", checkAuth, TripsController.getTrip);
 
 module.exports = router;

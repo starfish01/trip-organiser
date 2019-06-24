@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
 import {Router} from '@angular/router';
 
 import {environment} from '../../environments/environment';
+import {last} from "rxjs/operators";
 
 const BACKEND_URL = environment.apiURL + '/users/';
 
@@ -18,6 +19,8 @@ export class AuthService {
   private isAuthenticated = false;
   private tokenTimer: any;
   private userId: string;
+  private firstName: string;
+  private lastName: string;
 
   getToken() {
     return this.token;
@@ -35,16 +38,28 @@ export class AuthService {
     return this.userId;
   }
 
+  getFullName() {
+    return this.firstName + ' ' + this.lastName;
+  }
+
+  getFirstName() {
+    return this.firstName;
+  }
+
+  getLastName() {
+    return this.lastName;
+  }
+
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  createUser(email: string, password: string) {
+  createUser(email: string, password: string, firstName: string, lastName: string) {
     const authData: AuthData = {
       email,
       password,
-      firstName: 'testFirst',
-      lastName: 'testFirst',
+      firstName,
+      lastName,
       lastLogin: 1,
       emailValidated: false,
       loginCounter: 1,
@@ -68,26 +83,33 @@ export class AuthService {
       emailValidated: false,
       loginCounter: null,
     };
-    this.http.post<{ token: string, expiresIn: number, userId: string }>(BACKEND_URL + 'login', authData)
+    this.http.post<{ token: string, expiresIn: number, userId: string, firstName: string, lastName: string }>
+    (BACKEND_URL + 'login', authData)
       .subscribe(response => {
+        console.log(response)
         const token = response.token;
         this.token = token;
         if (token) {
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
           this.isAuthenticated = true;
+
           this.userId = response.userId;
+          this.firstName = response.firstName;
+          this.lastName = response.lastName;
+
           this.authStatusListener.next(true);
           const now = new Date();
           const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-          this.saveAuthData(token, expirationDate, this.userId);
+
+          this.saveAuthData(token, expirationDate, this.userId, this.firstName, this.lastName);
+
           this.router.navigate(['/home']);
         }
       }, error => {
         console.log(error);
         this.authStatusListener.next(false);
       });
-
   }
 
   logout() {
@@ -111,6 +133,8 @@ export class AuthService {
       this.setAuthTimer(expiresIn / 1000);
       this.token = authInformation.token;
       this.userId = authInformation.userId;
+      this.firstName = authInformation.firstName;
+      this.lastName = authInformation.lastName;
       this.isAuthenticated = true;
       this.authStatusListener.next(true);
     }
@@ -123,22 +147,29 @@ export class AuthService {
     }, duration * 1000);
   }
 
-  private saveAuthData(token: string, expirationDate: Date, userId: string) {
+  private saveAuthData(token: string, expirationDate: Date, userId: string, firstName: string, lastName: string) {
     localStorage.setItem('token', token);
     localStorage.setItem('expiration', expirationDate.toISOString());
     localStorage.setItem('userId', userId);
+    localStorage.setItem('firstName', firstName);
+    localStorage.setItem('lastName', lastName);
   }
 
   private clearAuthData() {
     localStorage.removeItem('token');
     localStorage.removeItem('expiration');
     localStorage.removeItem('userId');
+    localStorage.removeItem('firstName');
+    localStorage.removeItem('lastName');
   }
 
   private getAuthData() {
     const token = localStorage.getItem('token');
     const expirationDate = localStorage.getItem('expiration');
     const userId = localStorage.getItem('userId');
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+
     if (!token || !expirationDate || !userId) {
       return;
     }
@@ -146,6 +177,8 @@ export class AuthService {
       token,
       expirationDate: new Date(expirationDate),
       userId,
+      firstName,
+      lastName,
     };
   }
 }
