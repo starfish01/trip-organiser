@@ -23,7 +23,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HttpClientModule } from '@angular/common/http';
-import { MatDialogModule, MatExpansionModule, MatIconModule, MatSelectModule, MatTabsModule } from '@angular/material';
+import { MatDialogModule, MatProgressSpinnerModule, MatExpansionModule, MatIconModule, MatSelectModule, MatTabsModule } from '@angular/material';
 import { RestaurantsComponent } from './location-overview/restaurants/restaurants.component';
 import { AddEditRestaurantsComponent } from './location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
 import { TripsOverviewComponent } from './trips-overview/trips-overview.component';
@@ -35,6 +35,7 @@ import { SitesComponent } from './location-overview/sites/sites.component';
 import { AddEditSitesComponent } from './location-overview/sites/add-edit-sites/add-edit-sites.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import {AuthGuard} from "./auth/auth.guard";
 
 
 @NgModule({
@@ -76,13 +77,14 @@ import { SignupComponent } from './auth/signup/signup.component';
     MatTabsModule,
     MatIconModule,
     MatDialogModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
 
   ],
   entryComponents: [
     AddEditRestaurantsComponent
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' },AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

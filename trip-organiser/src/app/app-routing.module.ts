@@ -10,11 +10,17 @@ import {TripSelectorComponent} from './trips-overview/trip-selector/trip-selecto
 import {TripsOverviewComponent} from './trips-overview/trips-overview.component';
 import {TripOverviewComponent} from "./trips-overview/trip-overview/trip-overview.component";
 import {AddEditSitesComponent} from "./location-overview/sites/add-edit-sites/add-edit-sites.component";
+import {LoginComponent} from "./auth/login/login.component";
+import {SignupComponent} from "./auth/signup/signup.component";
+import {AuthGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
-  { path: 'home', component: TripsOverviewComponent },
+  {path: '', component: HomePageComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
+  { path: 'home', component: TripsOverviewComponent, canActivate: [AuthGuard] },
   {
-    path: ':trip', component: TripParentComponent, children: [
+    path: ':trip', component: TripParentComponent, canActivate: [AuthGuard], children: [
       { path: '', component: TripOverviewComponent},
       { path: 'create', component: AddEditLocationComponent },
       { path: ':id/edit', component: AddEditLocationComponent },
@@ -22,10 +28,10 @@ const routes: Routes = [
       { path: ':location/restaurant/add', component: AddEditRestaurantsComponent },
       { path: ':location/restaurant/edit/:restaurantId', component: AddEditRestaurantsComponent },
       { path: ':location/site/add', component: AddEditSitesComponent },
-      { path: ':location/site/edit/:siteId', component: AddEditSitesComponent },
+      { path: ':location/site/edit/:siteId', component: AddEditSitesComponent }
     ]
   },
-  { path: '**', redirectTo: '/home' }
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({

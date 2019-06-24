@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a98ceda-33e1-4e06-b7db-aeab3c7bb274" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/trip-organiser/backend/controllers/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trip-organiser/backend/models/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trip-organiser/backend/routes/user.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trip-organiser/nodemon.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trip-organiser/src/app/auth/auth-interceptor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/trip-organiser/src/app/model/auth-data.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trip-organiser/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/backend/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip-organiser/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trip-organiser/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/backend/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/backend/controllers/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -27,22 +24,104 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/model/auth-data.model.ts">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="295">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/backend/controllers/user.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
+              <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="313">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/app.module.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="67" column="28" lean-forward="true" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+            <state relative-caret-position="205">
+              <caret line="86" column="71" selection-start-line="86" selection-start-column="71" selection-end-line="86" selection-end-column="71" />
+              <folding>
+                <element signature="e#0#58#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="372">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/backend/controllers/locations.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.spec.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#73#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/model/auth-data.model.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -58,8 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>MatCardModule</find>
-      <find>googlemaps</find>
       <find>@agooglemapsngular/cli@~7.3.9</find>
       <find>Autocomplete</find>
       <find>https://maps.googleapis.com/maps/api/js?libraries=places&amp;key</find>
@@ -87,6 +164,9 @@
       <find>Restaurant</find>
       <find>web</find>
       <find>AuthData</find>
+      <find>//</find>
+      <find>BACKEND_URL</find>
+      <find>login</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -98,9 +178,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/trips-overview/trips-overview.component.html" />
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/trips-overview/trip-overview/trip-overview.component.ts" />
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/model/location.model.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/backend/models/location.js" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/location-overview/add-edit-location/add-edit-location.component.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/shared/locations.service.ts" />
@@ -115,7 +192,6 @@
         <option value="$PROJECT_DIR$/trip-organiser/src/app/trips-overview/trip-parent/trip-parent.component.scss" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/core/sub-header-locations/sub-header-locations.component.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/trips-overview/trip-parent/trip-parent.component.html" />
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.html" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/trips-overview/trip-parent/trip-parent.component.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/model/site.model.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/location-overview/sites/add-edit-sites/add-edit-sites.component.scss" />
@@ -128,18 +204,14 @@
         <option value="$PROJECT_DIR$/trip-organiser/backend/routes/sites.js" />
         <option value="$PROJECT_DIR$/trip-organiser/backend/controllers/sites.js" />
         <option value="$PROJECT_DIR$/trip-organiser/backend/models/site.js" />
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/location-overview/sites/add-edit-sites/add-edit-sites.component.html" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/location-overview/sites/sites.component.scss" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/location-overview/sites/sites.component.html" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/model/user.js" />
         <option value="$PROJECT_DIR$/trip-organiser/backend/models/user.js" />
         <option value="$PROJECT_DIR$/trip-organiser/backend/routes/users.js" />
-        <option value="$PROJECT_DIR$/trip-organiser/backend/controllers/user.js" />
         <option value="$PROJECT_DIR$/trip-organiser/nodemon.json" />
-        <option value="$PROJECT_DIR$/trip-organiser/backend/app.js" />
         <option value="$PROJECT_DIR$/trip-organiser/package.json" />
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/auth-interceptor.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.html" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.scss" />
@@ -147,8 +219,16 @@
         <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/signup/signup.component.html" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/signup/signup.component.scss" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/signup/signup.component.ts" />
-        <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts" />
         <option value="$PROJECT_DIR$/trip-organiser/src/app/model/auth-data.model.ts" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.scss" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.ts" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.html" />
+        <option value="$PROJECT_DIR$/trip-organiser/backend/app.js" />
+        <option value="$PROJECT_DIR$/trip-organiser/backend/controllers/user.js" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts" />
+        <option value="$PROJECT_DIR$/trip-organiser/src/app/app.module.ts" />
       </list>
     </option>
   </component>
@@ -177,12 +257,6 @@
               <item name="trip-organiser" type="b2602c69:ProjectViewProjectNode" />
               <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
               <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="trip-organiser" type="b2602c69:ProjectViewProjectNode" />
-              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
-              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="trip-organiser" type="b2602c69:ProjectViewProjectNode" />
@@ -220,8 +294,32 @@
               <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="auth" type="462c0819:PsiDirectoryNode" />
-              <item name="signup" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="trip-organiser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
+              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="header" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="trip-organiser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
+              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="trip-organiser" type="b2602c69:ProjectViewProjectNode" />
+              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
+              <item name="trip-organiser" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="shared" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -290,12 +388,12 @@
       <workItem from="1561004903705" duration="12052000" />
       <workItem from="1561163822640" duration="10393000" />
       <workItem from="1561237508831" duration="206000" />
-      <workItem from="1561237775803" duration="3142000" />
+      <workItem from="1561237775803" duration="5977000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64380000" />
+    <option name="totallyTimeSpent" value="67215000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="427" y="0" width="1115" height="830" extended-state="0" />
@@ -345,49 +443,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/model/restaurant.model.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/model/trip.model.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/tslint.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/shared/sites.service.spec.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="31" lean-forward="true" selection-end-line="112" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/location-overview/sites/add-edit-sites/add-edit-sites.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -498,16 +553,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="19" column="20" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/location-overview/sites/add-edit-sites/add-edit-sites.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -571,22 +616,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/routes/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/trip-organiser/backend/routes/locations.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/controllers/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="47" column="24" lean-forward="true" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/trip-organiser/package-lock.json">
       <provider selected="true" editor-type-id="text-editor" />
@@ -622,60 +653,12 @@
     <entry file="file://$PROJECT_DIR$/trip-organiser/server.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="14" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth-interceptor.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="48" selection-start-line="12" selection-start-column="48" selection-end-line="12" selection-end-column="48" />
           <folding>
             <element signature="e#0#81#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -694,12 +677,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/signup/signup.component.ts">
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+        <state relative-caret-position="170">
+          <caret line="10" column="16" lean-forward="true" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="3" lean-forward="true" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/core/home-page/home-page.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="80" lean-forward="true" selection-start-line="3" selection-start-column="80" selection-end-line="3" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/routes/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="45" column="21" lean-forward="true" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/signup/signup.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="30" column="26" selection-start-line="30" selection-start-column="26" selection-end-line="30" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/core/header/header.component.spec.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#73#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -711,12 +758,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts">
+    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/controllers/locations.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/backend/controllers/user.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="67" column="28" lean-forward="true" selection-start-line="67" selection-start-column="28" selection-end-line="67" selection-end-column="28" />
+        <state relative-caret-position="17">
+          <caret line="18" column="30" lean-forward="true" selection-start-line="18" selection-start-column="30" selection-end-line="18" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/app-routing.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="26" column="59" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/login/login.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/auth/auth.guard.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trip-organiser/src/app/app.module.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="86" column="71" selection-start-line="86" selection-start-column="71" selection-end-line="86" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#58#0" expanded="true" />
           </folding>
         </state>
       </provider>

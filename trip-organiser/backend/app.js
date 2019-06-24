@@ -41,6 +41,6 @@ app.use("/api/trips", tripsRoutes);
 
 app.use("/api/sites", sitesRoutes);
 
-app.use("api/user/", userRoutes);
+app.use("/api/users/", userRoutes);
 
 module.exports = app;
