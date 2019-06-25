@@ -56,16 +56,15 @@ exports.getLocations = (req,res,next)=>{
   let fetchedLocations;
 
   locationQuery.then(documents => {
-    fetchedLocations = documents
+    fetchedLocations = documents;
     return Location.count();
   }).then(count=>{
-    console.log(fetchedLocations);
     res.status(200).json({
       message: 'Post fetched successfully',
       locations: fetchedLocations,
-      maxPosts: count
-    })
-  })
+      maxPosts: count,
+    });
+  });
 };
 
 exports.getLocation = (req,res,next)=>{

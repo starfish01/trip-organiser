@@ -1,7 +1,7 @@
-<div *ngIf="trip">
+<div *ngIf="trip != undefined">
   <mat-card class="example-card">
     <h1>{{ trip.tripTitle }}</h1>
-    <p>List Of People</p>
+    <app-trip-attendees [tripAttendees]="trip.usersWithAccess"></app-trip-attendees>
     <p>Checklist For Group</p>
     <p>Checklist for Me</p>
   </mat-card>

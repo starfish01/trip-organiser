@@ -7,6 +7,7 @@ const restaurantRoutes = require("./routes/restaurants");
 const tripsRoutes = require("./routes/trips");
 const sitesRoutes = require("./routes/sites");
 const userRoutes = require("./routes/user");
+const usersInformation = require("./routes/users-information");
 
 const app = express();
 
@@ -42,5 +43,7 @@ app.use("/api/trips", tripsRoutes);
 app.use("/api/sites", sitesRoutes);
 
 app.use("/api/users/", userRoutes);
+
+app.use("/api/user-information/", usersInformation);
 
 module.exports = app;

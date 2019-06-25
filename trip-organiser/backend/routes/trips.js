@@ -8,8 +8,8 @@ const checkAuth = require("../middleware/check-auth");
 
 router.post("/create", checkAuth, TripsController.createTrip);
 
-router.get("", checkAuth, TripsController.getTrips);
-
 router.get("/:id", checkAuth, TripsController.getTrip);
+
+router.get("", checkAuth, TripsController.getTrips);
 
 module.exports = router;

@@ -1,0 +1,11 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    Wolf Pack
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{currentUser}}</li>
+
+    <li *ngFor="let attendee of attendeeNames" class="list-group-item">{{attendee.firstName}} {{attendee.lastName}}</li>
+
+  </ul>
+</div>

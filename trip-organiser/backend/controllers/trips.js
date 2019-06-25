@@ -16,17 +16,6 @@ exports.createTrip = (req, res, next) => {
   });
 };
 
-exports.getTrips = (req, res, next) => {
-  console.log("Get Trips");
-  //probably will need to implement the query with the users id
-  Trip.find({ usersWithAccess: req.userData.userId}).then(documents => {
-    res.status(200).json({
-      message: "Trips fetched",
-      trips: documents,
-    });
-  });
-};
-
 exports.getTrip = (req, res, next) => {
   console.log("Get Trip");
   Trip.findById(req.params.id).where({ usersWithAccess: req.userData.userId}).then(document => {
@@ -38,6 +27,17 @@ exports.getTrip = (req, res, next) => {
     res.status(200).json({
       message: err.message,
       trip: null,
+    });
+  });
+};
+
+exports.getTrips = (req, res, next) => {
+  console.log("Get Trips");
+  //probably will need to implement the query with the users id
+  Trip.find({ usersWithAccess: req.userData.userId}).then(documents => {
+    res.status(200).json({
+      message: "Trips fetched",
+      trips: documents,
     });
   });
 };

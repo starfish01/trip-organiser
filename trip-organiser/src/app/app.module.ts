@@ -47,6 +47,7 @@ import {FooterComponent} from './core/footer/footer.component';
 import {AuthInterceptor} from './auth/auth-interceptor';
 import {ErrorInterceptor} from './error-interceptor';
 import {ErrorComponent} from './core/error/error.component';
+import { TripAttendeesComponent } from './trips-overview/trip-overview/trip-attendees/trip-attendees.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import {ErrorComponent} from './core/error/error.component';
     SignupComponent,
     FooterComponent,
     ErrorComponent,
+    TripAttendeesComponent,
   ],
   imports: [
     BrowserModule,

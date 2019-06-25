@@ -23,46 +23,56 @@ export class TripService {
   constructor(private http: HttpClient, private router: Router) { }
 
   selectTrip(tripId) {
-    this.selectedTrip = this.trips.find(x => x.id === tripId)
+    this.selectedTrip = this.trips.find(x => x.id === tripId);
     if (this.selectedTrip) {
-      this.router.navigate([this.selectedTrip.id])
+      this.router.navigate([this.selectedTrip.id]);
     } else {
       this.selectedTrip = null;
     }
   }
 
   getSelectedTripId() {
-    console.log('123')
+    console.log('123');
     console.log(this.selectedTrip.id);
     // return this.selectedTrip.id;
 
-    //need to do the collecting
+    // need to do the collecting
   }
 
+
   getTrip(id) {
-    return new Promise((res, rej) => {
-      if (this.selectedTrip !== undefined) {
-        res({ ...this.selectedTrip });
-      } else {
-        this.http.get<{ message: string, trip: any }>(BACKEND_URL + id).subscribe((data) => {
-          if (data.trip != null) {
-            const tripData: Trip = {
-              id: data.trip._id,
-              tripTitle: data.trip.tripTitle
-            };
-            this.selectedTrip = tripData;
-            res({ ...tripData });
-          } else {
-            res(null);
-          }
-        });
+    // internal search
+    this.trips.forEach((obj) => {
+      if (obj.id === id) {
+        return obj;
       }
     });
-    if (this.selectTrip != undefined) {
-      return { ...this.selectedTrip }
-    } else {
-      this.http.get<{ message: string, trip: any }>(BACKEND_URL + id)
-    }
+
+    return  this.http.get<{ message: string, trip: any }>(BACKEND_URL + id);
+    //
+    // return new Promise((res, rej) => {
+    //   if (this.selectedTrip !== undefined) {
+    //     res({ ...this.selectedTrip });
+    //   } else {
+    //     this.http.get<{ message: string, trip: any }>(BACKEND_URL + id).subscribe((data) => {
+    //       if (data.trip != null) {
+    //         const tripData: Trip = {
+    //           id: data.trip._id,
+    //           tripTitle: data.trip.tripTitle
+    //         };
+    //         this.selectedTrip = tripData;
+    //         res({ ...tripData });
+    //       } else {
+    //         res(null);
+    //       }
+    //     });
+    //   }
+    // });
+    // if (this.selectTrip != undefined) {
+    //   return { ...this.selectedTrip }
+    // } else {
+    //   this.http.get<{ message: string, trip: any }>(BACKEND_URL + id)
+    // }
   }
 
   unselectTrip() {
@@ -81,16 +91,16 @@ export class TripService {
             return {
               tripTitle: trip.tripTitle,
               id: trip._id
-            }
+            };
           }
           )
-        }
+        };
       }))
       .subscribe((transformedData) => {
-        this.trips = transformedData.trips
-        this.tripUpdate.next([...this.trips])
+        this.trips = transformedData.trips;
+        this.tripUpdate.next([...this.trips]);
       }
-      )
+      );
   }
 
   addTrip(trip: Trip) {
