@@ -1,4 +1,6 @@
 <main>
+  <div class="col-md-6 offset-md-3">
+
   <h2>Login</h2>
   <mat-card>
     <mat-spinner *ngIf="isLoading"></mat-spinner>
@@ -19,9 +21,13 @@
         </label>
         <mat-error *ngIf="passwordInput.invalid">Please enter a valid password</mat-error>
       </mat-form-field>
-      <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit">Login</button>
+      <div class="login-holder">
+        <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit">Login</button>
+      </div>
 
     </form>
+    <hr>
+    <p><small>Don't have an account? <a routerLink="/signup">Sign up today!</a></small></p>
   </mat-card>
-
+  </div>
 </main>

@@ -5,6 +5,14 @@ mat-form-field{
 mat-spinner {
   margin: auto;
 }
-label{
+p{
+  text-align: center;
+}
+
+.login-holder{
   width: 100%;
+  display: flex;
+  button{
+    margin:auto;
+  }
 }

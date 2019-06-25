@@ -1,7 +1,17 @@
 mat-form-field{
   width: 100%;
+  padding-left: 0;
 }
 
 mat-spinner {
   margin: auto;
+}
+.signup-btn{
+  display: flex;
+  button {
+    margin: auto;
+  }
+}
+p{
+  text-align: center;
 }

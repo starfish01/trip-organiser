@@ -2,6 +2,7 @@ const Site = require("../models/site");
 
 exports.createSite = (req, res, next) => {
   console.log('Create Site');
+  const userWithAccess = req.userData.userId;
   const site = new Site({
     siteCost: req.body.siteCost,
     siteDescription: req.body.siteDescription,
@@ -9,7 +10,7 @@ exports.createSite = (req, res, next) => {
     siteLocationRef: req.body.siteLocationRef,
     siteTitle: req.body.siteTitle,
     siteUrl: req.body.siteUrl,
-
+    creator: userWithAccess,
   });
   console.log(site);
   site.save().then(createdSite => {
@@ -26,7 +27,6 @@ exports.getSites = (req, res, next) => {
   const sitesQuery = Site.find();
   //not implementing query yet not sure if it will be needed
   // it will be needed if you are organising a separate trip
-
   let fetchedSites;
 
   sitesQuery.then(documents => {

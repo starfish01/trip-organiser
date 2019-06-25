@@ -1,16 +1,18 @@
 const express = require("express");
 const router = express.Router();
+const checkAuth = require("../middleware/check-auth");
+
 
 const LocationController = require("../controllers/locations");
 
-router.post("/create", LocationController.createLocation);
+router.post("/create", checkAuth, LocationController.createLocation);
 
-router.put("/:id", LocationController.updateLocation);
+router.put("/:id", checkAuth,LocationController.updateLocation);
 
-router.get("", LocationController.getLocations);
+router.get("", checkAuth,LocationController.getLocations);
 
-router.get("/:id", LocationController.getLocation);
+router.get("/:id", checkAuth,LocationController.getLocation);
 
-router.delete("/:id", LocationController.deleteLocation);
+router.delete("/:id", checkAuth,LocationController.deleteLocation);
 
 module.exports = router;

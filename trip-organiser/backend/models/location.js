@@ -5,8 +5,9 @@ const locationSchema = mongoose.Schema({
     startDate: { type: Number, required: true },
     endDate: { type: Number, required: true },
     stay: {type: String},
-    tripId: {type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: true}
-  });
+    tripId: {type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: true},
+    creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
+});
   
   module.exports = mongoose.model("Location", locationSchema);
 

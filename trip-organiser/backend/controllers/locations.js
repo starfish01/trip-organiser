@@ -2,12 +2,10 @@ const Location = require("../models/location");
 
 exports.createLocation = (req,res,next)=>{
   console.log('Create Location');
-
-  //Mass Assign values
-  //After the spread we can add the user ID
+  const userWithAccess = req.userData.userId;
   const location = new Location({
     ...req.body,
-
+    creator: userWithAccess,
   });
   console.log(location);
   location.save().then(createdLocation => {
@@ -19,7 +17,7 @@ exports.createLocation = (req,res,next)=>{
 };
 
 exports.updateLocation = (req,res,next) => {
-  console.log('put')
+  console.log('put');
   const location = ({
     title: req.body.title,
     startDate: req.body.startDate,

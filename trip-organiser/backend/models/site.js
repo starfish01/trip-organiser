@@ -7,6 +7,7 @@ const siteSchema = mongoose.Schema({
     siteCost: {type: String, required: true},
     siteUrl: {type: String},
     siteLocationRef: {type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true},
+    creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
   },
   {timestamps: {createdAt: "created_at"}});
 
