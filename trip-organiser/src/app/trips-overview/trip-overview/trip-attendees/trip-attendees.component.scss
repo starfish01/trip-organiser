@@ -1,3 +1,16 @@
-.card{
+.card {
   margin-left: auto;
+}
+.attendee-li {
+  text-transform: capitalize;
+}
+.add-attendee {
+  &:hover{
+    background-color: aqua;
+    cursor: pointer;
+  }
+}
+
+img{
+  width: 50px;
 }

@@ -20,7 +20,7 @@ export class TripOverviewComponent implements OnInit {
       this.tripService.getTrip(params.trip).subscribe((data) => {
         this.trip = data.trip;
         console.log(this.trip)
-        if(data.trip == null){
+        if(data.trip == null) {
           alert('The trip could not be found');
           this.router.navigate(['/home']);
         }

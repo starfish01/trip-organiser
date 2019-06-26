@@ -3,9 +3,35 @@
     Wolf Pack
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item">{{currentUser}}</li>
 
-    <li *ngFor="let attendee of attendeeNames" class="list-group-item">{{attendee.firstName}} {{attendee.lastName}}</li>
+    <ng-container *ngIf="isLoading">
+      <li class="list-group-item"> <img src="../../../../assets/loading.svg" /> </li>
+    </ng-container>
+
+    <ng-container *ngIf="!isLoading">
+      <li *ngFor="let attendee of attendeeNames" class="attendee-li list-group-item">{{attendee.firstName}} {{attendee.lastName}}</li>
+      <li *ngIf="!addAttendee" (click)="onAddAtteendee()" class="list-group-item add-attendee">+ to the wolf pack</li>
+      <li *ngIf="addAttendee" class="list-group-item">
+
+        <form (submit)="onAddEmail(attendeeForm)" #attendeeForm="ngForm">
+
+          <div class="row">
+            <div class="col-sm">
+              <mat-form-field>
+                <label>
+                  <input placeholder="Email" #emailInput="ngModel" required type="email" ngModel matInput email name="email">
+                </label>
+                <mat-error *ngIf="emailInput.invalid">Please enter a valid email</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm">
+              <button mat-raised-button color="primary" type="submit">Add</button>
+            </div>
+          </div>
+        </form>
+
+      </li>
+    </ng-container>
 
   </ul>
 </div>
