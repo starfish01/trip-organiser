@@ -1,5 +1,7 @@
 const User = require("../models/user");
-const  async = require("async");
+const Trip = require("../models/trip");
+const async = require("async");
+
 
 exports.getListOfUsersNames = (req, res, next) => {
   console.log("Get List Of Users Names");
@@ -7,7 +9,7 @@ exports.getListOfUsersNames = (req, res, next) => {
   const arrayOfNames = [];
 
   async.forEach(listOfUserIds, (userDataId, callback) => {
-     User.findById(userDataId).then((userData) => {
+    User.findById(userDataId).then((userData) => {
       arrayOfNames.push({
         id: userData.id,
         firstName: userData.firstName,
@@ -21,5 +23,36 @@ exports.getListOfUsersNames = (req, res, next) => {
       usersNames: arrayOfNames,
     });
   });
+};
 
+exports.addusertotrip = (req, res, next) => {
+  console.log('adding user to a trip')
+  console.log(req.body)
+
+  //find user with email
+  User.findOne({email: req.body.email}, (err, user) => {
+    // Couldn't find user
+    if (user == null) {
+      res.status(404).json({
+        message: "Couldn't find user with that email",
+      });
+      return;
+    }
+
+    const userData = {
+      firstName: user.firstName,
+      id: user.id,
+      lastName: user.lastName,
+    };
+
+    Trip.updateOne({_id: req.body.tripId}, {$addToSet: {usersWithAccess: user._id}}).then(result => {
+      res.status(200).json({
+        userData,
+        message: "Member Added",
+      });
+    });
+
+
+  });
+  //
 };

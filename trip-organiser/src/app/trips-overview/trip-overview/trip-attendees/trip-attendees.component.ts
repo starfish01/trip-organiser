@@ -19,7 +19,8 @@ export class TripAttendeesComponent implements OnInit {
 
   addAttendee: boolean;
 
-  constructor(private authService: AuthService, private userService: UsersInformationService) { }
+  constructor(private authService: AuthService, private userService: UsersInformationService) {
+  }
 
   ngOnInit() {
     console.log(this.tripId);
@@ -44,12 +45,28 @@ export class TripAttendeesComponent implements OnInit {
       return;
     }
 
-    // addUser = {
-    //   email: form.value.email,
-    //   id: this.tripId,
-    // };
+    const addUser = {
+      email: form.value.email,
+      tripId: this.tripId,
+    };
 
-    // console.log(addUser);
+    this.userService.findAndUser(addUser).subscribe((data) => {
+      console.log(data.userData.id);
+      // Check if user exists
+
+      const inArray = this.attendeeNames.some(function(elem) {
+        return elem.id === data.userData.id;
+      });
+
+      if (!inArray) {
+        this.attendeeNames.push(data.userData);
+      }
+
+      form.resetForm();
+
+      this.addAttendee = false;
+
+    });
 
   }
 

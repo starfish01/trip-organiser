@@ -20,4 +20,8 @@ export class UsersInformationService {
     return this.http.get<{ message: string, usersNames: [] }>(BACKEND_URL + 'user-list/' + data);
 
   }
+
+  findAndUser(userEmailAndTripId) {
+    return this.http.post<{message: string, userData}>(BACKEND_URL + 'addusertotrip', userEmailAndTripId)
+  }
 }
