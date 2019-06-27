@@ -3,6 +3,7 @@
 }
 .attendee-li {
   text-transform: capitalize;
+  display: flex;
 }
 .add-attendee {
   &:hover{
@@ -13,4 +14,15 @@
 
 img{
   width: 50px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.remove-btn{
+  cursor: pointer;
+  &:hover{
+    color:red;
+  }
 }

@@ -6,15 +6,18 @@
 
     <ng-container *ngIf="isLoading">
       <li class="list-group-item"> <img src="../../../../assets/loading.svg" /> </li>
-    </ng-container>
+ `   </ng-container>
 
     <ng-container *ngIf="!isLoading">
-      <li *ngFor="let attendee of attendeeNames" class="attendee-li list-group-item">{{attendee.firstName}} {{attendee.lastName}}</li>
+      <li *ngFor="let attendee of attendeeNames" class="attendee-li list-group-item">
+        {{attendee.firstName}} {{attendee.lastName}}
+        <span class="spacer"></span>
+        <i (click)="onRemoveClick(attendee.id)" class="material-icons remove-btn">remove_circle</i>
+      </li>
       <li *ngIf="!addAttendee" (click)="onAddAtteendee()" class="list-group-item add-attendee">+ to the wolf pack</li>
-      <li *ngIf="addAttendee" class="list-group-item">
+      <li *ngIf="addAttendee && !isLoadingNewUser" class="list-group-item">
 
         <form (submit)="onAddEmail(attendeeForm)" #attendeeForm="ngForm">
-
           <div class="row">
             <div class="col-sm">
               <mat-form-field>
@@ -29,8 +32,10 @@
             </div>
           </div>
         </form>
-
       </li>
+
+      <li *ngIf="isLoadingNewUser" class="list-group-item"> <img src="../../../../assets/loading.svg" /> </li>
+
     </ng-container>
 
   </ul>

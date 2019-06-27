@@ -24,4 +24,9 @@ export class UsersInformationService {
   findAndUser(userEmailAndTripId) {
     return this.http.post<{message: string, userData}>(BACKEND_URL + 'addusertotrip', userEmailAndTripId)
   }
+
+  removeUserFromTrip(userData) {
+    console.log(userData);
+
+  }
 }

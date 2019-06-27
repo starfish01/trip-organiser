@@ -17,6 +17,8 @@ export class TripAttendeesComponent implements OnInit {
   private attendeeNames = [];
   isLoading: boolean;
 
+  isLoadingNewUser: boolean;
+
   addAttendee: boolean;
 
   constructor(private authService: AuthService, private userService: UsersInformationService) {
@@ -45,6 +47,8 @@ export class TripAttendeesComponent implements OnInit {
       return;
     }
 
+    this.isLoadingNewUser = true;
+
     const addUser = {
       email: form.value.email,
       tripId: this.tripId,
@@ -62,12 +66,23 @@ export class TripAttendeesComponent implements OnInit {
         this.attendeeNames.push(data.userData);
       }
 
+      this.isLoadingNewUser = false;
       form.resetForm();
 
       this.addAttendee = false;
 
     });
+  }
 
+
+  onRemoveClick(attendeeId) {
+
+    const removeUser = {
+      uid: attendeeId,
+      tripId: this.tripId,
+    };
+
+    this.userService.removeUserFromTrip(removeUser)
   }
 
 }
