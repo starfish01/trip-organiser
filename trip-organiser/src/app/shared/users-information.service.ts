@@ -30,32 +30,37 @@ export class UsersInformationService {
 
     this.http.get<{ message: string, usersNames: [] }>(BACKEND_URL + 'user-list/' + data)
       .subscribe((userData) => {
-        console.log(userData.usersNames)
-        this.attendeeList = userData.usersNames;
-        this.attendeeListUpdated.next([...this.attendeeList]);
-      });
+          this.attendeeList = userData.usersNames;
+          this.attendeeListUpdated.next([...this.attendeeList]);
+        }
+      );
   }
 
   findAndUser(userEmailAndTripId) {
 
-    this.http.post<{message: string, userData: Attendee}>(BACKEND_URL + 'addusertotrip', userEmailAndTripId)
+    this.http.post<{ message: string, userData: Attendee }>(BACKEND_URL + 'addusertotrip', userEmailAndTripId)
       .subscribe((data) => {
-          // Check if user exists
+        // Check if user exists
 
-          const inArray = this.attendeeList.some((elem) => {
-            return elem.id === data.userData.id;
-          });
+        const inArray = this.attendeeList.some((elem) => {
+          return elem.id === data.userData.id;
+        });
 
-          if (!inArray) {
-            this.attendeeList.push(data.userData);
-          }
-          this.attendeeListUpdated.next([...this.attendeeList]);
+        if (!inArray) {
+          this.attendeeList.push(data.userData);
+        }
+        this.attendeeListUpdated.next([...this.attendeeList]);
       });
   }
 
   removeUserFromTrip(userData) {
-    this.http.post<{message: string, userData: Attendee}>(BACKEND_URL + 'remove-user-from-trip',userData)
-      .subscribe();
-    console.log(userData);
+    this.http.post<{ message: string, userData: Attendee }>(BACKEND_URL + 'remove-user-from-trip', userData)
+      .subscribe((res) => {
+        const index = this.attendeeList.findIndex(el => el.id === userData.uid);
+        if (index > -1) {
+          this.attendeeList.splice(index, 1);
+        }
+        this.attendeeListUpdated.next([...this.attendeeList]);
+      });
   }
 }

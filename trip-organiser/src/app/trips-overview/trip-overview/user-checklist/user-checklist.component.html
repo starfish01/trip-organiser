@@ -1,0 +1,32 @@
+<h4>Checklist for Me</h4>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item">Dapibus ac facilisis in
+    <span class="spacer"></span>
+    <i class="material-icons checklist-item">check_box</i>
+    <i class="material-icons checklist-item">check_box_outline_blank</i>
+    <i class="material-icons remove-btn checklist-item">remove_circle</i>
+  </li>
+
+  <li class="list-group-item add-checklist-item" *ngIf="isLoading"> <img class="loading-image" src="../../../../assets/loading.svg" /> </li>
+  <li class="list-group-item add-checklist-item" *ngIf="!isAddingItem">Add +</li>
+
+  <li class="list-group-item" *ngIf="isAddingItem">
+    <form (submit)="onAddCheckListItem(checklistForm)" #checklistForm="ngForm">
+      <div class="row">
+        <div class="col-sm">
+          <mat-form-field>
+            <label>
+              <input placeholder="What needs doing?" #checklistItemInput="ngModel" required type="text" ngModel matInput name="checklistItem">
+            </label>
+            <mat-error *ngIf="checklistItemInput.invalid">Please enter a valid email</mat-error>
+          </mat-form-field>
+        </div>
+        <span class="spacer"></span>
+        <div class="col-sm">
+          <button mat-raised-button color="primary" type="submit">Add</button>
+        </div>
+      </div>
+    </form>
+  </li>
+
+</ul>

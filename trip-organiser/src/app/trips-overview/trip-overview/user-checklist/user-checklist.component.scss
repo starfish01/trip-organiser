@@ -1,0 +1,26 @@
+.spacer {
+  flex: 1 1 auto;
+}
+.checklist-item {
+  cursor: pointer;
+  &:hover{
+    color:red;
+  }
+}
+.list-group-item{
+  display:flex;
+}
+
+.add-checklist-item{
+  &:hover{
+    background-color: aqua;
+    cursor: pointer;
+  }
+}
+.loading-image {
+  width:10%;
+}
+
+form {
+  width: 100%;
+}

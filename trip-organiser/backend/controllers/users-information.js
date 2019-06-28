@@ -53,12 +53,17 @@ exports.addusertotrip = (req, res, next) => {
   });
 };
 
-exports.removeAttendee = (req,res,next) => {
+exports.removeAttendee = (req, res, next) => {
   console.log(req.body)
-  Trip.updateOne({_id:req.body.tripId}, {$pull:{usersWithAccess:req.body.uid}}).then((res) => {
-    console.log(res)
-
-    //TODO implement response
-
-  })
+  Trip.updateOne({_id: req.body.tripId}, {$pull: {usersWithAccess: req.body.uid}}).then(result => {
+    res.status(200).json({
+      userData: req.body.uid,
+      message: "Member Added",
+    });
+  }).catch((err) => {
+    console.log(err)
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  });
 };

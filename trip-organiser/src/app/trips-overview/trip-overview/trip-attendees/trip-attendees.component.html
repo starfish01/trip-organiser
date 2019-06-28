@@ -21,7 +21,7 @@
 
 
       </li>
-      <li *ngIf="!addAttendee" (click)="onAddAtteendee()" class="list-group-item add-attendee">+ to the wolf pack</li>
+      <li *ngIf="!addAttendee" (click)="onAddAttendee()" class="list-group-item add-attendee">+ to the wolf pack</li>
       <li *ngIf="addAttendee && !isLoadingNewUser && isLoadingUserActionID == null" class="list-group-item">
 
         <form (submit)="onAddEmail(attendeeForm)" #attendeeForm="ngForm">

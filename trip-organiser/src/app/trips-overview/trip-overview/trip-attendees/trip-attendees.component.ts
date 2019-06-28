@@ -39,14 +39,13 @@ export class TripAttendeesComponent implements OnInit {
       this.isLoading = false;
       this.isLoadingNewUser = false;
       this.isLoadingUserActionID = null;
+      this.addAttendee = false;
     });
     this.userService.getListOfUsers(this.attendeesIds);
-
     this.attendeeNames.push();
-
   }
 
-  onAddAtteendee() {
+  onAddAttendee() {
     this.addAttendee = true;
   }
 
@@ -69,7 +68,6 @@ export class TripAttendeesComponent implements OnInit {
 
 
   onRemoveClick(attendeeId) {
-    this.isLoadingUserAction = true;
     const removeUser = {
       uid: attendeeId,
       tripId: this.tripId,
