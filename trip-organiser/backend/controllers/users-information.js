@@ -27,7 +27,6 @@ exports.getListOfUsersNames = (req, res, next) => {
 
 exports.addusertotrip = (req, res, next) => {
   console.log('adding user to a trip')
-  console.log(req.body)
 
   //find user with email
   User.findOne({email: req.body.email}, (err, user) => {
@@ -51,8 +50,15 @@ exports.addusertotrip = (req, res, next) => {
         message: "Member Added",
       });
     });
-
-
   });
-  //
+};
+
+exports.removeAttendee = (req,res,next) => {
+  console.log(req.body)
+  Trip.updateOne({_id:req.body.tripId}, {$pull:{usersWithAccess:req.body.uid}}).then((res) => {
+    console.log(res)
+
+    //TODO implement response
+
+  })
 };

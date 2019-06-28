@@ -9,13 +9,20 @@
  `   </ng-container>
 
     <ng-container *ngIf="!isLoading">
-      <li *ngFor="let attendee of attendeeNames" class="attendee-li list-group-item">
-        {{attendee.firstName}} {{attendee.lastName}}
-        <span class="spacer"></span>
-        <i (click)="onRemoveClick(attendee.id)" class="material-icons remove-btn">remove_circle</i>
+      <li *ngFor="let attendee of attendeeList" class="attendee-li list-group-item">
+        <ng-container *ngIf="isLoadingUserActionID != attendee.id">
+          {{attendee.firstName}} {{attendee.lastName}}
+          <span class="spacer"></span>
+          <i *ngIf="isLoadingUserActionID == null" (click)="onRemoveClick(attendee.id)" class="material-icons remove-btn">remove_circle</i>
+        </ng-container>
+        <ng-container *ngIf="isLoadingUserAction && isLoadingUserActionID == attendee.id">
+          <img src="../../../../assets/loading.svg" />
+        </ng-container>
+
+
       </li>
       <li *ngIf="!addAttendee" (click)="onAddAtteendee()" class="list-group-item add-attendee">+ to the wolf pack</li>
-      <li *ngIf="addAttendee && !isLoadingNewUser" class="list-group-item">
+      <li *ngIf="addAttendee && !isLoadingNewUser && isLoadingUserActionID == null" class="list-group-item">
 
         <form (submit)="onAddEmail(attendeeForm)" #attendeeForm="ngForm">
           <div class="row">

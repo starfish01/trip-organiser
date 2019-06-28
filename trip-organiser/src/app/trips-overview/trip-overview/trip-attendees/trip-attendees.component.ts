@@ -2,6 +2,9 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../../auth/auth.service';
 import {UsersInformationService} from '../../../shared/users-information.service';
 import {NgForm} from '@angular/forms';
+import {Trip} from "../../../model/trip.model";
+import {Subscription} from "rxjs";
+import {Attendee} from "../../../model/attendee";
 
 @Component({
   selector: 'app-trip-attendees',
@@ -14,12 +17,14 @@ export class TripAttendeesComponent implements OnInit {
   @Input('tripId') tripId: string;
   private currentUser;
 
+  attendeeList: Attendee[] = [];
+  private attendeeListSub: Subscription;
+
   private attendeeNames = [];
   isLoading: boolean;
-
   isLoadingNewUser: boolean;
-
   addAttendee: boolean;
+  isLoadingUserActionID: string = null;
 
   constructor(private authService: AuthService, private userService: UsersInformationService) {
   }
@@ -28,10 +33,14 @@ export class TripAttendeesComponent implements OnInit {
     console.log(this.tripId);
     this.currentUser = this.authService.getFullName();
     this.isLoading = true;
-    this.userService.getListOfUsers(this.attendeesIds).subscribe((data) => {
-      this.attendeeNames = data.usersNames;
+
+    this.attendeeListSub = this.userService.getAttendeeListUpdateListener().subscribe((data) => {
+      this.attendeeList = data;
       this.isLoading = false;
+      this.isLoadingNewUser = false;
+      this.isLoadingUserActionID = null;
     });
+    this.userService.getListOfUsers(this.attendeesIds);
 
     this.attendeeNames.push();
 
@@ -54,35 +63,20 @@ export class TripAttendeesComponent implements OnInit {
       tripId: this.tripId,
     };
 
-    this.userService.findAndUser(addUser).subscribe((data) => {
-      console.log(data.userData.id);
-      // Check if user exists
+    this.userService.findAndUser(addUser);
 
-      const inArray = this.attendeeNames.some(function(elem) {
-        return elem.id === data.userData.id;
-      });
-
-      if (!inArray) {
-        this.attendeeNames.push(data.userData);
-      }
-
-      this.isLoadingNewUser = false;
-      form.resetForm();
-
-      this.addAttendee = false;
-
-    });
   }
 
 
   onRemoveClick(attendeeId) {
-
+    this.isLoadingUserAction = true;
     const removeUser = {
       uid: attendeeId,
       tripId: this.tripId,
     };
+    this.isLoadingUserActionID = attendeeId;
 
-    this.userService.removeUserFromTrip(removeUser)
+    this.userService.removeUserFromTrip(removeUser);
   }
 
 }
