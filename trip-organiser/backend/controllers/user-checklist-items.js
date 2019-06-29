@@ -1,0 +1,64 @@
+const CheckListItem = require("../models/user-checklist-item");
+
+exports.getChecklistItems = (req, res, next) => {
+  CheckListItem.find({createdById: req.userData.userId, tripId: req.params.tripId, deletedAt: null}).then((data) => {
+    res.status(200).json({
+      checklistItems: data,
+      message: "Checklist fetched",
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: "Error adding checklist item",
+    });
+  });
+};
+
+exports.addChecklistItem = (req, res, next) => {
+  const checkListItem = new CheckListItem({
+    ...req.body,
+    createdById: req.userData.userId,
+    completedAt: null,
+    deletedAt: null,
+  });
+  checkListItem.save().then((checklistItem) => {
+    res.status(200).json({
+      checklistItem,
+      message: "Item Added",
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: "Error adding checklist item",
+    });
+  });
+};
+
+exports.removeChecklistItem = (req, res, next) => {
+  console.log('remove item')
+  // console.log(req.body);
+  console.log(req.body.checklistItemId)
+  console.log(req.userData.userId)
+
+  CheckListItem.updateOne({
+    _id: req.body.checklistItemId,
+    createdById: req.userData.userId,
+  }, {$set: {"deletedAt": Date.now()}}).then((data)=>{
+    console.log(data);
+  });
+
+};
+
+
+// exports.removeAttendee = (req, res, next) => {
+//
+//   Trip.updateOne({_id: req.body.tripId}, {$pull: {usersWithAccess: req.body.uid}}).then(result => {
+//     res.status(200).json({
+//       userData: req.body.uid,
+//       message: "Member Added",
+//     });
+//   }).catch((err) => {
+//     console.log(err)
+//     res.status(500).json({
+//       message: "Something went wrong",
+//     });
+//   });
+// };

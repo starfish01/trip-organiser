@@ -2,7 +2,6 @@ const User = require("../models/user");
 const Trip = require("../models/trip");
 const async = require("async");
 
-
 exports.getListOfUsersNames = (req, res, next) => {
   console.log("Get List Of Users Names");
   const listOfUserIds = JSON.parse(req.params.data);

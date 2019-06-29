@@ -8,6 +8,7 @@ const tripsRoutes = require("./routes/trips");
 const sitesRoutes = require("./routes/sites");
 const userRoutes = require("./routes/user");
 const usersInformation = require("./routes/users-information");
+const userChecklistItems = require("./routes/user-checklist-items");
 
 const app = express();
 
@@ -45,5 +46,7 @@ app.use("/api/sites", sitesRoutes);
 app.use("/api/users/", userRoutes);
 
 app.use("/api/user-information/", usersInformation);
+
+app.use("/api/user-checklist/", userChecklistItems);
 
 module.exports = app;

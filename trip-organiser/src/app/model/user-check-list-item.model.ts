@@ -1,8 +1,8 @@
 export interface UserCheckListItem {
   createdById: string;
   tripId: string;
-  id: string;
+  _id: string;
   completedAt: string;
   description: string;
-  addedAt: string;
+  createdAt: string;
 }

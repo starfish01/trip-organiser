@@ -8,6 +8,6 @@ router.get("/user-list/:data", checkAuth, checkIfPartOfTrip, UserInformationCont
 
 router.post('/addusertotrip', checkAuth, checkIfPartOfTrip, UserInformationController.addusertotrip);
 
-router.post('/remove-user-from-trip', checkAuth, checkIfPartOfTrip, UserInformationController.removeAttendee)
+router.post('/remove-user-from-trip', checkAuth, checkIfPartOfTrip, UserInformationController.removeAttendee);
 
 module.exports = router;

@@ -1,17 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from '../../../auth/auth.service';
 import {UsersInformationService} from '../../../shared/users-information.service';
 import {NgForm} from '@angular/forms';
-import {Trip} from "../../../model/trip.model";
-import {Subscription} from "rxjs";
-import {Attendee} from "../../../model/attendee";
+import {Subscription} from 'rxjs';
+import {Attendee} from '../../../model/attendee';
 
 @Component({
   selector: 'app-trip-attendees',
   templateUrl: './trip-attendees.component.html',
   styleUrls: ['./trip-attendees.component.scss']
 })
-export class TripAttendeesComponent implements OnInit {
+export class TripAttendeesComponent implements OnInit, OnDestroy {
 
   @Input('tripAttendees') attendeesIds = [];
   @Input('tripId') tripId: string;
@@ -30,7 +29,6 @@ export class TripAttendeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.tripId);
     this.currentUser = this.authService.getFullName();
     this.isLoading = true;
 
@@ -75,6 +73,10 @@ export class TripAttendeesComponent implements OnInit {
     this.isLoadingUserActionID = attendeeId;
 
     this.userService.removeUserFromTrip(removeUser);
+  }
+
+  ngOnDestroy(): void {
+    this.attendeeListSub.unsubscribe();
   }
 
 }
