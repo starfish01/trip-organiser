@@ -42,23 +42,13 @@ exports.removeChecklistItem = (req, res, next) => {
     _id: req.body.checklistItemId,
     createdById: req.userData.userId,
   }, {$set: {"deletedAt": Date.now()}}).then((data)=>{
-    console.log(data);
+    res.status(200).json({
+      message:"Item removed"
+    })
+  }).catch((err) => {
+    res.status(500).json({
+      message:"Something went wrong"
+    })
   });
 
 };
-
-
-// exports.removeAttendee = (req, res, next) => {
-//
-//   Trip.updateOne({_id: req.body.tripId}, {$pull: {usersWithAccess: req.body.uid}}).then(result => {
-//     res.status(200).json({
-//       userData: req.body.uid,
-//       message: "Member Added",
-//     });
-//   }).catch((err) => {
-//     console.log(err)
-//     res.status(500).json({
-//       message: "Something went wrong",
-//     });
-//   });
-// };

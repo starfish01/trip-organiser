@@ -18,6 +18,7 @@ export class UserChecklistComponent implements OnInit, OnDestroy {
 
   isLoading: boolean;
   isAddingItem: boolean;
+  isLoadingRemovingID: string;
 
 
   checkList: UserCheckListItem[] = [];
@@ -31,6 +32,7 @@ export class UserChecklistComponent implements OnInit, OnDestroy {
     this.attendeeListSub = this.userCheckListService.userCheckListItemUpdatedListener().subscribe((data) => {
       this.checkList = data;
       this.isLoading = false;
+      this.isLoadingRemovingID = null;
     });
     this.userCheckListService.getChecklistItems(this.tripId);
   }
@@ -56,7 +58,17 @@ export class UserChecklistComponent implements OnInit, OnDestroy {
   }
 
   onRemoveItem(checklistItemId) {
+    this.isLoadingRemovingID = checklistItemId;
     this.userCheckListService.removeCheckListItem(checklistItemId);
+  }
+
+  onCheckItem(checklistItemId, completedAt) {
+    if (completedAt) {
+      completedAt = null;
+    } else {
+      completedAt = new Date();
+    }
+    console.log(completedAt)
   }
 
   ngOnDestroy(): void {

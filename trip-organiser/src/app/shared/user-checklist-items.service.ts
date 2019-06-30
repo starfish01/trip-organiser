@@ -48,6 +48,11 @@ export class UserChecklistItemsService {
     this.http.post<{ message: string }>(BACKEND_URL + 'remove-item', {checklistItemId})
       .subscribe((response) => {
         console.log(response);
+        const index = this.userCheckListItem.findIndex(el => el._id === checklistItemId);
+        if (index !== -1 ) {
+          this.userCheckListItem.splice(index, 1);
+        }
+        this.userCheckListItemUpdated.next([...this.userCheckListItem]);
       });
   }
 
