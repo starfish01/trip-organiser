@@ -4,12 +4,7 @@ exports.createSite = (req, res, next) => {
   console.log('Create Site');
   const userWithAccess = req.userData.userId;
   const site = new Site({
-    siteCost: req.body.siteCost,
-    siteDescription: req.body.siteDescription,
-    siteLocation: req.body.siteLocation,
-    siteLocationRef: req.body.siteLocationRef,
-    siteTitle: req.body.siteTitle,
-    siteUrl: req.body.siteUrl,
+    ...req.body,
     creator: userWithAccess,
   });
   console.log(site);
@@ -24,19 +19,17 @@ exports.createSite = (req, res, next) => {
 
 exports.getSites = (req, res, next) => {
   console.log("get all sites");
-  const sitesQuery = Site.find();
-  //not implementing query yet not sure if it will be needed
-  // it will be needed if you are organising a separate trip
-  let fetchedSites;
+  console.log(req.params.tripId)
 
-  sitesQuery.then(documents => {
-    fetchedSites = documents;
-    return Site.count();
-  }).then(count => {
+  Site.find({siteTripRef: req.params.tripId}).then((data) => {
+    console.log(data)
     res.status(200).json({
-      maxPosts: count,
       message: "Sites fetched successfully",
-      sites: fetchedSites,
+      sites: data,
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: "Something went wrong",
     });
   });
 };
@@ -44,12 +37,7 @@ exports.getSites = (req, res, next) => {
 exports.updateSite = (req, res, next) => {
   console.log('updating');
   const site = ({
-    siteCost: req.body.siteCost,
-    siteDescription: req.body.siteDescription,
-    siteLocation: req.body.siteLocation,
-    siteLocationRef: req.body.siteLocationRef,
-    siteTitle: req.body.siteTitle,
-    siteUrl: req.body.siteUrl,
+    ...req.body,
   });
   Site.updateOne({_id: req.body.id}, site).then((result) => {
     if (result.n === 1) {

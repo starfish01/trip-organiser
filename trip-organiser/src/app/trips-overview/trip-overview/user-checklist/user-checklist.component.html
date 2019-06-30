@@ -1,15 +1,15 @@
 <h4>Checklist for Me</h4>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item" *ngFor="let checkListItem of checkList">{{checkListItem.description}}
+  <li class="list-group-item" [ngClass]="checkListItem.completedAt != null ? 'strike-through' : ''" *ngFor="let checkListItem of checkList"><p>{{checkListItem.description}}</p>
     <span class="spacer"></span>
 
     <ng-container *ngIf="isLoadingRemovingID">
       <img alt="loading" class="loading-image" src="../../../../assets/loading.svg" />
     </ng-container>
     <ng-container *ngIf="!isLoadingRemovingID">
-      <i class="material-icons checklist-item" (click)="onCheckItem(checkListItem._id)" *ngIf="checkListItem.completedAt != null">check_box</i>
-      <i class="material-icons checklist-item" (click)="onCheckItem(checkListItem._id)" *ngIf="checkListItem.completedAt == null">check_box_outline_blank</i>
-      <i class="material-icons remove-btn checklist-item" (click)="onRemoveItem(checkListItem._id, checkListItem.completedAt)">remove_circle</i>
+      <i class="material-icons checklist-item checkbox" (click)="onCheckItem(checkListItem._id, checkListItem.completedAt)" *ngIf="checkListItem.completedAt != null">check_box</i>
+      <i class="material-icons checklist-item checkbox" (click)="onCheckItem(checkListItem._id, checkListItem.completedAt)" *ngIf="checkListItem.completedAt == null">check_box_outline_blank</i>
+      <i class="material-icons remove-btn checklist-item" (click)="onRemoveItem(checkListItem._id)">remove_circle</i>
     </ng-container>
 
   </li>

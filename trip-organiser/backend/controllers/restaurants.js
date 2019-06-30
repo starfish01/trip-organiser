@@ -3,14 +3,8 @@ const Restaurant = require("../models/restaurant");
 exports.createRestaurant = (req, res, next) => {
   console.log('Create Restaurant');
   const restaurant = new Restaurant({
-    cuisine: req.body.cuisine,
-    restaurantCost: req.body.restaurantCost,
-    restaurantDescription: req.body.restaurantDescription,
-    restaurantLocation: req.body.restaurantLocation,
-    restaurantLocationRef: req.body.restaurantLocationRef,
-    restaurantTitle: req.body.restaurantTitle,
-    restaurantUrl: req.body.restaurantUrl,
-
+    ...req.body,
+    creator: req.userData.userId,
   });
   console.log(restaurant);
   restaurant.save().then(createdRestaurant => {
@@ -24,20 +18,15 @@ exports.createRestaurant = (req, res, next) => {
 
 exports.getRestaurants = (req, res, next) => {
   console.log("get all restaurants");
-  const restaurantsQuery = Restaurant.find();
-  //not implementing query yet not sure if it will be needed
-  // it will be needed if you are organising a separate trip
 
-  let fetchedRestaurants;
-
-  restaurantsQuery.then(documents => {
-    fetchedRestaurants = documents;
-    return Restaurant.count();
-  }).then(count => {
+  Restaurant.find({restaurantTripRef: req.params.tripId}).then((data) => {
     res.status(200).json({
-      maxPosts: count,
       message: "Restaurants fetched successfully",
-      restaurants: fetchedRestaurants,
+      restaurants: data,
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: "Something went wrong",
     });
   });
 };
@@ -45,13 +34,7 @@ exports.getRestaurants = (req, res, next) => {
 exports.updateRestaurant = (req, res, next) => {
   console.log('updating');
   const restaurant = ({
-    cuisine: req.body.cuisine,
-    restaurantCost: req.body.restaurantCost,
-    restaurantDescription: req.body.restaurantDescription,
-    restaurantLocation: req.body.restaurantLocation,
-    restaurantLocationRef: req.body.restaurantLocationRef,
-    restaurantTitle: req.body.restaurantTitle,
-    restaurantUrl: req.body.restaurantUrl,
+    ...req.body
   });
   Restaurant.updateOne({_id: req.body.id}, restaurant).then((result) => {
     if (result.n === 1) {
@@ -74,5 +57,21 @@ exports.deleteRestaurant = (req, res, next) => {
   }).catch((error) => {
     res.status(404).js({message: "Delete Failed"});
   });
+};
 
+exports.favouriteRestaurant = (req, res, next) => {
+  const data = req.body
+
+  console.log(req.body)
+
+  Restaurant.updateOne({_id: req.params.restaurantId}, {$set: {"usersWhoLike": data}}).then((result) => {
+    res.status(200).json({
+      data,
+      message: "Saved",
+    });
+  }).catch((err) => {
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  });
 };

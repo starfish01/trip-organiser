@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Location } from '../model/location.model';
-import { Subscription } from 'rxjs';
-import { LocationsService } from '../shared/locations.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Params, Router} from '@angular/router';
+import {Location} from '../model/location.model';
+import {Subscription} from 'rxjs';
+import {LocationsService} from '../shared/locations.service';
+import {TripService} from "../shared/trip.service";
 
 @Component({
   selector: 'app-location-trip-overview',
@@ -18,27 +19,13 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
 
 
-
-  constructor(private route: ActivatedRoute, private router: Router, private locationService: LocationsService) {
+  constructor(private route: ActivatedRoute, private router: Router, private locationService: LocationsService, private tripService: TripService) {
   }
 
-  isMobile = false;
-  locationURL: string;
-
-  private static getIsMobile(): boolean {
-    const w = window.innerWidth + 84;
-    const breakpoint = 920;
-    return w < breakpoint;
-  }
+  tripId: string;
 
   ngOnInit() {
-
-    this.isMobile = LocationOverviewComponent.getIsMobile();
-    window.onresize = () => {
-      this.isMobile = LocationOverviewComponent.getIsMobile();
-      console.log(this.isMobile);
-    };
-
+    this.tripId = this.tripService.getSelectedTripId();
 
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
       this.locationParamId = params.location;
@@ -61,7 +48,6 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
         console.log('invalid route');
       }
       this.locationSelected = locationData.location;
-      this.locationURL = 'https://maps.google.com/maps?q=' + this.locationSelected.title + '&t=&z=13&ie=UTF8&iwloc=&output=embed';
     });
   }
 

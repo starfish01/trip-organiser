@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Trip } from '../model/trip.model';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Subject } from 'rxjs';
-import { map, zip } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {Trip} from '../model/trip.model';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {Subject} from 'rxjs';
+import {map, zip} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 
 const BACKEND_URL = environment.apiURL + '/trips/';
@@ -20,7 +20,8 @@ export class TripService {
 
   private selectedTrip: Trip = null;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   selectTrip(tripId) {
     this.selectedTrip = this.trips.find(x => x.id === tripId);
@@ -32,11 +33,11 @@ export class TripService {
   }
 
   getSelectedTripId() {
-    console.log('123');
-    console.log(this.selectedTrip.id);
-    // return this.selectedTrip.id;
-
-    // need to do the collecting
+    if (this.selectedTrip) {
+      return this.selectedTrip.id;
+    } else {
+      return this.router.url.split('/')[1];
+    }
   }
 
 
@@ -48,7 +49,7 @@ export class TripService {
       }
     });
 
-    return  this.http.get<{ message: string, trip: any }>(BACKEND_URL + id);
+    return this.http.get<{ message: string, trip: any }>(BACKEND_URL + id);
     //
     // return new Promise((res, rej) => {
     //   if (this.selectedTrip !== undefined) {
@@ -88,18 +89,18 @@ export class TripService {
       .pipe(map((tripData) => {
         return {
           trips: tripData.trips.map(trip => {
-            return {
-              tripTitle: trip.tripTitle,
-              id: trip._id
-            };
-          }
+              return {
+                tripTitle: trip.tripTitle,
+                id: trip._id
+              };
+            }
           )
         };
       }))
       .subscribe((transformedData) => {
-        this.trips = transformedData.trips;
-        this.tripUpdate.next([...this.trips]);
-      }
+          this.trips = transformedData.trips;
+          this.tripUpdate.next([...this.trips]);
+        }
       );
   }
 

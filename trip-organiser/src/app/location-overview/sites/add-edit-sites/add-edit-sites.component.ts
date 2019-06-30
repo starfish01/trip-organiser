@@ -6,6 +6,7 @@ import {Subscription} from 'rxjs';
 import {Site} from '../../../model/site.model';
 import {SitesService} from '../../../shared/sites.service';
 import {Location} from '@angular/common';
+import {TripService} from '../../../shared/trip.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class AddEditSitesComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private sitesService: SitesService,
-              private location: Location) {
+              private location: Location,
+              private tripService: TripService) {
   }
 
   ngOnInit() {
@@ -99,6 +101,8 @@ export class AddEditSitesComponent implements OnInit {
       siteUrl: this.siteEdit.value.siteUrl,
       created_at: null,
       updatedAt: null,
+      siteTripRef: this.tripService.getSelectedTripId(),
+      usersWhoLike: [null],
     };
 
     if (this.editMode) {

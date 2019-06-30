@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
-import { Location } from '../model/location.model';
-import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Location} from '../model/location.model';
+import {Subject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 import {Location as LOCO} from '@angular/common';
 
 
-import { environment } from '../../environments/environment';
-const BACKEND_URL = environment.apiURL + '/locations/';
+import {environment} from '../../environments/environment';
+import {Restaurant} from "../model/restaurant.model";
+import {Site} from "../model/site.model";
 
+const BACKEND_URL = environment.apiURL + '/locations/';
 
 
 @Injectable({
@@ -22,7 +24,9 @@ export class LocationsService {
   private locations: Location[] = [];
   private locationsUpdated = new Subject<Location[]>();
 
-  constructor(private http: HttpClient, private router: Router, private _location: LOCO) { }
+
+  constructor(private http: HttpClient, private router: Router, private _location: LOCO) {
+  }
 
   getLocations(tripId) {
     const queryParams = `?tripId=${tripId}`;
@@ -30,15 +34,15 @@ export class LocationsService {
       .pipe(map((locationData) => {
         return {
           locations: locationData.locations.map(location => {
-            return {
-              title: location.title,
-              startDate: new Date(location.startDate * 1000),
-              endDate: new Date(location.endDate * 1000),
-              id: location._id,
-              stay: location.stay,
-              tripId: location.tripId,
-            };
-          }
+              return {
+                title: location.title,
+                startDate: new Date(location.startDate * 1000),
+                endDate: new Date(location.endDate * 1000),
+                id: location._id,
+                stay: location.stay,
+                tripId: location.tripId,
+              };
+            }
           ),
           maxPosts: locationData.maxPosts
         };
@@ -55,14 +59,10 @@ export class LocationsService {
   }
 
   getLocation(locationId) {
-    // internal search
-    this.locations.forEach((obj) => {
-      if (obj.id === locationId) {
-        return obj;
-      }
-    });
     return this.http.get<{ location: any }>(BACKEND_URL + locationId);
   }
+
+
 
   locationCheck(locationId) {
     return this.locations.some(el => el.id === locationId);

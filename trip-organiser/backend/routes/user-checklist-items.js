@@ -12,5 +12,6 @@ router.post("/add-item", checkAuth, checkIfPartOfTrip, UserChecklistItems.addChe
 
 router.post("/remove-item", checkAuth, checkIfPartOfTrip, UserChecklistItems.removeChecklistItem);
 
+router.post("/update-item", checkAuth, checkIfPartOfTrip, UserChecklistItems.updateChecklistItem);
 
 module.exports = router;

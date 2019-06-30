@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
-import { Location } from '@angular/common';
-import { LocationsService } from 'src/app/shared/locations.service';
+import {Location} from '@angular/common';
+import {LocationsService} from 'src/app/shared/locations.service';
 
-import { Location as LocationModel } from 'src/app/model/location.model';
+import {Location as LocationModel} from 'src/app/model/location.model';
 import {TripService} from "../../shared/trip.service";
-
 
 
 @Component({
@@ -16,7 +15,14 @@ import {TripService} from "../../shared/trip.service";
 })
 export class AddEditLocationComponent implements OnInit {
 
-  constructor(private tripService: TripService, private router: Router, private _location: Location, private locationService: LocationsService, public route: ActivatedRoute) { }
+  constructor(
+    private tripService: TripService,
+    private router: Router,
+    private _location: Location,
+    private locationService: LocationsService,
+    public route: ActivatedRoute) {
+  }
+
 
   locationEdit: FormGroup;
   editLocation = null;
@@ -24,7 +30,6 @@ export class AddEditLocationComponent implements OnInit {
   isLoading = false;
   locationId;
   tripId: string;
-
 
 
   ngOnInit() {
@@ -73,7 +78,6 @@ export class AddEditLocationComponent implements OnInit {
       endDate = new Date(this.editLocation.endDate * 1000);
       stay = this.editLocation.stay;
     }
-
 
 
     this.locationEdit = new FormGroup({

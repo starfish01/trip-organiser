@@ -1,4 +1,4 @@
-<div class="container">
+<div>
 
   <a mat-button color="primary" routerLink="../site/add/">Add</a>
   <span *ngIf="isLoading">loading...</span>
@@ -14,7 +14,8 @@
             </mat-panel-title>
 
             <mat-panel-description>
-              <mat-icon>face</mat-icon><span> x 5</span>
+              <mat-icon>face</mat-icon>
+              <span> x 5</span>
             </mat-panel-description>
 
             <mat-panel-description>
@@ -35,9 +36,9 @@
           <p>{{site.siteLocation}}</p>
 
 
-
           <mat-action-row>
-            <a class="site-button" *ngIf="site.siteUrl" target="_blank" color="primary" mat-raised-button href="{{site.siteUrl}}">Visit Website</a>
+            <a class="site-button" *ngIf="site.siteUrl" target="_blank" color="primary" mat-raised-button
+               href="{{site.siteUrl}}">Visit Website</a>
             <button mat-button color="warn" routerLink="../site/edit/{{site.id}}">Edit</button>
             <button mat-button color="primary" (click)="onFavoriteClick()">
               <mat-icon *ngIf="isFavourite">favorite</mat-icon>
@@ -47,7 +48,6 @@
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>
-
 
 
     </ng-container>

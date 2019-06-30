@@ -29,13 +29,37 @@ export class UserChecklistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.isLoading = true;
-    this.attendeeListSub = this.userCheckListService.userCheckListItemUpdatedListener().subscribe((data) => {
-      this.checkList = data;
+    this.attendeeListSub = this.userCheckListService.userCheckListItemUpdatedListener().subscribe((data: UserCheckListItem[]) => {
+      this.checkList = this.sortChecklist(data);
       this.isLoading = false;
       this.isLoadingRemovingID = null;
     });
     this.userCheckListService.getChecklistItems(this.tripId);
   }
+
+  sortChecklist(data) {
+
+    const unchecked: UserCheckListItem[] = [];
+    const checked: UserCheckListItem[] = [];
+
+    data.forEach((el: UserCheckListItem) => {
+      if (el.completedAt == null) {
+        unchecked.push(el);
+      } else {
+        checked.push(el);
+      }
+    });
+
+    unchecked.sort((a, b) => (a.completedAt > b.completedAt) ? 1 : ((b.completedAt > a.completedAt) ? -1 : 0));
+    checked.sort((a, b) => (a.completedAt > b.completedAt) ? 1 : ((b.completedAt > a.completedAt) ? -1 : 0));
+
+    console.log(unchecked);
+    console.log(checked);
+
+
+    return [...unchecked, ...checked];
+  }
+
 
   onAddCheckListItem(form: NgForm) {
     if (form.invalid) {
@@ -63,12 +87,16 @@ export class UserChecklistComponent implements OnInit, OnDestroy {
   }
 
   onCheckItem(checklistItemId, completedAt) {
-    if (completedAt) {
+
+    if (completedAt != null) {
       completedAt = null;
     } else {
-      completedAt = new Date();
+      completedAt = new Date().getTime() / 1000 | 0;
     }
-    console.log(completedAt)
+
+    this.userCheckListService.updateCheckItem(completedAt, checklistItemId);
+
+
   }
 
   ngOnDestroy(): void {

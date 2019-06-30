@@ -7,6 +7,7 @@ import {Location as LocationModel} from '../../../model/location.model';
 import {Restaurant} from '../../../model/restaurant.model';
 import {RestaurantsService} from '../../../shared/restaurants.service';
 import {Location} from '@angular/common';
+import {TripService} from "../../../shared/trip.service";
 
 
 @Component({
@@ -29,7 +30,8 @@ export class AddEditRestaurantsComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private restaurantsService: RestaurantsService,
-              private _location: Location) {
+              private _location: Location,
+              private tripService: TripService) {
   }
 
   ngOnInit() {
@@ -37,7 +39,6 @@ export class AddEditRestaurantsComponent implements OnInit {
     this.isLoading = true;
 
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      console.log(params.location)
       this.locationParamId = params.location;
       this.restaurantId = params.restaurantId;
       const check = this.locationService.locationCheck(this.locationParamId);
@@ -104,6 +105,8 @@ export class AddEditRestaurantsComponent implements OnInit {
       restaurantUrl: this.restaurantEdit.value.restaurantUrl,
       created_at: null,
       updatedAt: null,
+      restaurantTripRef: this.tripService.getSelectedTripId(),
+      usersWhoLike: [null],
     };
 
     if (this.editMode) {
@@ -122,5 +125,5 @@ export class AddEditRestaurantsComponent implements OnInit {
 
   onCancel() {
     this._location.back();
-    }
+  }
 }

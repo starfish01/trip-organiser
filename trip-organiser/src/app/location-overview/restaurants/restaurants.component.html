@@ -1,4 +1,4 @@
-<div class="container">
+<div>
 
   <a mat-button color="primary" routerLink="../restaurant/add/">Add</a>
   <span *ngIf="isLoading">loading...</span>
@@ -6,51 +6,51 @@
 
     <ng-container *ngFor="let restaurant of restaurants">
 
-    <mat-accordion *ngIf="restaurant.restaurantLocationRef === locationId">
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{restaurant.restaurantTitle}}
-          </mat-panel-title>
+      <mat-accordion *ngIf="restaurant.restaurantLocationRef === locationId">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{restaurant.restaurantTitle}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{restaurant.cuisine}}
+            </mat-panel-description>
+
+            <mat-panel-description>
+              <mat-icon>face</mat-icon>
+              <span> x 5</span>
+            </mat-panel-description>
+
+            <mat-panel-description>
+
+              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
+              <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+
           <mat-panel-description>
-            {{restaurant.cuisine}}
+            {{restaurant.restaurantCost}}
           </mat-panel-description>
 
-          <mat-panel-description>
-            <mat-icon>face</mat-icon><span> x 5</span>
-          </mat-panel-description>
-
-          <mat-panel-description>
-
-            <mat-icon *ngIf="isFavourite">favorite</mat-icon>
-            <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
+          <h3>Description</h3>
+          <p>{{restaurant.restaurantDescription}}</p>
+          <h3>Location</h3>
+          <p>{{restaurant.restaurantLocation}}</p>
 
 
-        <mat-panel-description>
-          {{restaurant.restaurantCost}}
-        </mat-panel-description>
+          <mat-action-row>
+            <a class="restaurant-button" *ngIf="restaurant.restaurantUrl" target="_blank" color="primary"
+               mat-raised-button href="{{ restaurant.restaurantUrl }}">Visit Website</a>
+            <button mat-button color="warn" routerLink="../restaurant/edit/{{restaurant.id}}">Edit</button>
+            <button mat-button color="primary" (click)="onFavoriteClick(restaurant.id)">
+              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
+              <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
+            </button>
 
-        <h3>Description</h3>
-        <p>{{restaurant.restaurantDescription}}</p>
-        <h3>Location</h3>
-        <p>{{restaurant.restaurantLocation}}</p>
-
-
-
-        <mat-action-row>
-          <a class="restaurant-button" *ngIf="restaurant.restaurantUrl" target="_blank" color="primary" mat-raised-button href="{{ restaurant.restaurantUrl }}">Visit Website</a>
-          <button mat-button color="warn" routerLink="../restaurant/edit/{{restaurant.id}}">Edit</button>
-          <button mat-button color="primary" (click)="onFavoriteClick()">
-            <mat-icon *ngIf="isFavourite">favorite</mat-icon>
-            <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
-          </button>
-
-        </mat-action-row>
-      </mat-expansion-panel>
-    </mat-accordion>
-
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-accordion>
 
 
     </ng-container>

@@ -9,5 +9,7 @@ export interface Restaurant {
   restaurantUrl: string;
   created_at: string;
   updatedAt: string;
+  restaurantTripRef: string;
+  usersWhoLike: [string];
 }
 

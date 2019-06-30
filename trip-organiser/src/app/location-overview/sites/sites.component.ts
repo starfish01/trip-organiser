@@ -15,6 +15,8 @@ import {SitesService} from '../../shared/sites.service';
 export class SitesComponent implements OnInit, OnDestroy {
 
   @Input('locationID') locationId: string;
+  @Input('tripId') tripId: string;
+
   isFavourite = false;
 
   constructor(private router: Router, public route: ActivatedRoute, private siteService: SitesService) {
@@ -29,18 +31,14 @@ export class SitesComponent implements OnInit, OnDestroy {
     this.siteSubs = this.siteService.getSiteUpdateListener().subscribe((sites: Site[]) => {
       this.sites = sites;
       this.isLoading = false;
-      console.log(this.sites);
     });
-    this.siteService.getSites();
+    this.siteService.getSites(this.tripId);
   }
 
   ngOnDestroy(): void {
     this.siteSubs.unsubscribe();
   }
 
-  getsites() {
-
-  }
 
   onClickAddsite(): void {
     this.router.navigate([this.locationId, 'site', 'add']);

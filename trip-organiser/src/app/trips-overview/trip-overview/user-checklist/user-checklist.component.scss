@@ -6,6 +6,12 @@
   &:hover{
     color:red;
   }
+  &.checkbox{
+    //color: #FFD740;
+    &:hover{
+      color:#FFD740;
+    }
+  }
 }
 .list-group-item{
   display:flex;
@@ -19,6 +25,11 @@
 }
 .loading-image {
   width:10%;
+}
+.strike-through {
+  p {
+    text-decoration: line-through;
+  }
 }
 
 form {

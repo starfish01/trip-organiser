@@ -11,7 +11,6 @@ import {Router} from '@angular/router';
 import {Location as LOCO} from '@angular/common';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -20,11 +19,11 @@ export class RestaurantsService {
   private restaurants: Restaurant[] = [];
   private restaurantsUpdate = new Subject<Restaurant[]>();
 
-  constructor(private http: HttpClient, private  router: Router,private _location: LOCO) {
+  constructor(private http: HttpClient, private  router: Router, private _location: LOCO) {
   }
 
-  getRestaurants() {
-    this.http.get<{ message: string, restaurants: any, maxPosts: number }>(BACKEND_URL)
+  getRestaurants(tripId) {
+    this.http.get<{ message: string, restaurants: any, maxPosts: number }>(BACKEND_URL + tripId)
       .pipe(map((restaurantData) => {
         return {
           restaurants: restaurantData.restaurants.map(restaurant => {
@@ -39,6 +38,7 @@ export class RestaurantsService {
                 restaurantUrl: restaurant.restaurantUrl,
                 created_at: restaurant.created_at,
                 updatedAt: restaurant.updatedAt,
+                usersWhoLike: restaurant.usersWhoLike,
               };
             }
           ),
@@ -90,4 +90,15 @@ export class RestaurantsService {
       this._location.back();
     });
   }
+
+  favouriteRestaurant(data, restaurantId) {
+    this.http.post<{ message: string, data: any }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
+      console.log(data);
+      const usersWhoLike = this.restaurants[this.restaurants.findIndex(el => el.id === restaurantId)].usersWhoLike;
+      const indexOfUser = usersWhoLike.findIndex(el => el.uid === data.uid);
+      usersWhoLike[indexOfUser] = data;
+      this.restaurantsUpdate.next([...this.restaurants]);
+    });
+  }
+
 }

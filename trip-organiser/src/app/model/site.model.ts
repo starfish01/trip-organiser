@@ -8,5 +8,7 @@ export interface Site {
   siteUrl: string;
   created_at: string;
   updatedAt: string;
+  siteTripRef: string;
+  usersWhoLike: [string];
 }
 

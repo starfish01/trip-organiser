@@ -22,8 +22,8 @@ export class SitesService {
   constructor(private http: HttpClient, private  router: Router, private location: Location) {
   }
 
-  getSites() {
-    this.http.get<{ message: string, sites: any, maxPosts: number }>(BACKEND_URL)
+  getSites(tripId) {
+    this.http.get<{ message: string, sites: any, maxPosts: number }>(BACKEND_URL + tripId)
       .pipe(map((siteData) => {
         return {
           sites: siteData.sites.map(site => {
@@ -37,6 +37,7 @@ export class SitesService {
                 siteUrl: site.siteUrl,
                 created_at: site.created_at,
                 updatedAt: site.updatedAt,
+                usersWhoLike: site.usersWhoLike,
               };
             }
           ),

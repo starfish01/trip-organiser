@@ -34,21 +34,32 @@ exports.addChecklistItem = (req, res, next) => {
 
 exports.removeChecklistItem = (req, res, next) => {
   console.log('remove item')
-  // console.log(req.body);
-  console.log(req.body.checklistItemId)
-  console.log(req.userData.userId)
-
   CheckListItem.updateOne({
     _id: req.body.checklistItemId,
     createdById: req.userData.userId,
-  }, {$set: {"deletedAt": Date.now()}}).then((data)=>{
+  }, {$set: {"deletedAt": Date.now()}}).then((data) => {
     res.status(200).json({
-      message:"Item removed"
-    })
+      message: "Item removed",
+    });
   }).catch((err) => {
     res.status(500).json({
-      message:"Something went wrong"
-    })
+      message: "Something went wrong",
+    });
   });
+};
 
+exports.updateChecklistItem = (req, res, next) => {
+  CheckListItem.updateOne({
+    _id: req.body.checklistItemId,
+    createdById: req.userData.userId,
+  }, {$set: {"completedAt": req.body.completedAt}}).then((data) => {
+      res.status(200).json({
+        message: "Item updated",
+      });
+    },
+  ).catch((err) => {
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  });
 };

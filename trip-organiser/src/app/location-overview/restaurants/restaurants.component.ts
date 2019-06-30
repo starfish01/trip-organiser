@@ -4,6 +4,8 @@ import {RestaurantsService} from "../../shared/restaurants.service";
 import {Location} from "../../model/location.model";
 import {Subscription} from "rxjs";
 import {Restaurant} from "../../model/restaurant.model";
+import {UsersInformationService} from "../../shared/users-information.service";
+import {AuthService} from "../../auth/auth.service";
 
 
 @Component({
@@ -14,9 +16,11 @@ import {Restaurant} from "../../model/restaurant.model";
 export class RestaurantsComponent implements OnInit, OnDestroy {
 
   @Input('locationID') locationId: string;
+  @Input('tripId') tripId: string;
   isFavourite = false;
 
-  constructor(private router: Router, public route: ActivatedRoute, private restaurantService: RestaurantsService) {}
+  constructor(private router: Router, public route: ActivatedRoute, private restaurantService: RestaurantsService, private authService: AuthService) {
+  }
 
   restaurants: Restaurant[] = [];
   private restaurantSubs: Subscription;
@@ -27,18 +31,14 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     this.restaurantSubs = this.restaurantService.getRestaurantUpdateListener().subscribe((restaurants: Restaurant[]) => {
       this.restaurants = restaurants;
       this.isLoading = false;
-      console.log(this.restaurants);
     });
-    this.restaurantService.getRestaurants();
+    this.restaurantService.getRestaurants(this.tripId);
   }
 
   ngOnDestroy(): void {
     this.restaurantSubs.unsubscribe();
   }
 
-  getRestaurants() {
-
-  }
 
   onClickAddRestaurant(): void {
     this.router.navigate([this.locationId, 'restaurant', 'add']);
@@ -48,8 +48,40 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     this.router.navigate([this.locationId, 'restaurant', 'edit', restaurantId]);
   }
 
-  onFavoriteClick(){
-    this.isFavourite = !this.isFavourite;
+  onFavoriteClick(restaurantId) {
+
+    const index = this.restaurants.findIndex(el => el.id === restaurantId);
+    const uid = this.authService.getUserId();
+    const restaurant = this.restaurants[index];
+
+    const favouriteData = {
+      uid,
+      favourite: null,
+    };
+
+
+
+    console.log(restaurant.usersWhoLike.findIndex(el => el.uid === uid));
+
+    if (restaurant.usersWhoLike[0] === null) {
+      // no values so we can just add out id
+      favouriteData.favourite = new Date().getTime() / 1000 | 0;
+    } else {
+      const indexOfUser = restaurant.usersWhoLike.findIndex(el => el.uid === uid);
+      if (indexOfUser === -1) {
+        // Can't find user
+        favouriteData.favourite = new Date().getTime() / 1000 | 0;
+      } else {
+        // Can find user
+        if (restaurant.usersWhoLike[indexOfUser].favourite) {
+          favouriteData.favourite = null;
+        } else {
+          favouriteData.favourite = new Date().getTime() / 1000 | 0;
+        }
+      }
+    }
+
+    this.restaurantService.favouriteRestaurant(favouriteData, restaurant.id);
   }
 
 
