@@ -4,7 +4,7 @@
   <span *ngIf="isLoading">loading...</span>
   <div class="food-accordion" *ngIf="!isLoading">
 
-    <ng-container *ngFor="let restaurant of restaurants">
+    <ng-container *ngFor="let restaurant of restaurants; let i = index">
 
       <mat-accordion *ngIf="restaurant.restaurantLocationRef === locationId">
         <mat-expansion-panel>
@@ -38,13 +38,12 @@
           <h3>Location</h3>
           <p>{{restaurant.restaurantLocation}}</p>
 
-
           <mat-action-row>
             <a class="restaurant-button" *ngIf="restaurant.restaurantUrl" target="_blank" color="primary"
                mat-raised-button href="{{ restaurant.restaurantUrl }}">Visit Website</a>
             <button mat-button color="warn" routerLink="../restaurant/edit/{{restaurant.id}}">Edit</button>
             <button mat-button color="primary" (click)="onFavoriteClick(restaurant.id)">
-              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
+              <mat-icon *ngIf="restaurant.usersWhoLike">favorite</mat-icon>
               <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
             </button>
 

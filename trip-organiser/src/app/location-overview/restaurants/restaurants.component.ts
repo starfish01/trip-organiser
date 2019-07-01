@@ -1,11 +1,9 @@
 import {Component, Inject, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {RestaurantsService} from "../../shared/restaurants.service";
-import {Location} from "../../model/location.model";
-import {Subscription} from "rxjs";
-import {Restaurant} from "../../model/restaurant.model";
-import {UsersInformationService} from "../../shared/users-information.service";
-import {AuthService} from "../../auth/auth.service";
+import {RestaurantsService} from '../../shared/restaurants.service';
+import {Subscription} from 'rxjs';
+import {Restaurant} from '../../model/restaurant.model';
+import {AuthService} from '../../auth/auth.service';
 
 
 @Component({

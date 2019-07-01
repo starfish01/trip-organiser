@@ -10,6 +10,9 @@ export interface Restaurant {
   created_at: string;
   updatedAt: string;
   restaurantTripRef: string;
-  usersWhoLike: [string];
+  usersWhoLike: [{
+    uid: string,
+    favourite: string,
+  }];
 }
 
