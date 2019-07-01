@@ -14,5 +14,7 @@ export interface Restaurant {
     uid: string,
     favourite: string,
   }];
+  currentUserFavourite: boolean;
+  totalUserFavourite: number;
 }
 

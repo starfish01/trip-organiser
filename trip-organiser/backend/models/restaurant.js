@@ -11,14 +11,14 @@ const restaurantSchema = mongoose.Schema({
     restaurantTripRef: {type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: true},
     creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
     usersWhoLike: [{
-      uid: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
       favourite: {type: String},
+      uid: {type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true},
     },
     ],
   },
   {
     timestamps: {
-      createdAt: "created_at"
+      createdAt: "created_at",
     },
   },
   )
