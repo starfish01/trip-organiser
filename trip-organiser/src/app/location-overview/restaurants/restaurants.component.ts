@@ -25,79 +25,111 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     private authService: AuthService) {
   }
 
-  restaurants: Restaurant[] = [];
+  private restaurants: Restaurant[] = [];
   private restaurantSubs: Subscription;
+
+  private favRestaurants: Favourite[] = [];
+  private favRestaurantsSubs: Subscription;
+  private uid;
+
   isLoading = false;
+  isLoadingFavs = false;
 
   ngOnInit() {
     this.isLoading = true;
+    this.isLoadingFavs = true;
+
+    this.uid = this.authService.getUserId();
+
+
     this.restaurantSubs = this.restaurantService.getRestaurantUpdateListener().subscribe((restaurants: Restaurant[]) => {
       this.restaurants = restaurants;
       this.isLoading = false;
-      this.checkFavoriteStatus();
-      this.totalUsersFavorite();
     });
+
+    this.favRestaurantsSubs = this.restaurantService.getFavouriteRestaurantUpdateListener().subscribe((fav: Favourite[]) => {
+      console.log('update');
+      this.favRestaurants = fav;
+      for (const restaurant of this.restaurants) {
+        let favCount = 0;
+        for (const favourite of this.favRestaurants) {
+          console.log(this.favRestaurants)
+          if (favourite.refResSite === restaurant.id) {
+            if (favourite.favourite !== '0') {
+              favCount++;
+              if (favourite.uid === this.uid) {
+                restaurant.currentUserFavourite = true;
+              }
+            }
+          }
+        }
+        restaurant.totalUserFavourite = favCount;
+      }
+      this.isLoadingFavs = false;
+    });
+
     this.restaurantService.getRestaurants(this.tripId);
+    this.restaurantService.getFavouriteRestaurants(this.tripId);
   }
 
   ngOnDestroy(): void {
     this.restaurantSubs.unsubscribe();
   }
 
+  onFavoriteClick(restaurantId, userFav, res) {
+    this.isLoadingFavs = true;
+    console.log(res)
 
-  onClickAddRestaurant(): void {
-    this.router.navigate([this.locationId, 'restaurant', 'add']);
-  }
-
-  onEditClick(restaurantId) {
-    this.router.navigate([this.locationId, 'restaurant', 'edit', restaurantId]);
-  }
-
-  onFavoriteClick(restaurantId) {
-
-    const index = this.restaurants.findIndex(el => el.id === restaurantId);
     const uid = this.authService.getUserId();
-    const restaurant = this.restaurants[index];
 
     const favouriteData: Favourite = {
       location: this.locationId,
       refResSite: restaurantId,
       uid,
-      favourite: new Date().toString()
+      favourite: new Date().toString(),
+      tripId: this.tripId,
+      _id: null,
     };
 
-    this.restaurantService.favouriteRestaurant(favouriteData, restaurant.id);
+
+
+    console.log('userfav '+ userFav )
+    if (userFav) {
+      favouriteData.favourite = '0';
+    }
+
+    this.restaurantService.favouriteRestaurant(favouriteData, restaurantId);
   }
 
 
   private checkFavoriteStatus() {
-    const uid = this.authService.getUserId();
-    for (let i = 0; i < this.restaurants.length; i++) {
-      const currentUserIndex = this.restaurants[i].usersWhoLike.findIndex(el => el.uid === uid);
-      if (currentUserIndex === -1) {
-        this.restaurants[i].currentUserFavourite = false;
-      } else {
-        const position = this.restaurants[i].usersWhoLike[currentUserIndex].favourite;
-        if (position === null) {
-          this.restaurants[i].currentUserFavourite = false;
-        } else {
-          this.restaurants[i].currentUserFavourite = true;
-        }
-      }
-
-    }
+    // const uid = this.authService.getUserId();
+    // for (let i = 0; i < this.restaurants.length; i++) {
+    //   const currentUserIndex = this.restaurants[i].usersWhoLike.findIndex(el => el.uid === uid);
+    //   if (currentUserIndex === -1) {
+    //     this.restaurants[i].currentUserFavourite = false;
+    //   } else {
+    //     const position = this.restaurants[i].usersWhoLike[currentUserIndex].favourite;
+    //     if (position === null) {
+    //       this.restaurants[i].currentUserFavourite = false;
+    //     } else {
+    //       this.restaurants[i].currentUserFavourite = true;
+    //     }
+    //   }
+    //
+    // }
   }
 
   private totalUsersFavorite() {
-    for (const restaurant of this.restaurants) {
-      let usersWhoLike = 0;
-      for (const user of restaurant.usersWhoLike) {
-        if (user.favourite !== null) {
-          usersWhoLike++;
-        }
-      }
-      restaurant.totalUserFavourite = usersWhoLike;
-      console.log(usersWhoLike);
-    }
+    // for (const restaurant of this.restaurants) {
+    //   let usersWhoLike = 0;
+    //   for (const user of restaurant.usersWhoLike) {
+    //     if (user.favourite !== null) {
+    //       usersWhoLike++;
+    //     }
+    //   }
+    //   restaurant.totalUserFavourite = usersWhoLike;
+    //   console.log(usersWhoLike);
+    // }
   }
 }

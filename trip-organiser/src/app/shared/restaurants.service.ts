@@ -9,7 +9,7 @@ import {Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Location as LOCO} from '@angular/common';
-import {Favourite} from "../model/favourite.model";
+import {Favourite} from '../model/favourite.model';
 
 
 @Injectable({
@@ -42,7 +42,8 @@ export class RestaurantsService {
                 restaurantUrl: restaurant.restaurantUrl,
                 created_at: restaurant.created_at,
                 updatedAt: restaurant.updatedAt,
-                usersWhoLike: restaurant.usersWhoLike,
+                currentUserFavourite: false,
+                totalUserFavourite: 0,
               };
             }
           ),
@@ -54,8 +55,20 @@ export class RestaurantsService {
     });
   }
 
+  getFavouriteRestaurants(tripId) {
+    this.http.get<{ message: string, favRestaurants: Favourite[] }>(BACKEND_URL + 'favourite/get/' + tripId).subscribe((response) => {
+      console.log(response.favRestaurants);
+      this.favouriteRestaurants = response.favRestaurants;
+      this.favouriteRestaurantUpdate.next([...this.favouriteRestaurants]);
+    });
+  }
+
   getRestaurantUpdateListener() {
     return this.restaurantsUpdate.asObservable();
+  }
+
+  getFavouriteRestaurantUpdateListener() {
+    return this.favouriteRestaurantUpdate.asObservable();
   }
 
   updateRestaurant(restaurantData: Restaurant, restaurantId) {
@@ -96,18 +109,22 @@ export class RestaurantsService {
   }
 
   favouriteRestaurant(data, restaurantId) {
-    console.log(data);
 
-    this.http.post<{ message: string, data: any }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
+    this.http.post<{ message: string }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
       console.log('fav res return');
-      console.log(data);
+      console.log(response)
 
-      // TODO need to add to the array list and then notifiy the sections
-      const index = this.restaurants.findIndex()
-      // const usersWhoLike = this.restaurants[this.restaurants.findIndex(el => el.id === restaurantId)].usersWhoLike;
-      // const indexOfUser = usersWhoLike.findIndex(el => el.uid === data.uid);
-      // usersWhoLike[indexOfUser] = data;
-      // this.restaurantsUpdate.next([...this.restaurants]);
+      console.log(data)
+
+      // const index = this.favouriteRestaurants.findIndex(el => el._id === response.favRestaurant._id);
+      // if (index === -1) {
+      //   this.favouriteRestaurants.push(response.favRestaurant);
+      // } else {
+      //   this.favouriteRestaurants[index] = response.favRestaurant;
+      // }
+
+      this.favouriteRestaurantUpdate.next([...this.favouriteRestaurants]);
+
     });
   }
 

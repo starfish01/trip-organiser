@@ -2,7 +2,7 @@ const Restaurant = require("../models/restaurant");
 const Favourite = require("../models/favourite");
 
 exports.createRestaurant = (req, res, next) => {
-  console.log('Create Restaurant');
+  console.log("Create Restaurant");
   const restaurant = new Restaurant({
     ...req.body,
     creator: req.userData.userId,
@@ -33,9 +33,9 @@ exports.getRestaurants = (req, res, next) => {
 };
 
 exports.updateRestaurant = (req, res, next) => {
-  console.log('updating');
+  console.log("updating");
   const restaurant = ({
-    ...req.body
+    ...req.body,
   });
   Restaurant.updateOne({_id: req.body.id}, restaurant).then((result) => {
     if (result.n === 1) {
@@ -61,22 +61,42 @@ exports.deleteRestaurant = (req, res, next) => {
 };
 
 exports.favouriteRestaurant = (req, res, next) => {
-  console.log('fav clicked');
+  console.log("fav clicked");
 
   const favRestaurant = ({
     location: req.body.location,
-    refResSite: req.body.refResSite,
-    uid: req.userData.userId,
     favourite: req.body.favourite,
+    refResSite: req.body.refResSite,
+    tripId: req.body.tripId,
+    uid: req.userData.userId,
   });
 
-  Favourite.updateOne({location: favRestaurant.location, uid: favRestaurant.uid, refResSite: favRestaurant.refResSite}, favRestaurant, {upsert:true}).then((data)=>{
+  Favourite.updateOne({
+    location: favRestaurant.location,
+    refResSite: favRestaurant.refResSite,
+    uid: favRestaurant.uid,
+    tripId: favRestaurant.tripId,
+  }, favRestaurant, {upsert: true}).then((data) => {
+    console.log(data)
     res.status(200).json(
-      {message: "updated successful"}
-      );
+      {message: "updated successful"},
+    );
   }).catch((data) => {
     res.status(500).json(
-      {message: "An error occurred"}
-    )
-  })
+      {message: "An error occurred"},
+    );
+  });
+};
+
+exports.getFavouriteRestaurant = (req, res, next) => {
+  console.log("Getting Fav Restaurants");
+  Favourite.find({tripId: req.params.tripId}).then((data) => {
+    res.status(200).json(
+      {message: "updated successful", favRestaurants: data},
+    );
+  }).catch((data) => {
+    res.status(500).json(
+      {message: "An error occurred"},
+    );
+  });
 };

@@ -4,8 +4,8 @@ const favouriteSchema = mongoose.Schema({
   favourite: {type: String},
   location: {type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true},
   refResSite: {type: mongoose.Schema.Types.ObjectId, required: true},
-  uid: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true}
+  tripId: {type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: true},
+  uid: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
 });
 
 module.exports = mongoose.model("Favourite", favouriteSchema);
-

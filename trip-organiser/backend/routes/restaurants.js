@@ -16,4 +16,6 @@ router.delete("/:id", checkAuth, checkIfPartOfTrip, RestaurantController.deleteR
 
 router.post("/favourite/:restaurantId", checkAuth, checkIfPartOfTrip, RestaurantController.favouriteRestaurant);
 
+router.get("/favourite/get/:tripId", checkAuth, checkIfPartOfTrip, RestaurantController.getFavouriteRestaurant);
+
 module.exports = router;
