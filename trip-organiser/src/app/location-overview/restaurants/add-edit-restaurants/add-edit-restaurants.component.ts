@@ -106,7 +106,6 @@ export class AddEditRestaurantsComponent implements OnInit {
       created_at: null,
       updatedAt: null,
       restaurantTripRef: this.tripService.getSelectedTripId(),
-      usersWhoLike: [null],
       currentUserFavourite: false,
       totalUserFavourite: 0,
     };

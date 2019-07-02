@@ -4,6 +4,7 @@ import {RestaurantsService} from '../../shared/restaurants.service';
 import {Subscription} from 'rxjs';
 import {Restaurant} from '../../model/restaurant.model';
 import {AuthService} from '../../auth/auth.service';
+import {Favourite} from "../../model/favourite.model";
 
 
 @Component({
@@ -58,30 +59,12 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     const uid = this.authService.getUserId();
     const restaurant = this.restaurants[index];
 
-    const favouriteData = {
+    const favouriteData: Favourite = {
+      location: this.locationId,
+      refResSite: restaurantId,
       uid,
-      favourite: null,
+      favourite: new Date().toString()
     };
-
-    if (restaurant.usersWhoLike[0] === null) {
-      // no values so we can just add out id
-      favouriteData.favourite = new Date().getTime() / 1000 | 0;
-    } else {
-      const indexOfUser = restaurant.usersWhoLike.findIndex(el => el.uid === uid);
-      if (indexOfUser === -1) {
-        // Can't find user
-        favouriteData.favourite = new Date().getTime() / 1000 | 0;
-      } else {
-        // Can find user
-        // favouriteData._id = restaurant.usersWhoLike[indexOfUser]._id;
-
-        if (restaurant.usersWhoLike[indexOfUser].favourite) {
-          favouriteData.favourite = null;
-        } else {
-          favouriteData.favourite = new Date().getTime() / 1000 | 0;
-        }
-      }
-    }
 
     this.restaurantService.favouriteRestaurant(favouriteData, restaurant.id);
   }

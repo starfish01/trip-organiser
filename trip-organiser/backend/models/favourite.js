@@ -1,0 +1,11 @@
+const mongoose = require("mongoose");
+
+const favouriteSchema = mongoose.Schema({
+  favourite: {type: String},
+  location: {type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true},
+  refResSite: {type: mongoose.Schema.Types.ObjectId, required: true},
+  uid: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true}
+});
+
+module.exports = mongoose.model("Favourite", favouriteSchema);
+

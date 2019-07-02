@@ -9,6 +9,7 @@ import {Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Location as LOCO} from '@angular/common';
+import {Favourite} from "../model/favourite.model";
 
 
 @Injectable({
@@ -18,6 +19,9 @@ export class RestaurantsService {
 
   private restaurants: Restaurant[] = [];
   private restaurantsUpdate = new Subject<Restaurant[]>();
+
+  private favouriteRestaurants: Favourite[] = [];
+  private favouriteRestaurantUpdate = new Subject<Favourite[]>();
 
   constructor(private http: HttpClient, private  router: Router, private _location: LOCO) {
   }
@@ -92,12 +96,18 @@ export class RestaurantsService {
   }
 
   favouriteRestaurant(data, restaurantId) {
+    console.log(data);
+
     this.http.post<{ message: string, data: any }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
+      console.log('fav res return');
       console.log(data);
-      const usersWhoLike = this.restaurants[this.restaurants.findIndex(el => el.id === restaurantId)].usersWhoLike;
-      const indexOfUser = usersWhoLike.findIndex(el => el.uid === data.uid);
-      usersWhoLike[indexOfUser] = data;
-      this.restaurantsUpdate.next([...this.restaurants]);
+
+      // TODO need to add to the array list and then notifiy the sections
+      const index = this.restaurants.findIndex()
+      // const usersWhoLike = this.restaurants[this.restaurants.findIndex(el => el.id === restaurantId)].usersWhoLike;
+      // const indexOfUser = usersWhoLike.findIndex(el => el.uid === data.uid);
+      // usersWhoLike[indexOfUser] = data;
+      // this.restaurantsUpdate.next([...this.restaurants]);
     });
   }
 

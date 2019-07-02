@@ -1,4 +1,5 @@
 const Restaurant = require("../models/restaurant");
+const Favourite = require("../models/favourite");
 
 exports.createRestaurant = (req, res, next) => {
   console.log('Create Restaurant');
@@ -60,42 +61,22 @@ exports.deleteRestaurant = (req, res, next) => {
 };
 
 exports.favouriteRestaurant = (req, res, next) => {
-  const data = req.body
+  console.log('fav clicked');
 
-  console.log(req.body)
-
-  const fav = {
-    _id: req.body.uid,
+  const favRestaurant = ({
+    location: req.body.location,
+    refResSite: req.body.refResSite,
+    uid: req.userData.userId,
     favourite: req.body.favourite,
-  };
-
-  Restaurant.findById({_id: req.params.restaurantId}).updateOne({usersWhoLike: {_id: fav._id} }, {$set: {"usersWhoLike": fav}}, { upsert: true, new: true, setDefaultsOnInsert: true }).then((data)=>{
-    console.log(data)
   });
 
-  // Restaurant.findById({_id: req.params.restaurantId}).then((data) => {
-  //   const c = data.usersWhoLike.findIndex(el => el._id.toString() === fav._id.toString());
-
-  // Restaurant({_id: req.params.restaurantId}).where().usersWhoLike.updateOne({_id: fav._id}, {$set: {"usersWhoLike": fav}).then((data) => {
-  //   console.log(data);
-  // });
-  // })
-  // console.log('aaa')
-  // console.log(data.usersWhoLike[0]._id)
-  // console.log(fav._id)
-  // console.log(c)
-// })
-
-  // Restaurant.updateOne({_id: req.params.restaurantId}, {$set:{"usersWhoLike":fav}}).then((result) => {
-  //
-  //   res.status(200).json({
-  //     data,
-  //     message: "Saved",
-  //   });
-  // }).catch((err) => {
-  //   res.status(500).json({
-  //     message: "Something went wrong",
-  //   });
-  // });
-}
-;
+  Favourite.updateOne({location: favRestaurant.location, uid: favRestaurant.uid, refResSite: favRestaurant.refResSite}, favRestaurant, {upsert:true}).then((data)=>{
+    res.status(200).json(
+      {message: "updated successful"}
+      );
+  }).catch((data) => {
+    res.status(500).json(
+      {message: "An error occurred"}
+    )
+  })
+};
