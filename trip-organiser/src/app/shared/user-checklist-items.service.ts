@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
-import {Attendee} from "../model/attendee";
-import {Subject} from "rxjs";
-import {UserCheckListItem} from "../model/user-check-list-item.model";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {environment} from "../../environments/environment";
+import {Subject} from 'rxjs';
+import {UserCheckListItem} from '../model/user-check-list-item.model';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 
 const BACKEND_URL = environment.apiURL + '/user-checklist/';
@@ -70,6 +69,4 @@ export class UserChecklistItemsService {
         this.userCheckListItemUpdated.next([...this.userCheckListItem]);
       });
   }
-
-
 }

@@ -19,14 +19,14 @@
             <mat-panel-description>
               <mat-icon>face</mat-icon>
               <span> x
-                <ng-container *ngIf="!isLoadingFavs">
+                <ng-container>
                   {{restaurant.totalUserFavourite}}
                 </ng-container>
               </span>
             </mat-panel-description>
 
             <mat-panel-description>
-              <ng-container *ngIf="!isLoadingFavs">
+              <ng-container>
                 <mat-icon *ngIf="restaurant.currentUserFavourite">favorite</mat-icon>
                 <mat-icon *ngIf="!restaurant.currentUserFavourite">favorite_border</mat-icon>
               </ng-container>
@@ -47,8 +47,7 @@
             <a class="restaurant-button" *ngIf="restaurant.restaurantUrl" target="_blank" color="primary"
                mat-raised-button href="{{ restaurant.restaurantUrl }}">Visit Website</a>
             <button mat-button color="warn" routerLink="../restaurant/edit/{{restaurant.id}}">Edit</button>
-{{restaurant.currentUserFavourite}}
-            <ng-container *ngIf="!isLoadingFavs">
+            <ng-container>
               <button mat-button color="primary"
                       (click)="onFavoriteClick(restaurant.id, restaurant.currentUserFavourite, restaurant)">
                 <mat-icon *ngIf="restaurant.currentUserFavourite">favorite</mat-icon>

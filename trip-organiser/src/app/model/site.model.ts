@@ -9,6 +9,7 @@ export interface Site {
   created_at: string;
   updatedAt: string;
   siteTripRef: string;
-  usersWhoLike: [string];
+  currentUserFavourite: boolean;
+  totalUserFavourite: number;
 }
 

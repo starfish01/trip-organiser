@@ -79,8 +79,8 @@ exports.favouriteRestaurant = (req, res, next) => {
   }, favRestaurant, {upsert: true}).then((data) => {
 
     let favId = null;
-    console.log(data.upserted)
-    if(data.upserted){
+    console.log(data.upserted);
+    if (data.upserted) {
       favId = data.upserted[0]._id;
     }
 

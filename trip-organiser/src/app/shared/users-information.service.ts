@@ -2,9 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {Subject} from "rxjs";
-import {Attendee} from "../model/attendee";
-import {map} from "rxjs/operators";
+import {Subject} from 'rxjs';
+import {Attendee} from '../model/attendee';
 
 const BACKEND_URL = environment.apiURL + '/user-information/';
 

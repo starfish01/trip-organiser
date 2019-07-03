@@ -15,13 +15,18 @@
 
             <mat-panel-description>
               <mat-icon>face</mat-icon>
-              <span> x 5</span>
+              <span> x
+                <ng-container>
+                  {{site.totalUserFavourite}}
+                </ng-container>
+              </span>
             </mat-panel-description>
 
             <mat-panel-description>
-
-              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
-              <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
+              <ng-container>
+                <mat-icon *ngIf="site.currentUserFavourite">favorite</mat-icon>
+                <mat-icon *ngIf="!site.currentUserFavourite">favorite_border</mat-icon>
+              </ng-container>
             </mat-panel-description>
           </mat-expansion-panel-header>
 
@@ -40,10 +45,13 @@
             <a class="site-button" *ngIf="site.siteUrl" target="_blank" color="primary" mat-raised-button
                href="{{site.siteUrl}}">Visit Website</a>
             <button mat-button color="warn" routerLink="../site/edit/{{site.id}}">Edit</button>
-            <button mat-button color="primary" (click)="onFavoriteClick()">
-              <mat-icon *ngIf="isFavourite">favorite</mat-icon>
-              <mat-icon *ngIf="!isFavourite">favorite_border</mat-icon>
-            </button>
+            <ng-container>
+              <button mat-button color="primary"
+                      (click)="onFavoriteClick(site.id, site.currentUserFavourite, site)">
+                <mat-icon *ngIf="site.currentUserFavourite">favorite</mat-icon>
+                <mat-icon *ngIf="!site.currentUserFavourite">favorite_border</mat-icon>
+              </button>
+            </ng-container>
 
           </mat-action-row>
         </mat-expansion-panel>

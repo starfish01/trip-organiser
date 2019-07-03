@@ -7,11 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 import {Location as LOCO} from '@angular/common';
-
-
 import {environment} from '../../environments/environment';
-import {Restaurant} from "../model/restaurant.model";
-import {Site} from "../model/site.model";
 
 const BACKEND_URL = environment.apiURL + '/locations/';
 
@@ -75,18 +71,14 @@ export class LocationsService {
         locationData.id = responseData.id;
         this.locations.push(locationData);
         this.locationsUpdated.next([...this.locations]);
-        // this.router.navigate(['/']);
         this._location.back();
       });
   }
 
   updateLocation(locationData: Location, locationId: string) {
     this.http.put<{ message: string }>(BACKEND_URL + locationId, locationData).subscribe(response => {
-      // this.router.navigate(['/']);
-
       const index = this.locations.findIndex(x => x.id === locationId);
       this.locations[index] = locationData;
-
       this.locationsUpdated.next([...this.locations]);
       this._location.back();
     });

@@ -57,7 +57,6 @@ export class RestaurantsService {
 
   getFavouriteRestaurants(tripId) {
     this.http.get<{ message: string, favRestaurants: Favourite[] }>(BACKEND_URL + 'favourite/get/' + tripId).subscribe((response) => {
-      console.log(response.favRestaurants);
       this.favouriteRestaurants = response.favRestaurants;
       this.favouriteRestaurantUpdate.next([...this.favouriteRestaurants]);
     });
@@ -74,7 +73,6 @@ export class RestaurantsService {
   updateRestaurant(restaurantData: Restaurant, restaurantId) {
     this.http.put<{ message: string }>
     (BACKEND_URL + restaurantData.id, restaurantData).subscribe((responseData) => {
-      console.log(responseData);
       const index = this.restaurants.findIndex(x => x.id === restaurantData.id);
       this.restaurants[index] = restaurantData;
       this.restaurantsUpdate.next([...this.restaurants]);
@@ -90,7 +88,6 @@ export class RestaurantsService {
   addRestaurant(restaurantData: Restaurant) {
     this.http.post<{ message: string, id: string, locationId: string }>
     (BACKEND_URL + 'create', restaurantData).subscribe((responseData) => {
-      console.log(responseData);
       // Need to set up object
       restaurantData.id = responseData.id;
       this.restaurants.push(restaurantData);
@@ -111,16 +108,11 @@ export class RestaurantsService {
   favouriteRestaurant(data, restaurantId) {
 
     this.http.post<{ message: string, favId: string; }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
-      console.log('fav res return');
-      console.log(response);
 
       if (response.favId) {
-        // if its a new item
         data._id = response.favId;
         this.favouriteRestaurants.push(data);
       } else {
-        // if its an existing item
-        // we will need to find and update
         const favElement = this.favouriteRestaurants.filter((favRes) => {
           return (favRes.uid === data.uid && favRes.refResSite === data.refResSite);
         });
@@ -128,10 +120,6 @@ export class RestaurantsService {
         const favId = favElement[0]._id;
         const favIndex = this.favouriteRestaurants.findIndex(el => el._id === favId);
         this.favouriteRestaurants[favIndex].favourite = data.favourite;
-
-        console.log(this.favouriteRestaurants[favIndex])
-
-
       }
 
       this.favouriteRestaurantUpdate.next([...this.favouriteRestaurants]);

@@ -1,4 +1,5 @@
 const Site = require("../models/site");
+const Favourite = require("../models/favourite");
 
 exports.createSite = (req, res, next) => {
   console.log('Create Site');
@@ -61,4 +62,53 @@ exports.deleteSite = (req, res, next) => {
     res.status(404).js({message: "Delete Failed"});
   });
 
+};
+
+
+exports.favouriteSite = (req, res, next) => {
+  console.log("fav clicked");
+
+  const favSite = ({
+    location: req.body.location,
+    favourite: req.body.favourite,
+    refResSite: req.body.refResSite,
+    tripId: req.body.tripId,
+    uid: req.userData.userId,
+  });
+
+  Favourite.updateOne({
+    location: favSite.location,
+    refResSite: favSite.refResSite,
+    uid: favSite.uid,
+    tripId: favSite.tripId,
+  }, favSite, {upsert: true}).then((data) => {
+
+    let favId = null;
+
+    if (data.upserted) {
+      favId = data.upserted[0]._id;
+    }
+
+    res.status(200).json(
+      {message: "updated successful", favId},
+    );
+  }).catch((data) => {
+    res.status(500).json(
+      {message: "An error occurred"},
+    );
+  });
+};
+
+exports.getFavouriteSite = (req, res, next) => {
+  console.log("Getting Fav Site");
+  Favourite.find({tripId: req.params.tripId}).then((data) => {
+    console.log('get sites')
+    res.status(200).json(
+      {message: "updated successful", favSites: data},
+    );
+  }).catch((data) => {
+    res.status(500).json(
+      {message: "An error occurred"},
+    );
+  });
 };

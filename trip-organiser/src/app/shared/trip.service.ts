@@ -3,7 +3,7 @@ import {Trip} from '../model/trip.model';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Subject} from 'rxjs';
-import {map, zip} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 
 
@@ -50,30 +50,6 @@ export class TripService {
     });
 
     return this.http.get<{ message: string, trip: any }>(BACKEND_URL + id);
-    //
-    // return new Promise((res, rej) => {
-    //   if (this.selectedTrip !== undefined) {
-    //     res({ ...this.selectedTrip });
-    //   } else {
-    //     this.http.get<{ message: string, trip: any }>(BACKEND_URL + id).subscribe((data) => {
-    //       if (data.trip != null) {
-    //         const tripData: Trip = {
-    //           id: data.trip._id,
-    //           tripTitle: data.trip.tripTitle
-    //         };
-    //         this.selectedTrip = tripData;
-    //         res({ ...tripData });
-    //       } else {
-    //         res(null);
-    //       }
-    //     });
-    //   }
-    // });
-    // if (this.selectTrip != undefined) {
-    //   return { ...this.selectedTrip }
-    // } else {
-    //   this.http.get<{ message: string, trip: any }>(BACKEND_URL + id)
-    // }
   }
 
   unselectTrip() {
