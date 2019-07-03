@@ -78,6 +78,8 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
 
   onFavoriteClick(restaurantId, userFav, res) {
     this.isLoadingFavs = true;
+
+    console.log('res coming')
     console.log(res)
 
     const uid = this.authService.getUserId();

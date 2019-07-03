@@ -110,18 +110,29 @@ export class RestaurantsService {
 
   favouriteRestaurant(data, restaurantId) {
 
-    this.http.post<{ message: string }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
+    this.http.post<{ message: string, favId: string; }>(BACKEND_URL + 'favourite/' + restaurantId, data).subscribe((response) => {
       console.log('fav res return');
-      console.log(response)
+      console.log(response);
 
-      console.log(data)
+      if (response.favId) {
+        // if its a new item
+        data._id = response.favId;
+        this.favouriteRestaurants.push(data);
+      } else {
+        // if its an existing item
+        // we will need to find and update
+        const favElement = this.favouriteRestaurants.filter((favRes) => {
+          return (favRes.uid === data.uid && favRes.refResSite === data.refResSite);
+        });
 
-      // const index = this.favouriteRestaurants.findIndex(el => el._id === response.favRestaurant._id);
-      // if (index === -1) {
-      //   this.favouriteRestaurants.push(response.favRestaurant);
-      // } else {
-      //   this.favouriteRestaurants[index] = response.favRestaurant;
-      // }
+        const favId = favElement[0]._id;
+        const favIndex = this.favouriteRestaurants.findIndex(el => el._id === favId);
+        this.favouriteRestaurants[favIndex].favourite = data.favourite;
+
+        console.log(this.favouriteRestaurants[favIndex])
+
+
+      }
 
       this.favouriteRestaurantUpdate.next([...this.favouriteRestaurants]);
 

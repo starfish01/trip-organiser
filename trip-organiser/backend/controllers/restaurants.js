@@ -77,9 +77,15 @@ exports.favouriteRestaurant = (req, res, next) => {
     uid: favRestaurant.uid,
     tripId: favRestaurant.tripId,
   }, favRestaurant, {upsert: true}).then((data) => {
-    console.log(data)
+
+    let favId = null;
+    console.log(data.upserted)
+    if(data.upserted){
+      favId = data.upserted[0]._id;
+    }
+
     res.status(200).json(
-      {message: "updated successful"},
+      {message: "updated successful", favId},
     );
   }).catch((data) => {
     res.status(500).json(
