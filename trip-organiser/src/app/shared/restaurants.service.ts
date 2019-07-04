@@ -57,6 +57,7 @@ export class RestaurantsService {
 
   getFavouriteRestaurants(tripId) {
     this.http.get<{ message: string, favRestaurants: Favourite[] }>(BACKEND_URL + 'favourite/get/' + tripId).subscribe((response) => {
+      console.log(response.favRestaurants)
       this.favouriteRestaurants = response.favRestaurants;
       this.favouriteRestaurantUpdate.next([...this.favouriteRestaurants]);
     });

@@ -69,6 +69,7 @@ exports.favouriteRestaurant = (req, res, next) => {
     refResSite: req.body.refResSite,
     tripId: req.body.tripId,
     uid: req.userData.userId,
+    type: 'restaurant'
   });
 
   Favourite.updateOne({
@@ -96,7 +97,7 @@ exports.favouriteRestaurant = (req, res, next) => {
 
 exports.getFavouriteRestaurant = (req, res, next) => {
   console.log("Getting Fav Restaurants");
-  Favourite.find({tripId: req.params.tripId}).then((data) => {
+  Favourite.find({tripId: req.params.tripId, type: 'restaurant'}).then((data) => {
     res.status(200).json(
       {message: "updated successful", favRestaurants: data},
     );

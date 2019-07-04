@@ -74,6 +74,7 @@ exports.favouriteSite = (req, res, next) => {
     refResSite: req.body.refResSite,
     tripId: req.body.tripId,
     uid: req.userData.userId,
+    type: 'site'
   });
 
   Favourite.updateOne({
@@ -101,8 +102,7 @@ exports.favouriteSite = (req, res, next) => {
 
 exports.getFavouriteSite = (req, res, next) => {
   console.log("Getting Fav Site");
-  Favourite.find({tripId: req.params.tripId}).then((data) => {
-    console.log('get sites')
+  Favourite.find({tripId: req.params.tripId, type: 'site'}).then((data) => {
     res.status(200).json(
       {message: "updated successful", favSites: data},
     );
