@@ -48,26 +48,29 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
     });
 
     this.favRestaurantsSubs = this.restaurantService.getFavouriteRestaurantUpdateListener().subscribe((fav: Favourite[]) => {
-
       for (const restaurant of this.restaurants) {
         let favCount = 0;
+        const listOfUserWhoLike: string[] = [];
         for (const favourite of fav) {
           if (favourite.refResSite === restaurant.id) {
             if (favourite.uid === this.uid) {
               if (favourite.favourite !== '0') {
                 favCount++;
+                listOfUserWhoLike.push(favourite.userName);
                 restaurant.currentUserFavourite = true;
               } else {
                 restaurant.currentUserFavourite = false;
               }
             } else {
               if (favourite.favourite !== '0') {
+                listOfUserWhoLike.push(favourite.userName);
                 favCount++;
               }
             }
           }
         }
         restaurant.totalUserFavourite = favCount;
+        restaurant.listOfUserWhoLike = listOfUserWhoLike;
       }
 
       this.isLoadingFavs = false;
@@ -84,8 +87,9 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
   onFavoriteClick(restaurantId, userFav, res) {
     this.isLoadingFavs = true;
 
-
     const uid = this.authService.getUserId();
+    const userName = this.authService.getFirstName() + ' ' + this.authService.getLastName() ;
+
 
     const favouriteData: Favourite = {
       location: this.locationId,
@@ -94,6 +98,7 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
       favourite: new Date().toString(),
       tripId: this.tripId,
       _id: null,
+      userName,
     };
 
 

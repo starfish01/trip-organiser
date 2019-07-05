@@ -92,6 +92,7 @@ export class AddEditSitesComponent implements OnInit {
     }
 
     const site: Site = {
+      currentUserFavourite: false, totalUserFavourite: 0,
       id: null,
       siteTitle: this.siteEdit.value.siteTitle,
       siteLocation: this.siteEdit.value.siteLocation,
@@ -102,7 +103,7 @@ export class AddEditSitesComponent implements OnInit {
       created_at: null,
       updatedAt: null,
       siteTripRef: this.tripService.getSelectedTripId(),
-      usersWhoLike: [null],
+      listOfUserWhoLike: null
     };
 
     if (this.editMode) {

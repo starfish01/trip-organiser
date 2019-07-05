@@ -69,7 +69,8 @@ exports.favouriteRestaurant = (req, res, next) => {
     refResSite: req.body.refResSite,
     tripId: req.body.tripId,
     uid: req.userData.userId,
-    type: 'restaurant'
+    type: 'restaurant',
+    userName: req.body.userName,
   });
 
   Favourite.updateOne({
@@ -80,7 +81,6 @@ exports.favouriteRestaurant = (req, res, next) => {
   }, favRestaurant, {upsert: true}).then((data) => {
 
     let favId = null;
-    console.log(data.upserted);
     if (data.upserted) {
       favId = data.upserted[0]._id;
     }

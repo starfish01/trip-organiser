@@ -47,22 +47,26 @@ export class SitesComponent implements OnInit, OnDestroy {
 
       for (const sites of this.sites) {
         let favCount = 0;
+        const listOfUserWhoLike: string[] = [];
         for (const favourite of fav) {
           if (favourite.refResSite === sites.id) {
             if (favourite.uid === this.uid) {
               if (favourite.favourite !== '0') {
                 favCount++;
+                listOfUserWhoLike.push(favourite.userName);
                 sites.currentUserFavourite = true;
               } else {
                 sites.currentUserFavourite = false;
               }
             } else {
               if (favourite.favourite !== '0') {
+                listOfUserWhoLike.push(favourite.userName);
                 favCount++;
               }
             }
           }
         }
+        sites.listOfUserWhoLike = listOfUserWhoLike;
         sites.totalUserFavourite = favCount;
       }
     });
@@ -90,6 +94,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   onFavoriteClick(siteId, userFav, res) {
 
     const uid = this.authService.getUserId();
+    const userName = this.authService.getFirstName() + ' ' + this.authService.getLastName() ;
 
     const favouriteData: Favourite = {
       location: this.locationId,
@@ -98,6 +103,7 @@ export class SitesComponent implements OnInit, OnDestroy {
       favourite: new Date().toString(),
       tripId: this.tripId,
       _id: null,
+      userName,
     };
 
 

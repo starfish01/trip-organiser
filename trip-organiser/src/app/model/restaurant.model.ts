@@ -12,5 +12,6 @@ export interface Restaurant {
   restaurantTripRef: string;
   currentUserFavourite: boolean;
   totalUserFavourite: number;
+  listOfUserWhoLike: string[];
 }
 

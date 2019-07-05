@@ -74,7 +74,8 @@ exports.favouriteSite = (req, res, next) => {
     refResSite: req.body.refResSite,
     tripId: req.body.tripId,
     uid: req.userData.userId,
-    type: 'site'
+    type: 'site',
+    userName: req.body.userName,
   });
 
   Favourite.updateOne({

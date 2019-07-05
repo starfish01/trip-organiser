@@ -108,6 +108,7 @@ export class AddEditRestaurantsComponent implements OnInit {
       restaurantTripRef: this.tripService.getSelectedTripId(),
       currentUserFavourite: false,
       totalUserFavourite: 0,
+      listOfUserWhoLike: null
     };
 
     if (this.editMode) {

@@ -29,7 +29,7 @@ import {
   MatExpansionModule,
   MatIconModule,
   MatSelectModule,
-  MatTabsModule
+  MatTabsModule, MatTooltipModule
 } from '@angular/material';
 import {RestaurantsComponent} from './location-overview/restaurants/restaurants.component';
 import {AddEditRestaurantsComponent} from './location-overview/restaurants/add-edit-restaurants/add-edit-restaurants.component';
@@ -95,7 +95,8 @@ import { UserChecklistComponent } from './trips-overview/trip-overview/user-chec
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTooltipModule
 
   ],
   entryComponents: [

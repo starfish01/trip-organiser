@@ -5,4 +5,5 @@ export interface Favourite {
   uid: string;
   _id: string;
   tripId: string;
+  userName: string;
 }

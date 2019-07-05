@@ -11,5 +11,6 @@ export interface Site {
   siteTripRef: string;
   currentUserFavourite: boolean;
   totalUserFavourite: number;
+  listOfUserWhoLike: string[];
 }
 
