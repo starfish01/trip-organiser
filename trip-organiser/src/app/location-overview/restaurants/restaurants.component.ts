@@ -44,6 +44,7 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
 
     this.restaurantSubs = this.restaurantService.getRestaurantUpdateListener().subscribe((restaurants: Restaurant[]) => {
       this.restaurants = restaurants;
+      this.restaurantService.getFavouriteRestaurants(this.tripId);
       this.isLoading = false;
     });
 
@@ -69,15 +70,17 @@ export class RestaurantsComponent implements OnInit, OnDestroy {
             }
           }
         }
+
         restaurant.totalUserFavourite = favCount;
         restaurant.listOfUserWhoLike = listOfUserWhoLike;
       }
-
+      this.restaurants.sort((a, b) =>
+        (a.totalUserFavourite < b.totalUserFavourite) ? 1 :
+          ((a.totalUserFavourite > b.totalUserFavourite) ? -1 : 0));
       this.isLoadingFavs = false;
     });
 
     this.restaurantService.getRestaurants(this.tripId);
-    this.restaurantService.getFavouriteRestaurants(this.tripId);
   }
 
   ngOnDestroy(): void {

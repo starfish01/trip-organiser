@@ -1,4 +1,4 @@
-<h4>Checklist for Me</h4>
+<h4>Checklist</h4>
 <ul class="list-group list-group-flush">
   <li class="list-group-item" [ngClass]="checkListItem.completedAt != null ? 'strike-through' : ''" *ngFor="let checkListItem of checkList"><p>{{checkListItem.description}}</p>
     <span class="spacer"></span>
@@ -15,7 +15,7 @@
   </li>
 
   <li class="list-group-item add-checklist-item" *ngIf="isLoading"> <img alt="loading" class="loading-image" src="../../../../assets/loading.svg" /> </li>
-  <li class="list-group-item add-checklist-item" (click)="onAddCheckListItemButton()" *ngIf="!isAddingItem && !isLoading">Add +</li>
+  <li class="list-group-item add-checklist-item" (click)="onAddCheckListItemButton()" *ngIf="!isAddingItem && !isLoading">+ to the check list</li>
 
   <li class="list-group-item" *ngIf="isAddingItem">
     <form (submit)="onAddCheckListItem(checklistForm)" #checklistForm="ngForm">

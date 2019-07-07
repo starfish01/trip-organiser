@@ -21,7 +21,7 @@ export class SitesComponent implements OnInit, OnDestroy {
 
   isFavourite = false;
 
-  constructor(private router: Router, public route: ActivatedRoute, private siteService: SitesService,  private authService: AuthService) {
+  constructor(private router: Router, public route: ActivatedRoute, private siteService: SitesService, private authService: AuthService) {
   }
 
   sites: Site[] = [];
@@ -34,17 +34,21 @@ export class SitesComponent implements OnInit, OnDestroy {
 
   isLoading = false;
 
+  isLoadingFavs = false;
+
   ngOnInit() {
     this.isLoading = true;
+    this.isLoadingFavs = true;
     this.uid = this.authService.getUserId();
 
     this.siteSubs = this.siteService.getSiteUpdateListener().subscribe((sites: Site[]) => {
       this.sites = sites;
       this.isLoading = false;
+      this.siteService.getFavouriteSites(this.tripId);
     });
 
     this.favSitesSubs = this.siteService.getFavouriteSitesUpdateListener().subscribe((fav: Favourite[]) => {
-
+      this.favSites = fav;
       for (const sites of this.sites) {
         let favCount = 0;
         const listOfUserWhoLike: string[] = [];
@@ -69,12 +73,15 @@ export class SitesComponent implements OnInit, OnDestroy {
         sites.listOfUserWhoLike = listOfUserWhoLike;
         sites.totalUserFavourite = favCount;
       }
+
+      this.sites.sort((a, b) =>
+        (a.totalUserFavourite < b.totalUserFavourite) ? 1 :
+          ((a.totalUserFavourite > b.totalUserFavourite) ? -1 : 0));
+
+      this.isLoadingFavs = false;
     });
 
-
     this.siteService.getSites(this.tripId);
-    this.siteService.getFavouriteSites(this.tripId);
-
   }
 
 
@@ -94,7 +101,7 @@ export class SitesComponent implements OnInit, OnDestroy {
   onFavoriteClick(siteId, userFav, res) {
 
     const uid = this.authService.getUserId();
-    const userName = this.authService.getFirstName() + ' ' + this.authService.getLastName() ;
+    const userName = this.authService.getFirstName() + ' ' + this.authService.getLastName();
 
     const favouriteData: Favourite = {
       location: this.locationId,

@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    Wolf Pack
+    Who's coming?
   </div>
   <ul class="list-group list-group-flush">
 
@@ -21,7 +21,7 @@
 
 
       </li>
-      <li *ngIf="!addAttendee" (click)="onAddAttendee()" class="list-group-item add-attendee">+ to the wolf pack</li>
+      <li *ngIf="!addAttendee" (click)="onAddAttendee()" class="list-group-item add-attendee">+ to the trip</li>
       <li *ngIf="addAttendee && !isLoadingNewUser && isLoadingUserActionID == null" class="list-group-item">
 
         <form (submit)="onAddEmail(attendeeForm)" #attendeeForm="ngForm">

@@ -19,8 +19,11 @@
             <mat-panel-description>
               <mat-icon matTooltip="{{restaurant.listOfUserWhoLike}}">face</mat-icon>
               <span> x
-                <ng-container>
+                <ng-container *ngIf="!isLoadingFavs">
                   {{restaurant.totalUserFavourite}}
+                </ng-container>
+                 <ng-container *ngIf="isLoadingFavs">
+                  <img class="loadingFav" src="../../../assets/loading.svg" alt="loading">
                 </ng-container>
               </span>
             </mat-panel-description>
