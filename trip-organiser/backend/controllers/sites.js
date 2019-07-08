@@ -38,8 +38,13 @@ exports.getSites = (req, res, next) => {
 exports.updateSite = (req, res, next) => {
   console.log('updating');
   const site = ({
-    ...req.body,
+    siteTitle: req.body.siteTitle,
+    siteLocation: req.body.siteLocation,
+    siteDescription: req.body.siteDescription,
+    siteCost: req.body.siteCost,
+    siteUrl: req.body.siteUrl,
   });
+
   Site.updateOne({_id: req.body.id}, site).then((result) => {
     if (result.n === 1) {
       res.status(200).json({message: "Update Successful"});

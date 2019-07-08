@@ -13,6 +13,7 @@ import {AddEditSitesComponent} from "./location-overview/sites/add-edit-sites/ad
 import {LoginComponent} from "./auth/login/login.component";
 import {SignupComponent} from "./auth/signup/signup.component";
 import {AuthGuard} from "./auth/auth.guard";
+import {TripEditComponent} from "./trips-overview/trip-overview/trip-edit/trip-edit.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {
     path: ':trip', component: TripParentComponent, canActivate: [AuthGuard], children: [
       { path: '', component: TripOverviewComponent},
+      { path: 'edit', component: TripEditComponent },
       { path: 'create', component: AddEditLocationComponent },
       { path: ':id/edit', component: AddEditLocationComponent },
       { path: ':location/overview', component: LocationOverviewComponent },

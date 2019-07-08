@@ -1,0 +1,36 @@
+<div *ngIf="!isLoading">
+  <mat-card class="example-card">
+
+    <mat-card-header>
+      <mat-card-title><h2>Edit Trip</h2></mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <form (submit)="onSave(tripUpdateForm)" #tripUpdateForm="ngForm" *ngIf="!isLoading">
+
+        <mat-form-field>
+          <label>
+            <input placeholder="Trip Title" #tripInput="ngModel" required [(ngModel)]="tripData.tripTitle" matInput name="tripTitle">
+          </label>
+          <mat-error *ngIf="tripInput.invalid">Please enter a valid title</mat-error>
+        </mat-form-field>
+
+
+
+        <div class="action-holder">
+          <button *ngIf="!isLoading" mat-raised-button color="primary" type="submit">Save</button>
+          <button *ngIf="!isLoading" mat-raised-button color="accent" (click)="onCancel()">Cancel</button>
+          <button *ngIf="!isLoading" mat-raised-button color="warn" (click)="onDelete()">Delete</button>
+        </div>
+
+      </form>
+
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="isLoading">
+  <img src="../../../../assets/loading.svg" alt="loading">
+</div>

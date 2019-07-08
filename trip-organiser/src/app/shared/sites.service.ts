@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {environment} from '../../environments/environment';
+
 const BACKEND_URL = environment.apiURL + '/sites/';
 import {HttpClient} from '@angular/common/http';
 import {Subject} from 'rxjs';
@@ -9,7 +10,6 @@ import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {Favourite} from '../model/favourite.model';
-
 
 
 @Injectable({
@@ -58,6 +58,13 @@ export class SitesService {
   }
 
   updateSite(siteData: Site, siteId) {
+
+    if (siteData.siteUrl !== '') {
+      if (siteData.siteUrl[0] !== 'h' && siteData.siteUrl[1] !== 't' && siteData.siteUrl[2] !== 't' && siteData.siteUrl[3] !== 'p') {
+       siteData.siteUrl = 'https://' + siteData.siteUrl;
+      }
+    }
+
     this.http.put<{ message: string }>
     (BACKEND_URL + siteData.id, siteData).subscribe((responseData) => {
       const index = this.sites.findIndex(x => x.id === siteData.id);

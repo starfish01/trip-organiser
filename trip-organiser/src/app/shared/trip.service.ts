@@ -5,6 +5,7 @@ import {environment} from '../../environments/environment';
 import {Subject} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 
 const BACKEND_URL = environment.apiURL + '/trips/';
@@ -20,7 +21,7 @@ export class TripService {
 
   private selectedTrip: Trip = null;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private location: Location) {
   }
 
   selectTrip(tripId) {
@@ -81,6 +82,7 @@ export class TripService {
   }
 
   addTrip(trip: Trip) {
+
     this.http.post<{ message: string, id: string }>(BACKEND_URL + 'create', trip).subscribe((response) => {
       trip.id = response.id;
       this.trips.push(trip);
@@ -88,4 +90,22 @@ export class TripService {
     });
   }
 
+  updateTrip(trip) {
+
+    this.http.post<{ message: string }>(BACKEND_URL + 'update', trip).subscribe((response) => {
+      const index = this.trips.findIndex(el => el.id === trip.tripId);
+      if (index !== -1) {
+        this.trips[index].tripTitle = trip.tripTitle;
+        this.tripUpdate.next([...this.trips]);
+      }
+      this.location.back();
+    });
+  }
+
+  deleteTrip(tripId) {
+    this.http.delete<{ message: string }>(BACKEND_URL + 'delete/' + tripId).subscribe((response) => {
+      this.router.navigate(['../home']);
+    });
+
+  }
 }
