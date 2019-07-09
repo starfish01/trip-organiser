@@ -8,6 +8,10 @@ const checkAuth = require("../middleware/check-auth");
 
 router.post("/create", checkAuth, TripsController.createTrip);
 
+router.post("/update", checkAuth, TripsController.updateTrip);
+
+router.delete("/delete/:tripId", checkAuth, TripsController.deleteTrip);
+
 router.get("/:id", checkAuth, TripsController.getTrip);
 
 router.get("", checkAuth, TripsController.getTrips);

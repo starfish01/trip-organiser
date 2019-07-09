@@ -1,0 +1,14 @@
+.action-holder {
+  width: 100%;
+  display: flex;
+
+  button {
+    margin-left: 10px;
+  }
+  button:first-child {
+    margin-left: 0;
+  }
+  button:last-child {
+    margin-left: auto;
+  }
+}

@@ -33,9 +33,14 @@ exports.getRestaurants = (req, res, next) => {
 };
 
 exports.updateRestaurant = (req, res, next) => {
-  console.log("updating");
+  console.log("updating res");
   const restaurant = ({
-    ...req.body,
+    restaurantTitle: req.body.restaurantTitle,
+    cuisine: req.body.cuisine,
+    restaurantLocation: req.body.restaurantLocation,
+    restaurantCost: req.body.restaurantCost,
+    restaurantDescription: req.body.restaurantDescription,
+    restaurantUrl: req.body.restaurantUrl,
   });
   Restaurant.updateOne({_id: req.body.id}, restaurant).then((result) => {
     if (result.n === 1) {
@@ -44,7 +49,7 @@ exports.updateRestaurant = (req, res, next) => {
       res.status(404).json({message: "Failed to update"});
     }
   }).catch((error) => {
-    res.status(404).json({message: "Failed to update"});
+    res.status(404).json({message: "Failed to update: " + error});
   });
 
 };

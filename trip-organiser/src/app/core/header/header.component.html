@@ -11,6 +11,7 @@
 <!--    <a routerLinkActive="mat-accent" mat-button routerLink="/home">Trip Organiser</a>-->
 <!--  </h1>-->
 
+
   <span class="spacer"></span>
 
   <ul>
@@ -20,11 +21,9 @@
     <li *ngIf="!userIsAuthenticated">
       <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
     </li>
-<!--    <li *ngIf="userIsAuthenticated">-->
-<!--      <span class="username">-->
-<!--        {{userLoggedIn}}-->
-<!--      </span>-->
-<!--    </li>-->
+    <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/home" routerLinkActive="mat-accent">My Trips</a>
+    </li>
     <li *ngIf="userIsAuthenticated">
       <button mat-button (click)="onLogout()">Logout</button>
     </li>

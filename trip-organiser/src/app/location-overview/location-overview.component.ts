@@ -19,7 +19,11 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
   paramsSubscription: Subscription;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private locationService: LocationsService, private tripService: TripService) {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private locationService: LocationsService,
+    private tripService: TripService) {
   }
 
   tripId: string;

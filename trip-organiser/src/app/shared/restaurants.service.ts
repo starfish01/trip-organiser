@@ -72,6 +72,13 @@ export class RestaurantsService {
   }
 
   updateRestaurant(restaurantData: Restaurant, restaurantId) {
+
+    if (restaurantData.restaurantUrl !== '') {
+      if (restaurantData.restaurantUrl[0] !== 'h' && restaurantData.restaurantUrl[1] !== 't' && restaurantData.restaurantUrl[2] !== 't' && restaurantData.restaurantUrl[3] !== 'p') {
+        restaurantData.restaurantUrl = 'https://' + restaurantData.restaurantUrl;
+      }
+    }
+
     this.http.put<{ message: string }>
     (BACKEND_URL + restaurantData.id, restaurantData).subscribe((responseData) => {
       const index = this.restaurants.findIndex(x => x.id === restaurantData.id);

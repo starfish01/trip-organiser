@@ -49,6 +49,7 @@ import {ErrorInterceptor} from './error-interceptor';
 import {ErrorComponent} from './core/error/error.component';
 import { TripAttendeesComponent } from './trips-overview/trip-overview/trip-attendees/trip-attendees.component';
 import { UserChecklistComponent } from './trips-overview/trip-overview/user-checklist/user-checklist.component';
+import { TripEditComponent } from './trips-overview/trip-overview/trip-edit/trip-edit.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { UserChecklistComponent } from './trips-overview/trip-overview/user-chec
     ErrorComponent,
     TripAttendeesComponent,
     UserChecklistComponent,
+    TripEditComponent,
   ],
   imports: [
     BrowserModule,
