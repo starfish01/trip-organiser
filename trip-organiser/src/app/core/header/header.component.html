@@ -1,8 +1,16 @@
 <mat-toolbar color="primary">
 
-  <h1>
-    <a routerLinkActive="mat-accent" mat-button routerLink="/">Trip Organiser</a>
-  </h1>
+<!--  <h1>-->
+    <a routerLinkActive="mat-accent" mat-button routerLink="/home" *ngIf="userIsAuthenticated">
+      <img alt="logo" class="logo" src="../../../assets/logo_white.svg">
+    </a>
+
+  <a routerLinkActive="mat-accent" mat-button routerLink="/" *ngIf="!userIsAuthenticated">
+    <img alt="logo" class="logo" src="../../../assets/logo_white.svg">
+  </a>
+<!--    <a routerLinkActive="mat-accent" mat-button routerLink="/home">Trip Organiser</a>-->
+<!--  </h1>-->
+
 
   <span class="spacer"></span>
 

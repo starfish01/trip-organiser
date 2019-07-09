@@ -7,7 +7,6 @@ exports.createLocation = (req,res,next)=>{
     ...req.body,
     creator: userWithAccess,
   });
-  console.log(location);
   location.save().then(createdLocation => {
     res.status(201).json({
       message:"Post Created",
