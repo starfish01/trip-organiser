@@ -48,7 +48,6 @@ export class AddEditRestaurantsComponent implements OnInit {
         this.editMode = true;
         this.restaurantDetails = this.restaurantsService.getRestaurant(params.restaurantId);
         if (!this.restaurantsService) {
-          console.log('ERROR');
           this.router.navigate(['/']);
         } else {
           this.initForm();

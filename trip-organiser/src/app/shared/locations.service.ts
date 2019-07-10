@@ -44,7 +44,6 @@ export class LocationsService {
         };
       }))
       .subscribe((transformedPostData) => {
-        console.log('2');
         this.locations = transformedPostData.locations;
         this.locationsUpdated.next([...this.locations]);
       });
@@ -67,7 +66,6 @@ export class LocationsService {
   addLocation(locationData: Location) {
     this.http.post<{ message: string, id: string }>(BACKEND_URL + 'create', locationData)
       .subscribe((responseData) => {
-        console.log(responseData);
         locationData.id = responseData.id;
         this.locations.push(locationData);
         this.locationsUpdated.next([...this.locations]);

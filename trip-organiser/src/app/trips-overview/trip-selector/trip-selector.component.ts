@@ -18,7 +18,6 @@ export class TripSelectorComponent implements OnInit {
   }
 
   onTripSelect(id){
-    console.log(id)
     this.tripService.selectTrip(id);
   }
 

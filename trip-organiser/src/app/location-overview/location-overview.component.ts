@@ -49,7 +49,6 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
     this.locationService.getLocation(this.locationParamId).subscribe(locationData => {
       if (!locationData.location) {
         this.router.navigate(['']);
-        console.log('invalid route');
       }
       this.locationSelected = locationData.location;
     });

@@ -53,9 +53,6 @@ export class UserChecklistComponent implements OnInit, OnDestroy {
     unchecked.sort((a, b) => (a.completedAt > b.completedAt) ? 1 : ((b.completedAt > a.completedAt) ? -1 : 0));
     checked.sort((a, b) => (a.completedAt > b.completedAt) ? 1 : ((b.completedAt > a.completedAt) ? -1 : 0));
 
-    console.log(unchecked);
-    console.log(checked);
-
 
     return [...unchecked, ...checked];
   }

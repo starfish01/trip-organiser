@@ -2,13 +2,11 @@ const Site = require("../models/site");
 const Favourite = require("../models/favourite");
 
 exports.createSite = (req, res, next) => {
-  console.log('Create Site');
   const userWithAccess = req.userData.userId;
   const site = new Site({
     ...req.body,
     creator: userWithAccess,
   });
-  console.log(site);
   site.save().then(createdSite => {
     res.status(201).json({
       id: createdSite._id,
@@ -19,11 +17,7 @@ exports.createSite = (req, res, next) => {
 };
 
 exports.getSites = (req, res, next) => {
-  console.log("get all sites");
-  console.log(req.params.tripId)
-
   Site.find({siteTripRef: req.params.tripId}).then((data) => {
-    console.log(data)
     res.status(200).json({
       message: "Sites fetched successfully",
       sites: data,
@@ -36,7 +30,6 @@ exports.getSites = (req, res, next) => {
 };
 
 exports.updateSite = (req, res, next) => {
-  console.log('updating');
   const site = ({
     siteTitle: req.body.siteTitle,
     siteLocation: req.body.siteLocation,
@@ -69,10 +62,7 @@ exports.deleteSite = (req, res, next) => {
 
 };
 
-
 exports.favouriteSite = (req, res, next) => {
-  console.log("fav clicked");
-
   const favSite = ({
     location: req.body.location,
     favourite: req.body.favourite,
@@ -107,7 +97,6 @@ exports.favouriteSite = (req, res, next) => {
 };
 
 exports.getFavouriteSite = (req, res, next) => {
-  console.log("Getting Fav Site");
   Favourite.find({tripId: req.params.tripId, type: 'site'}).then((data) => {
     res.status(200).json(
       {message: "updated successful", favSites: data},

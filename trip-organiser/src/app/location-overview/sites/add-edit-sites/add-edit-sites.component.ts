@@ -38,7 +38,6 @@ export class AddEditSitesComponent implements OnInit {
     this.isLoading = true;
 
     this.paramsSubscription = this.route.params.subscribe((params: Params) => {
-      console.log(params.location);
       this.locationParamId = params.location;
       this.siteId = params.siteId;
       const check = this.locationService.locationCheck(this.locationParamId);
@@ -48,7 +47,6 @@ export class AddEditSitesComponent implements OnInit {
         this.editMode = true;
         this.siteDetails = this.sitesService.getSite(params.siteId);
         if (!this.sitesService) {
-          console.log('ERROR');
           this.router.navigate(['/']);
         } else {
           this.initForm();

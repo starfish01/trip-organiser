@@ -2,7 +2,7 @@ const Trip = require("../models/trip");
 
 module.exports = (req, res, next) => {
   try {
-    console.log('middleWare part of trip')
+    // console.log('middleWare part of trip')
     Trip.findOne({_id: req.body.tripId, usersWithAccess: req.userData.userId}, (err, user) => {
       if (err) {
         res.status(404).json({

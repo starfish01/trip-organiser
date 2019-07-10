@@ -1,3 +1,4 @@
+const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
@@ -15,10 +16,12 @@ const app = express();
 
 mongoose.connect("mongodb+srv://patrickLabes:" + process.env.MONGO_ATLAS_PW + "@cluster0-trg7g.mongodb.net/trip-data?retryWrites=true&w=majority")
   .then(() => {
-    console.log('Connection Made')
+    // console.log('Connection Made')
   }).catch((err) => {
-  console.log('Connection Failed ' + err)
+  // console.log('Connection Failed ' + err)
 });
+
+app.use("/", express.static(path.join(__dirname, "angular")));
 
 
 app.use(bodyParser.json());
@@ -48,5 +51,9 @@ app.use("/api/users/", userRoutes);
 app.use("/api/user-information/", usersInformation);
 
 app.use("/api/user-checklist/", userChecklistItems);
+
+app.use((req,res,next)=>{
+  res.sendFile(path.join(__dirname, "angular", "index.html"))
+});
 
 module.exports = app;

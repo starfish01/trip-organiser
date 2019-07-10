@@ -2,12 +2,10 @@ const Restaurant = require("../models/restaurant");
 const Favourite = require("../models/favourite");
 
 exports.createRestaurant = (req, res, next) => {
-  console.log("Create Restaurant");
   const restaurant = new Restaurant({
     ...req.body,
     creator: req.userData.userId,
   });
-  console.log(restaurant);
   restaurant.save().then(createdRestaurant => {
     res.status(201).json({
       id: createdRestaurant._id,
@@ -18,8 +16,6 @@ exports.createRestaurant = (req, res, next) => {
 };
 
 exports.getRestaurants = (req, res, next) => {
-  console.log("get all restaurants");
-
   Restaurant.find({restaurantTripRef: req.params.tripId}).then((data) => {
     res.status(200).json({
       message: "Restaurants fetched successfully",
@@ -33,7 +29,6 @@ exports.getRestaurants = (req, res, next) => {
 };
 
 exports.updateRestaurant = (req, res, next) => {
-  console.log("updating res");
   const restaurant = ({
     restaurantTitle: req.body.restaurantTitle,
     cuisine: req.body.cuisine,
@@ -51,7 +46,6 @@ exports.updateRestaurant = (req, res, next) => {
   }).catch((error) => {
     res.status(404).json({message: "Failed to update: " + error});
   });
-
 };
 
 exports.deleteRestaurant = (req, res, next) => {
@@ -66,15 +60,13 @@ exports.deleteRestaurant = (req, res, next) => {
 };
 
 exports.favouriteRestaurant = (req, res, next) => {
-  console.log("fav clicked");
-
   const favRestaurant = ({
     location: req.body.location,
     favourite: req.body.favourite,
     refResSite: req.body.refResSite,
     tripId: req.body.tripId,
     uid: req.userData.userId,
-    type: 'restaurant',
+    type: "restaurant",
     userName: req.body.userName,
   });
 
@@ -101,8 +93,7 @@ exports.favouriteRestaurant = (req, res, next) => {
 };
 
 exports.getFavouriteRestaurant = (req, res, next) => {
-  console.log("Getting Fav Restaurants");
-  Favourite.find({tripId: req.params.tripId, type: 'restaurant'}).then((data) => {
+  Favourite.find({tripId: req.params.tripId, type: "restaurant"}).then((data) => {
     res.status(200).json(
       {message: "updated successful", favRestaurants: data},
     );

@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.createUser = (req, res, next) => {
-  console.log('signup');
   bcrypt.hash(req.body.password, 10).then(hash => {
     const user = new User({
       ...req.body,
@@ -51,7 +50,7 @@ exports.userLogin = (req, res, next) => {
       },
       process.env.JWT_KEY,
       {
-        expiresIn: "1h",
+        expiresIn: "5h",
       },
     );
 
@@ -63,11 +62,7 @@ exports.userLogin = (req, res, next) => {
       firstName: fetchedUser.firstName,
       lastName: fetchedUser.lastName,
     });
-    // We get the userId in the token however it would impact performance
-    // if we would have to decode the token on the client side
-
   }).catch(err => {
-    console.log(err);
     res.status(401).json({
       message: "You are not authenticated",
     });

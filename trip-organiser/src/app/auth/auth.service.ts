@@ -68,7 +68,6 @@ export class AuthService {
       this.router.navigate(['/']);
     }, error => {
       this.authStatusListener.next(false);
-      console.log(error);
     });
   }
 
@@ -86,7 +85,7 @@ export class AuthService {
     this.http.post<{ token: string, expiresIn: number, userId: string, firstName: string, lastName: string }>
     (BACKEND_URL + 'login', authData)
       .subscribe(response => {
-        console.log(response)
+        // console.log(response)
         const token = response.token;
         this.token = token;
         if (token) {
@@ -107,7 +106,7 @@ export class AuthService {
           this.router.navigate(['/home']);
         }
       }, error => {
-        console.log(error);
+        // console.log(error);
         this.authStatusListener.next(false);
       });
   }

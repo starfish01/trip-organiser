@@ -56,7 +56,7 @@ export class AddEditLocationComponent implements OnInit {
     this.locationService.getLocation(this.locationId).subscribe(locationData => {
       if (!locationData.location) {
         this.router.navigate(['']);
-        console.log('invalid route');
+        // console.log('invalid route');
       }
       this.editLocation = locationData.location;
       this.isEditMode = true;
@@ -65,14 +65,12 @@ export class AddEditLocationComponent implements OnInit {
   }
 
   initForm() {
-    console.log('here');
     let title = '';
     let startDate;
     let endDate;
     let stay;
 
     if (this.isEditMode) {
-      console.log(this.editLocation);
       title = this.editLocation.title;
       startDate = new Date(this.editLocation.startDate * 1000);
       endDate = new Date(this.editLocation.endDate * 1000);

@@ -3,7 +3,6 @@ const Trip = require("../models/trip");
 const async = require("async");
 
 exports.getListOfUsersNames = (req, res, next) => {
-  console.log("Get List Of Users Names");
   const listOfUserIds = JSON.parse(req.params.data);
   const arrayOfNames = [];
 
@@ -25,8 +24,6 @@ exports.getListOfUsersNames = (req, res, next) => {
 };
 
 exports.addusertotrip = (req, res, next) => {
-  console.log('adding user to a trip')
-
   //find user with email
   User.findOne({email: req.body.email}, (err, user) => {
     // Couldn't find user
@@ -53,14 +50,12 @@ exports.addusertotrip = (req, res, next) => {
 };
 
 exports.removeAttendee = (req, res, next) => {
-  console.log(req.body)
   Trip.updateOne({_id: req.body.tripId}, {$pull: {usersWithAccess: req.body.uid}}).then(result => {
     res.status(200).json({
       userData: req.body.uid,
-      message: "Member Added",
+      message: "Member Asdded",
     });
   }).catch((err) => {
-    console.log(err)
     res.status(500).json({
       message: "Something went wrong",
     });

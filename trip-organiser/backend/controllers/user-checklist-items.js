@@ -33,7 +33,6 @@ exports.addChecklistItem = (req, res, next) => {
 };
 
 exports.removeChecklistItem = (req, res, next) => {
-  console.log('remove item')
   CheckListItem.updateOne({
     _id: req.body.checklistItemId,
     createdById: req.userData.userId,
