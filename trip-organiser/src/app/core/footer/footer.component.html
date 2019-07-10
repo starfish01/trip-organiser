@@ -5,6 +5,6 @@
 
   <span class="spacer"></span>
 
-  <a mat-button [href]="'mailto:' +  'patrick.labes@gmail.com'">Issues?</a>
+  <a *ngIf="userIsAuthenticated" mat-button [href]="'mailto:' +  'patrick.labes@gmail.com'">Issues?</a>
 
 </div>
