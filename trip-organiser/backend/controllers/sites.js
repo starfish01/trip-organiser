@@ -2,6 +2,7 @@ const Site = require("../models/site");
 const Favourite = require("../models/favourite");
 
 exports.createSite = (req, res, next) => {
+
   const userWithAccess = req.userData.userId;
   const site = new Site({
     ...req.body,
@@ -51,16 +52,17 @@ exports.updateSite = (req, res, next) => {
 };
 
 exports.deleteSite = (req, res, next) => {
-  Site.deleteOne({id: req.params.locationId}).then((result) => {
+  Site.deleteOne({_id: req.params.id}).then((result) => {
     if (result.n === 1) {
       res.status(200).json({message: "Delete Successful"});
     }
-    res.status(404).js({message: "Delete Failed"});
+    res.status(404).json({message: "Delete Failed"});
   }).catch((error) => {
-    res.status(404).js({message: "Delete Failed"});
+    res.status(404).json({message: "Delete Failed"});
   });
-
 };
+
+
 
 exports.favouriteSite = (req, res, next) => {
   const favSite = ({

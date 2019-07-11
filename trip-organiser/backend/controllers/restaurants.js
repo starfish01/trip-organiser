@@ -2,15 +2,22 @@ const Restaurant = require("../models/restaurant");
 const Favourite = require("../models/favourite");
 
 exports.createRestaurant = (req, res, next) => {
+
+  const userWithAccess = req.userData.userId;
   const restaurant = new Restaurant({
     ...req.body,
-    creator: req.userData.userId,
+    creator: userWithAccess,
   });
+
   restaurant.save().then(createdRestaurant => {
     res.status(201).json({
       id: createdRestaurant._id,
       locationId: createdRestaurant.restaurantLocationRef,
       message: "Post Restaurant",
+    });
+  }).catch(err =>{
+    res.status(500).json({
+      message: "Something went wrong",
     });
   });
 };

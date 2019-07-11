@@ -4,7 +4,7 @@ exports.createTrip = (req, res, next) => {
   const userWithAccess = req.userData.userId;
   const trip = new Trip({
     creator: userWithAccess,
-    deleteTrip: false,
+    tripDeleted: false,
     tripTitle: req.body.tripTitle,
   });
   trip.usersWithAccess.push(userWithAccess);

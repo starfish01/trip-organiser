@@ -10,11 +10,7 @@ const restaurantSchema = mongoose.Schema({
     restaurantLocationRef: {type: mongoose.Schema.Types.ObjectId, ref: "Location", required: true},
     restaurantTripRef: {type: mongoose.Schema.Types.ObjectId, ref: "Trip", required: true},
     creator: {type: mongoose.Schema.Types.ObjectId, ref: "User", required: true},
-    usersWhoLike: [{
-      favourite: {type: String},
-      uid: {type: mongoose.Schema.Types.ObjectId, ref: "User", unique: true},
-    },
-    ],
+    usersWhoLike: [{ type : mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   {
     timestamps: {
